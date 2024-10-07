@@ -27,11 +27,15 @@ const DialogList = (props) => {
     event.stopPropagation();
   };
 
-  const onlyFavoriteDialogs = (chatPreview, userId) =>
-    chatPreview.favoriteList[chatPreview.participants.indexOf(userId)];
-
+  const onlyFavoriteDialogs = (chatPreview, userId) =>{
+    console.log("chatPreview:", chatPreview);
+    console.log("userId:", userId);
+    console.log("chatPreview.participants:", chatPreview?.participants);
+    chatPreview.Conversation.favoriteList[chatPreview.Conversation.participants.indexOf(userId)];
+  };
+  
   const onlyBlockDialogs = (chatPreview, userId) =>
-    chatPreview.blackList[chatPreview.participants.indexOf(userId)];
+    chatPreview.Conversation.blackList[chatPreview.Conversation.participants.indexOf(userId)];
 
   const getTimeStr = (time) => {
     const currentTime = moment();
@@ -41,47 +45,101 @@ const DialogList = (props) => {
     return moment(time).format('MMMM DD, YYYY');
   };
 
+  // const renderPreview = (filterFunc) => {
+  //   const arrayList = [];
+  //   const {
+  //     userId,
+  //     preview,
+  //     goToExpandedDialog,
+  //     chatMode,
+  //     removeChat,
+  //     interlocutor,
+  //   } = props;
+  //   preview.forEach((chatPreview, index) => {
+  //     const dialogNode = (
+  //       <DialogBox
+  //         interlocutor={chatPreview.interlocutor}
+  //         chatPreview={chatPreview}
+  //         userId={userId}
+  //         key={index}
+  //         getTimeStr={getTimeStr}
+  //         changeFavorite={changeFavorite}
+  //         changeBlackList={changeBlackList}
+  //         chatMode={chatMode}
+  //         catalogOperation={
+  //           chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
+  //             ? removeChat
+  //             : changeShowCatalogCreation
+  //         }
+  //         goToExpandedDialog={goToExpandedDialog}
+  //       />
+  //     );
+  //     if (filterFunc && filterFunc(chatPreview, userId)) {
+  //       arrayList.push(dialogNode);
+  //     } else if (!filterFunc) {
+  //       arrayList.push(dialogNode);
+  //     }
+  //   });
+  //   console.log(arrayList);
+  //   return arrayList.length ? (
+  //     arrayList
+  //   ) : (
+  //     <span className={styles.notFound}>Not found</span>
+  //   );
+  // };
+
+  const groupMessagesByChatId = (messages) => {
+    return messages.reduce((acc, message) => {
+      const chatId = message.chatId; // предполагается, что у каждого сообщения есть идентификатор диалога
+      if (!acc[chatId]) {
+        acc[chatId] = [];
+      }
+      acc[chatId].push(message);
+      return acc;
+    }, {});
+  };
+  
+
   const renderPreview = (filterFunc) => {
+    const groupedChats = groupMessagesByChatId(props.preview);
     const arrayList = [];
-    const {
-      userId,
-      preview,
-      goToExpandedDialog,
-      chatMode,
-      removeChat,
-      interlocutor,
-    } = props;
-    preview.forEach((chatPreview, index) => {
+  
+    Object.entries(groupedChats).forEach(([chatId, messages]) => {
+      const chatPreview = messages[0]; // Используем первое сообщение как представителя диалога
+  
       const dialogNode = (
         <DialogBox
           interlocutor={chatPreview.interlocutor}
           chatPreview={chatPreview}
-          userId={userId}
-          key={index}
+          userId={props.userId}
+          key={chatId}
           getTimeStr={getTimeStr}
           changeFavorite={changeFavorite}
           changeBlackList={changeBlackList}
-          chatMode={chatMode}
+          chatMode={props.chatMode}
           catalogOperation={
-            chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
-              ? removeChat
+            props.chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
+              ? props.removeChat
               : changeShowCatalogCreation
           }
-          goToExpandedDialog={goToExpandedDialog}
+          goToExpandedDialog={props.goToExpandedDialog}
         />
       );
-      if (filterFunc && filterFunc(chatPreview, userId)) {
+  
+      if (filterFunc && filterFunc(chatPreview, props.userId)) {
         arrayList.push(dialogNode);
       } else if (!filterFunc) {
         arrayList.push(dialogNode);
       }
     });
+  
     return arrayList.length ? (
       arrayList
     ) : (
       <span className={styles.notFound}>Not found</span>
     );
   };
+  
 
   const renderChatPreview = () => {
     const { chatMode } = props;

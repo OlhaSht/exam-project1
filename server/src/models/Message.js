@@ -1,30 +1,34 @@
 module.exports = (sequelize, DataTypes) => {
-    const Message = sequelize.define('Message', {
-      sender: {
-        type: DataTypes.INTEGER, // Указываем число вместо Number
-        allowNull: false,
+  const Message = sequelize.define('Message', {
+    sender: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users', // Указываем таблицу Users
+        key: 'id',
       },
-      body: {
-        type: DataTypes.STRING, // Указываем строку вместо String
-        allowNull: false,
+    },
+    body: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    conversationId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Conversations', // Указываем таблицу Conversations
+        key: 'id',
       },
-      conversationId: {
-        type: DataTypes.INTEGER, // foreign key для связи с моделью Conversation
-        allowNull: false,
-        references: {
-          model: 'Conversations', // Указываем таблицу Conversations
-          key: 'id',
-        },
-      },
-    }, {
-      timestamps: true, // Автоматически добавляем createdAt и updatedAt
-    });
-  
-    // Связь с моделью Conversation
+    },
+  }, {
+    timestamps: true,
+  });
+
+  // Связываем сообщения с пользователями через поле sender
     Message.associate = (models) => {
-      Message.belongsTo(models.Conversation, { foreignKey: 'conversationId' });
-    };
-  
-    return Message;
+    Message.belongsTo(models.Users, { foreignKey: 'sender' });
+    Message.belongsTo(models.Conversation, { foreignKey: 'conversationId' });
   };
-  
+
+  return Message;
+};

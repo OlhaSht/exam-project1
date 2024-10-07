@@ -5,7 +5,9 @@ const userController = require('../controllers/userController');
 const contestController = require('../controllers/contestController');
 const checkToken = require('../middlewares/checkToken');
 const validators = require('../middlewares/validators');
-const chatController = require('../controllers/chatController');
+// const chatController = require('../controllers/chatController');
+const chatSQL = require('../controllers/sockets/chatControllerSQL/chatSQL');
+const catalogSQL = require('../controllers/sockets/chatControllerSQL/catalogSQL');
 const upload = require('../utils/fileUpload');
 const router = express.Router();
 
@@ -115,67 +117,78 @@ router.post(
 router.post(
   '/newMessage',
   checkToken.checkToken,
-  chatController.addMessage,
+  chatSQL.addMessage,
+  // chatController.addMessage,
 );
 
 router.post(
   '/getChat',
   checkToken.checkToken,
-  chatController.getChat,
+  chatSQL.getChat,
+  // chatController.getChat,
 );
 
 router.post(
   '/getPreview',
   checkToken.checkToken,
-  chatController.getPreview,
+  chatSQL.getPreview,
+  // chatController.getPreview,
 );
 
 router.post(
   '/blackList',
   checkToken.checkToken,
-  chatController.blackList,
+  chatSQL.blackList,
+  // chatController.blackList,
 );
 
 router.post(
   '/favorite',
   checkToken.checkToken,
-  chatController.favoriteChat,
+  chatSQL.favoriteChat,
+  // chatController.favoriteChat,
 );
 
 router.post(
   '/createCatalog',
   checkToken.checkToken,
-  chatController.createCatalog,
+  catalogSQL.createCatalog,
+  // chatController.createCatalog,
 );
 
 router.post(
   '/updateNameCatalog',
   checkToken.checkToken,
-  chatController.updateNameCatalog,
+  catalogSQL.updateNameCatalog,
+  // chatController.updateNameCatalog,
 );
 
 router.post(
   '/addNewChatToCatalog',
   checkToken.checkToken,
-  chatController.addNewChatToCatalog,
+  catalogSQL.addNewChatToCatalog,
+  // chatController.addNewChatToCatalog,
 );
 
 router.post(
   '/removeChatFromCatalog',
   checkToken.checkToken,
-  chatController.removeChatFromCatalog,
+  catalogSQL.removeChatFromCatalog,
+  // chatController.removeChatFromCatalog,
 );
 
 router.post(
   '/deleteCatalog',
   checkToken.checkToken,
-  chatController.deleteCatalog,
+  catalogSQL.deleteCatalog,
+  // chatController.deleteCatalog,
 );
 
 router.post(
   '/getCatalogs',
   checkToken.checkToken,
-  chatController.getCatalogs,
+  catalogSQL.getCatalogs,
+  // chatController.getCatalogs,
 );
 
 module.exports = router;

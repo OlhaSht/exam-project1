@@ -98,10 +98,14 @@ const sendMessageExtraReducers = createExtraReducers({
       messagesPreview.push(payload.preview);
     }
     const chatData = {
-      _id: payload.preview._id,
-      participants: payload.preview.participants,
-      favoriteList: payload.preview.favoriteList,
-      blackList: payload.preview.blackList,
+      _id: payload.preview._id || state.chatData._id,
+      participants: payload.preview.participants || state.chatData.participants,
+      favoriteList: payload.preview.favoriteList || state.chatData.favoriteList,
+      blackList: payload.preview.blackList || state.chatData.blackList,
+      // _id: payload.preview._id,
+      // participants: payload.preview.participants,
+      // favoriteList: payload.preview.favoriteList,
+      // blackList: payload.preview.blackList,
     };
     state.chatData = { ...state.chatData, ...chatData };
     state.messagesPreview = messagesPreview;
@@ -120,6 +124,7 @@ export const changeChatFavorite = decorateAsyncThunk({
     return data;
   },
 });
+console.log(decorateAsyncThunk);
 
 const changeChatFavoriteExtraReducers = createExtraReducers({
   thunk: changeChatFavorite,

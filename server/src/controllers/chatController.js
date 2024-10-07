@@ -40,6 +40,7 @@ module.exports.addMessage = async (req, res, next) => {
       blackList: newConversation.blackList,
       favoriteList: newConversation.favoriteList,
     };
+    //-----------------------------------------------------------------------------
     controller.getChatController().emitNewMessage(interlocutorId, {
       message,
       preview: {
@@ -68,6 +69,7 @@ module.exports.addMessage = async (req, res, next) => {
     next(err);
   }
 };
+//----------------------------------------------------------------------
 
 module.exports.getChat = async (req, res, next) => {
   const participants = [req.tokenData.userId, req.body.interlocutorId];
@@ -113,6 +115,7 @@ module.exports.getChat = async (req, res, next) => {
     next(err);
   }
 };
+//---------------------------------------------------------------------
 
 module.exports.getPreview = async (req, res, next) => {
   try {
@@ -179,6 +182,7 @@ module.exports.getPreview = async (req, res, next) => {
     next(err);
   }
 };
+//------------------------------------------------------------------------------------------
 
 module.exports.blackList = async (req, res, next) => {
   const predicate = 'blackList.' +
@@ -195,6 +199,7 @@ module.exports.blackList = async (req, res, next) => {
     res.send(err);
   }
 };
+//---------------------------------------------------------------------------------------
 
 module.exports.favoriteChat = async (req, res, next) => {
   const predicate = 'favoriteList.' +
@@ -208,6 +213,7 @@ module.exports.favoriteChat = async (req, res, next) => {
     res.send(err);
   }
 };
+//--------------------------------------------------------------------------------------
 
 module.exports.createCatalog = async (req, res, next) => {
   console.log(req.body);
@@ -223,6 +229,7 @@ module.exports.createCatalog = async (req, res, next) => {
     next(err);
   }
 };
+//------------------------------------------------------------------------------------
 
 module.exports.updateNameCatalog = async (req, res, next) => {
   try {
@@ -235,6 +242,7 @@ module.exports.updateNameCatalog = async (req, res, next) => {
     next(err);
   }
 };
+//-----------------------------------------------------------------------------------------
 
 module.exports.addNewChatToCatalog = async (req, res, next) => {
   try {
@@ -247,6 +255,7 @@ module.exports.addNewChatToCatalog = async (req, res, next) => {
     next(err);
   }
 };
+//---------------------------------------------------------------------------------
 
 module.exports.removeChatFromCatalog = async (req, res, next) => {
   try {
@@ -259,6 +268,7 @@ module.exports.removeChatFromCatalog = async (req, res, next) => {
     next(err);
   }
 };
+//------------------------------------------------------------------------
 
 module.exports.deleteCatalog = async (req, res, next) => {
   try {
@@ -269,6 +279,7 @@ module.exports.deleteCatalog = async (req, res, next) => {
     next(err);
   }
 };
+//--------------------------------------------------------------------------------------
 
 module.exports.getCatalogs = async (req, res, next) => {
   try {
