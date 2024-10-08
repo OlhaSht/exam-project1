@@ -121,20 +121,26 @@ export const changeChatFavorite = decorateAsyncThunk({
   key: `${CHAT_SLICE_NAME}/changeChatFavorite`,
   thunk: async payload => {
     const { data } = await restController.changeChatFavorite(payload);
+    console.log('in changeChatFavorite:-----', payload);
+    console.log('Data returned from API in changeChatFavorite:-----', data);
     return data;
   },
 });
-console.log(decorateAsyncThunk);
 
 const changeChatFavoriteExtraReducers = createExtraReducers({
   thunk: changeChatFavorite,
   fulfilledReducer: (state, { payload }) => {
+    console.log('Payload received:ЖЖЖЖЖЖЖЖЖ', payload);
     const { messagesPreview } = state;
     messagesPreview.forEach(preview => {
       if (isEqual(preview.participants, payload.participants))
-        preview.favoriteList = payload.favoriteList;
+        preview.favoriteList = payload.favoriteList || [];
     });
-    state.chatData = payload;
+    // state.chatData = payload;
+    state.chatData = {
+      ...state.chatData,
+      favoriteList: payload.favoriteList || [],
+    };
     state.messagesPreview = messagesPreview;
   },
   rejectedReducer: (state, { payload }) => {

@@ -320,7 +320,7 @@ module.exports.addMessage = async (req, res, next) => {
   module.exports.blackList = async (req, res, next) => {
     const index = req.body.participants.indexOf(req.tokenData.userId);
     try {
-      const chat = await Conversation.update(
+      const chat = await Conversation.findOne(               //заменила update на findOne    
         { [`blackList[${index}]`]: req.body.blackListFlag },
         {
           where: { participants: req.body.participants },
@@ -331,7 +331,7 @@ module.exports.addMessage = async (req, res, next) => {
       const interlocutorId = req.body.participants.find(p => p !== req.tokenData.userId);
       controller.getChatController().emitChangeBlockStatus(interlocutorId, chat);
   
-      res.send(chat);
+      await res.send(chat);
     } catch (err) {
       res.send(err);
     }
@@ -341,8 +341,18 @@ module.exports.addMessage = async (req, res, next) => {
 
   module.exports.favoriteChat = async (req, res, next) => {
     const index = req.body.participants.indexOf(req.tokenData.userId);
+    console.log('Request body:------', req.body);
+    console.log('User ID:--------------', req.tokenData.userId);
+    console.log('Index:=============', index);
+
+    // const chatExists = await Conversation.findOne({
+    //   where: { participants: req.body.participants },
+    // });
+    // console.log('Chat found:\\\\\\\\\\', chatExists);
+    
+
     try {
-      const chat = await Conversation.update(
+      const chat = await Conversation.findOne(                   //заменила update на findOne
         { [`favoriteList[${index}]`]: req.body.favoriteFlag },
         {
           where: { participants: req.body.participants },
@@ -350,8 +360,9 @@ module.exports.addMessage = async (req, res, next) => {
         }
       );
       console.log('=======================', chat);
-      res.send(chat);
+       await res.send(chat);
     } catch (err) {
+      console.error('Error updating chat:======', err);
       res.send(err);
     }
   };

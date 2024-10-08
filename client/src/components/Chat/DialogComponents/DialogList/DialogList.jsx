@@ -28,9 +28,6 @@ const DialogList = (props) => {
   };
 
   const onlyFavoriteDialogs = (chatPreview, userId) =>{
-    console.log("chatPreview:", chatPreview);
-    console.log("userId:", userId);
-    console.log("chatPreview.participants:", chatPreview?.participants);
     chatPreview.Conversation.favoriteList[chatPreview.Conversation.participants.indexOf(userId)];
   };
   
