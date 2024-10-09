@@ -55,6 +55,8 @@ export const getDialogMessages = decorateAsyncThunk({
   key: `${CHAT_SLICE_NAME}/getDialogMessages`,
   thunk: async payload => {
     const { data } = await restController.getDialog(payload);
+    console.log('=====>>>>', data);
+    console.log('////////////', payload);
     return data;
   },
 });
@@ -62,6 +64,7 @@ export const getDialogMessages = decorateAsyncThunk({
 const getDialogMessagesExtraReducers = createExtraReducers({
   thunk: getDialogMessages,
   fulfilledReducer: (state, { payload }) => {
+    console.log('|||||||||||||||||', payload)
     state.messages = payload.messages;
     state.interlocutor = payload.interlocutor;
   },
@@ -94,20 +97,21 @@ const sendMessageExtraReducers = createExtraReducers({
         isNew = false;
       }
     });
+    console.log('=====', payload)
     if (isNew) {
       messagesPreview.push(payload.preview);
     }
-    const chatData = {
-      _id: payload.preview._id || state.chatData._id,
-      participants: payload.preview.participants || state.chatData.participants,
-      favoriteList: payload.preview.favoriteList || state.chatData.favoriteList,
-      blackList: payload.preview.blackList || state.chatData.blackList,
-      // _id: payload.preview._id,
-      // participants: payload.preview.participants,
-      // favoriteList: payload.preview.favoriteList,
-      // blackList: payload.preview.blackList,
-    };
-    state.chatData = { ...state.chatData, ...chatData };
+    // const chatData = {
+    //   _id: payload.preview.id || state.chatData._id,
+    //   participants: payload.preview.participants || state.chatData.participants,
+    //   favoriteList: payload.preview.favoriteList || state.chatData.favoriteList,
+    //   blackList: payload.preview.blackList || state.chatData.blackList,
+    //   // _id: payload.preview._id,
+    //   // participants: payload.preview.participants,
+    //   // favoriteList: payload.preview.favoriteList,
+    //   // blackList: payload.preview.blackList,
+    // };
+    // state.chatData = { ...state.chatData, ...chatData };
     state.messagesPreview = messagesPreview;
     state.messages = [...state.messages, payload.message];
   },
@@ -136,11 +140,11 @@ const changeChatFavoriteExtraReducers = createExtraReducers({
       if (isEqual(preview.participants, payload.participants))
         preview.favoriteList = payload.favoriteList || [];
     });
-    // state.chatData = payload;
-    state.chatData = {
-      ...state.chatData,
-      favoriteList: payload.favoriteList || [],
-    };
+    state.chatData = payload;
+    // state.chatData = {
+    //   ...state.chatData,
+    //   favoriteList: payload.favoriteList || [],
+    // };
     state.messagesPreview = messagesPreview;
   },
   rejectedReducer: (state, { payload }) => {

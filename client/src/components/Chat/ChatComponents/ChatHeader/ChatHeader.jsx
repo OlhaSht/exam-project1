@@ -25,19 +25,6 @@ const ChatHeader = (props) => {
     return favoriteList[participants.indexOf(userId)];
   };
 
-  // const isFavorite = (chatData, userId) => {
-  //   const { favoriteList = [], participants = [] } = chatData;
-  
-  //   // Проверяем, что индекс существует в массиве participants
-  //   const userIndex = participants.indexOf(userId);
-  //   if (userIndex === -1 || !favoriteList[userIndex]) {
-  //     return false;
-  //   }
-  
-  //   return favoriteList[userIndex];
-  // };
-  
-
   const isBlocked = (chatData, userId) => {
     const { participants, blackList } = chatData;
     return blackList[participants.indexOf(userId)];
@@ -111,6 +98,7 @@ const mapStateToProps = (state) => {
   const { interlocutor, chatData } = state.chatStore;
   return { interlocutor, chatData };
 };
+
 
 const mapDispatchToProps = (dispatch) => ({
   backToDialogList: () => dispatch(backToDialogList()),

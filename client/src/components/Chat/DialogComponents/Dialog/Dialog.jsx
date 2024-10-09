@@ -18,15 +18,15 @@ class Dialog extends React.Component {
 
   messagesEnd = React.createRef();
   
-  scrollToBottom = () => {
-    if (this.messagesEnd.current) {
-      this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   // scrollToBottom = () => {
-  //   this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
+  //   if (this.messagesEnd.current) {
+  //     this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
   // };
+
+  scrollToBottom = () => {
+    this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   componentWillReceiveProps(nextProps, nextContext) {
     if (nextProps.interlocutor.id !== this.props.interlocutor.id)
@@ -36,12 +36,7 @@ class Dialog extends React.Component {
   componentWillUnmount() {
     this.props.clearMessageList();
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.messages !== this.props.messages) {
-  //     this.scrollToBottom();
-  //   }
-  // }
+  
 
   componentDidUpdate() {
     if (this.messagesEnd.current) this.scrollToBottom();
@@ -82,7 +77,6 @@ class Dialog extends React.Component {
 
   blockMessage = () => {
     const { userId, chatData } = this.props;
-    // console.log('cd>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', chatData);
     const { blackList, participants } = chatData;
     const userIndex = participants.indexOf(userId);
     let message;
@@ -96,14 +90,10 @@ class Dialog extends React.Component {
 
   render() {
     const { chatData, userId } = this.props;
-    // console.log('cd>>>>>>>>>>>>>>>>>>>>>>>>>', chatData);
-    if (!chatData) {
-      return <div>Loading...</div>;
-    }
-  
+    console.log('cd>>>>>>>>>>>>>>>>>>>>>>>>>', chatData);
 
     const isBlackListDefined = chatData?.blackList && chatData.blackList.length > 0;
-  const isParticipantsDefined = chatData?.participants && chatData.participants.length > 0;
+    const isParticipantsDefined = chatData?.participants && chatData.participants.length > 0;
 
     return (
       <>
@@ -119,8 +109,11 @@ class Dialog extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state) => state.chatStore;
+const mapStateToProps = (state) => {
+  console.log('State in mapStateToProps:::::::', state.chatStore);
+  return state.chatStore;
+};
+// const mapStateToProps = (state) => state.chatStore;
 
 const mapDispatchToProps = (dispatch) => ({
   getDialog: (data) => dispatch(getDialogMessages(data)),
