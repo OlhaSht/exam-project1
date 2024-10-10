@@ -87,130 +87,6 @@ module.exports.addMessage = async (req, res, next) => {
 
   //----------------------------------------------------------------------------------
 
-  // module.exports.getPreview = async (req, res, next) => {
-  //   try {
-  //     // Получаем все беседы с участником, отсортированные по дате последнего сообщения
-  //     const conversations = await db.Message.findAll({
-  //       include: [{
-  //         model: db.Conversation,
-  //         where: {
-  //           participants: {
-  //             [db.Sequelize.Op.contains]: [req.tokenData.userId],  // Используем оператор contains для проверки участников
-  //           },
-  //         },
-  //         attributes: ['id', 'participants', 'blackList', 'favoriteList'], // Возвращаем только необходимые поля
-  //       }],
-  //       order: [['createdAt', 'DESC']],  // Сортируем по дате создания
-  //       group: ['Conversation.id', 'Message.id'],
-  //       attributes: [
-  //         [db.Sequelize.col('Conversation.id'), '_id'],
-  //         'sender',
-  //         'body',
-  //         'createdAt',
-  //         [db.Sequelize.col('Conversation.participants'), 'participants'],
-  //         [db.Sequelize.col('Conversation.blackList'), 'blackList'],
-  //         [db.Sequelize.col('Conversation.favoriteList'), 'favoriteList'],
-  //       ],
-  //     });
-  
-  //     // Получаем ID собеседников
-  //     const interlocutors = [];
-  //     conversations.forEach(conversation => {
-  //       interlocutors.push(conversation.dataValues.participants.find(
-  //         (participant) => participant !== req.tokenData.userId));
-  //     });
-  
-  //     // Запрашиваем данные о собеседниках
-  //     const senders = await db.Users.findAll({
-  //       where: {
-  //         id: interlocutors,
-  //       },
-  //       attributes: ['id', 'firstName', 'lastName', 'displayName', 'avatar'],
-  //     });
-  
-  //     // Добавляем информацию о собеседниках в каждую беседу
-  //     conversations.forEach((conversation) => {
-  //       senders.forEach(sender => {
-  //         if (conversation.participants.includes(sender.dataValues.id)) {
-  //           conversation.dataValues.interlocutor = {
-  //             id: sender.dataValues.id,
-  //             firstName: sender.dataValues.firstName,
-  //             lastName: sender.dataValues.lastName,
-  //             displayName: sender.dataValues.displayName,
-  //             avatar: sender.dataValues.avatar,
-  //           };
-  //         }
-  //       });
-  //     });
-  
-  //     await res.send(conversations);
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // };
-  
-
-  // module.exports.getPreview = async (req, res, next) => {
-  //   try {
-  //     const userId = req.tokenData.userId;
-  
-  //     // Выполняем запрос для получения всех бесед и последних сообщений
-  //     const conversations = await db.Message.findAll({
-  //       include: [{
-  //         model: db.Conversation,
-  //         as: 'conversationData',
-  //         where: {
-  //           participants: {
-  //             [db.Sequelize.Op.contains]: [userId],  // Проверяем, что участник присутствует
-  //           },
-  //         },
-  //       }],
-  //       order: [['createdAt', 'DESC']],  // Сортировка по дате создания сообщений
-  //       group: ['conversationData.id', 'Message.id'],
-  //       attributes: [
-  //         'conversationId', 'sender', 'body', 'createdAt',
-  //         [db.Sequelize.fn('array_agg', db.Sequelize.col('conversationData.participants')), 'participants'],
-  //         [db.Sequelize.fn('array_agg', db.Sequelize.col('conversationData.blackList')), 'blackList'],
-  //         [db.Sequelize.fn('array_agg', db.Sequelize.col('conversationData.favoriteList')), 'favoriteList'],
-  //       ],
-  //     });
-  
-  //     const interlocutors = [];
-  //     conversations.forEach(conversation => {
-  //       const participants = conversation.dataValues.participants[0]; // array_agg вернет массив
-  //       interlocutors.push(participants.find(participant => participant !== userId));
-  //     });
-  
-  //     // Получаем данные о собеседниках
-  //     const senders = await db.Users.findAll({
-  //       where: {
-  //         id: interlocutors,
-  //       },
-  //       attributes: ['id', 'firstName', 'lastName', 'displayName', 'avatar'],
-  //     });
-  
-  //     // Добавляем информацию о собеседниках в разговоры
-  //     conversations.forEach((conversation) => {
-  //       senders.forEach(sender => {
-  //         if (conversation.dataValues.participants[0].includes(sender.dataValues.id)) {
-  //           conversation.dataValues.interlocutor = {
-  //             id: sender.dataValues.id,
-  //             firstName: sender.dataValues.firstName,
-  //             lastName: sender.dataValues.lastName,
-  //             displayName: sender.dataValues.displayName,
-  //             avatar: sender.dataValues.avatar,
-  //           };
-  //         }
-  //       });
-  //     });
-  
-  //     await res.send(conversations);
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // };
-  
-
   module.exports.getPreview = async (req, res, next) => {
     try {
       console.log('Fetching conversations for user=================:', req.tokenData.userId);
@@ -261,66 +137,12 @@ module.exports.addMessage = async (req, res, next) => {
     }
   };
   
-  // module.exports.getPreview = async (req, res, next) => {
-  //   try {
-  //     console.log('Fetching conversations for user:', req.tokenData.userId);
-  
-  //     const conversations = await Message.findAll({
-  //       include: [{
-  //         model: Conversation,
-  //         where: {
-  //           participants: { [Op.contains]: [req.tokenData.userId] }, // Участие пользователя
-  //         },
-  //         attributes: ['id', 'participants', 'blackList', 'favoriteList'],
-  //       }],
-  //       order: [['createdAt', 'DESC']],
-  //       group: ['Conversation.id'],
-  //       attributes: [
-  //         'conversationId',
-  //         [sequelize.fn('FIRST', sequelize.col('sender')), 'sender'],
-  //         [sequelize.fn('FIRST', sequelize.col('body')), 'text'],
-  //         [sequelize.fn('FIRST', sequelize.col('createdAt')), 'createAt'],
-  //       ],
-  //     });
-  
-  //     console.log('Conversations fetched:', conversations);
-  
-  //     const interlocutors = conversations.map(convo =>
-  //       convo.Conversation.participants.find(p => p !== req.tokenData.userId)
-  //     );
-  //     console.log('Interlocutors:', interlocutors);
-  
-  //     const senders = await Users.findAll({
-  //       where: { id: interlocutors },
-  //       attributes: ['id', 'firstName', 'lastName', 'displayName', 'avatar'],
-  //     });
-  
-  //     console.log('Senders:', senders);
-  
-  //     conversations.forEach(convo => {
-  //       console.log('Current conversation:', convo);
-  //       const sender = senders.find(s => convo.Conversation.participants.includes(s.id));
-  //       if (sender) {
-  //         console.log('Found sender:', sender);
-  //         convo.dataValues.interlocutor = sender;
-  //       }
-  //     });
-  
-  //     console.log('Final conversations:', conversations);
-  //     res.send(conversations);
-  //   } catch (err) {
-  //     console.log('Error:', err); // Лог ошибки
-  //     next(err);
-  //   }
-  // };
-  
-
   //---------------------------------------------------------------------
 
   module.exports.blackList = async (req, res, next) => {
     const index = req.body.participants.indexOf(req.tokenData.userId);
     try {
-      const chat = await Conversation.findOne(               //заменила update на findOne    
+      const chat = await Conversation.update(               //заменила update на findOne    
         { [`blackList[${index}]`]: req.body.blackListFlag },
         {
           where: { participants: req.body.participants },
@@ -337,55 +159,68 @@ module.exports.addMessage = async (req, res, next) => {
     }
   };
 
-  //-------------------------------------------------------------------------
-
-  module.exports.favoriteChat = async (req, res, next) => {
-    const index = req.body.participants.indexOf(req.tokenData.userId);
-    console.log('Request body:------', req.body);
-    console.log('User ID:--------------', req.tokenData.userId);
-    console.log('Index:=============', index);
-
-    // const chatExists = await Conversation.findOne({
-    //   where: { participants: req.body.participants },
-    // });
-    // console.log('Chat found:\\\\\\\\\\', chatExists);
-    
-
-    try {
-      const chat = await Conversation.findOne(                   //заменила update на findOne
-        { [`favoriteList[${index}]`]: req.body.favoriteFlag },
-        {
-          where: { participants: req.body.participants },
-          returning: true,
-        }
-      );
-      console.log('=======================', chat);
-       await res.send(chat);
-    } catch (err) {
-      console.error('Error updating chat:======', err);
-      res.send(err);
-    }
-  };
   // module.exports.favoriteChat = async (req, res, next) => {
-  //   const index = req.body.participants.indexOf(req.tokenData.userId);
   //   try {
-  //     // Шаг 1: Обновление записи
-  //     await Conversation.update(
-  //       { [`favoriteList[${index}]`]: req.body.favoriteFlag },
-  //       {
-  //         where: { participants: req.body.participants },
-  //       }
+  //     // Убедимся, что участники отсортированы по возрастанию для согласованности
+  //     const sortedParticipants = req.body.participants.sort((a, b) => a - b);
+  //     const userId = req.tokenData.userId;
+  
+  //     // Найдем индекс пользователя в массиве `favoriteList`, где его ID соответствует текущему `userId`
+  //     const conversation = await Conversation.findOne({
+  //       where: { participants: sortedParticipants },
+  //     });
+  //     console.log('....',conversation )
+  
+  //     if (!conversation) {
+  //       return res.status(404).send({ message: 'Conversation not found' });
+  //     }
+  
+  //     const index = conversation.participants.findIndex(
+  //       (participant) => participant === userId
   //     );
   
-  //     // Шаг 2: Поиск обновлённой записи
-  //     const updatedChat = await Conversation.findOne({
-  //       where: { participants: req.body.participants },
-  //     });
+  //     if (index === -1) {
+  //       return res.status(400).send({ message: 'User is not a participant in the conversation' });
+  //     }
   
-  //     // Отправка обновленной записи в ответ
-  //     res.send(updatedChat);
+  //     // Обновляем нужный элемент в массиве `favoriteList` по найденному индексу
+  //     conversation.favoriteList[index] = req.body.favoriteFlag;
+  
+  //     // Сохраняем обновленную беседу
+  //     await conversation.save();
+  
+  //     await res.send(conversation);
   //   } catch (err) {
-  //     res.send(err);
+  //     console.error('Error updating conversation:', err);
+  //     res.status(500).send({ message: 'Server error', error: err });
   //   }
   // };
+  
+  module.exports.favoriteChat = async (req, res, next) => {
+    try {
+      const sortedParticipants = [...req.body.participants].sort((a, b) => a - b);
+      const index = sortedParticipants.indexOf(req.tokenData.userId);
+  
+      const conversation = await Conversation.findOne({
+        where: { participants: sortedParticipants },
+      });
+  
+      if (!conversation) {
+        return res.status(404).send({ message: 'Conversation not found' });
+      }
+  
+      // Обновляем favoriteList вручную, чтобы избежать проблем с индексами
+      const updatedFavoriteList = [...conversation.favoriteList];
+      console.log('----', updatedFavoriteList)
+      updatedFavoriteList[index] = req.body.favoriteFlag;
+  
+      conversation.favoriteList = updatedFavoriteList;
+      await conversation.save(); // сохраняем изменения
+  
+      res.send(conversation);
+    } catch (err) {
+      console.error('Error updating conversation:', err);
+      res.status(500).send({ message: 'Server error', error: err });
+    }
+  };
   

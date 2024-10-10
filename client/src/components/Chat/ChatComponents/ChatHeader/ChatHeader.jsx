@@ -21,6 +21,7 @@ const ChatHeader = (props) => {
   };
 
   const isFavorite = (chatData, userId) => {
+    console.log('....', chatData);
     const { favoriteList, participants } = chatData;
     return favoriteList[participants.indexOf(userId)];
   };
