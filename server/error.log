@@ -1,0 +1,5 @@
+2024-10-11T10:31:33.908Z - Error: Wrong password
+Stack: UserNotFoundError: Wrong password
+    at module.exports.passwordCompare (/server/src/controllers/queries/userQueries.js:36:11)
+    at async module.exports.login (/server/src/controllers/userController.js:15:5)
+
