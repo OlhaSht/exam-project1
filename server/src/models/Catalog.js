@@ -8,6 +8,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      chats: {
+        type: DataTypes.VIRTUAL, // Используем VIRTUAL, так как данные будут получены через ассоциацию
+        get() {
+          // Получаем чаты через ассоциацию
+          return this.getConversations();
+        },
+      },
     }, {
       timestamps: false, // Отключаем timestamps для этой модели
     });
