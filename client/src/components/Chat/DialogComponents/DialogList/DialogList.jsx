@@ -85,9 +85,9 @@ const DialogList = (props) => {
   //   );
   // };
 
-  const groupMessagesByChatId = (messages) => {
+  const groupMessagesByConversationId = (messages) => {
     return messages.reduce((acc, message) => {
-      const chatId = message.chatId; // предполагается, что у каждого сообщения есть идентификатор диалога
+      const chatId = message.conversationId; // предполагается, что у каждого сообщения есть идентификатор диалога
       if (!acc[chatId]) {
         acc[chatId] = [];
       }
@@ -98,12 +98,12 @@ const DialogList = (props) => {
   
 
   const renderPreview = (filterFunc) => {
-    const groupedChats = groupMessagesByChatId(props.preview);
+    const groupedChats = groupMessagesByConversationId(props.preview);
     const arrayList = [];
   
     Object.entries(groupedChats).forEach(([chatId, messages]) => {
       const chatPreview = messages[0]; // Используем первое сообщение как представителя диалога
-  
+
       const dialogNode = (
         <DialogBox
           interlocutor={chatPreview.interlocutor}
@@ -129,14 +129,13 @@ const DialogList = (props) => {
         arrayList.push(dialogNode);
       }
     });
-  
+    
     return arrayList.length ? (
       arrayList
     ) : (
       <span className={styles.notFound}>Not found</span>
     );
   };
-  
 
   const renderChatPreview = () => {
     const { chatMode } = props;
