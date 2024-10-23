@@ -19,14 +19,27 @@ import CatalogListHeader from '../../CatalogComponents/CatalogListHeader/Catalog
 import ChatError from '../../../ChatError/ChatError';
 
 class Chat extends React.Component {
+  chatRef = React.createRef();
+
   componentDidMount() {
     chatController.subscribeChat(this.props.userStore.data.id);
     this.props.getPreviewChat();
+
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
     chatController.unsubscribeChat(this.props.userStore.data.id);
+
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
+
+  handleClickOutside = (event) => {
+    // Проверяем, если клик был вне контейнера чата
+    if (this.chatRef.current && !this.chatRef.current.contains(event.target)) {
+      this.props.changeShow(); // Закрываем чат
+    }
+  };
 
   renderDialogList = () => {
     const { setChatPreviewMode } = this.props;
@@ -98,6 +111,7 @@ class Chat extends React.Component {
     const { changeShow, getPreviewChat } = this.props;
     return (
       <div
+        ref={this.chatRef} 
         className={classNames(styles.chatContainer, {
           [styles.showChat]: isShow,
         })}
