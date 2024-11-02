@@ -376,3 +376,380 @@ Stack: TokenError: token error
     at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
     at router (/server/node_modules/express/lib/router/index.js:47:12)
 
+2024-10-23T13:57:10.900Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T13:57:54.643Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T13:59:58.612Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T14:06:09.316Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T14:07:26.992Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T14:07:32.948Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T16:23:46.707Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T16:23:52.204Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T16:24:53.654Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-23T16:24:59.150Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-25T12:17:20.297Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-25T12:17:23.888Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-28T13:59:47.121Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-10-28T13:59:51.609Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T17:40:42.907Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T17:40:53.866Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T17:40:58.830Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T17:46:25.935Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T17:46:32.721Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T19:17:53.004Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T19:17:55.789Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T19:18:01.519Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-01T19:18:05.426Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-02T18:32:08.814Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-02T19:32:25.438Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:38:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-02T19:34:38.521Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-02T19:34:41.281Z - Error: token error
+Stack: TokenError: token error
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:25:10)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-02T19:38:57.566Z - Error: need token
+Stack: TokenError: need token
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:9:17)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-11-02T19:39:11.408Z - Error: need token
+Stack: TokenError: need token
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:9:17)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+

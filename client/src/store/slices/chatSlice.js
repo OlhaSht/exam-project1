@@ -167,7 +167,7 @@ const changeChatBlockExtraReducers = createExtraReducers({
     const { messagesPreview } = state;
     messagesPreview.forEach(preview => {
       if (isEqual(preview.participants, payload.participants))
-        preview.blackList = payload.blackList;
+        preview.blackList = payload.blackList || [];
     });
     state.chatData = payload;
     state.messagesPreview = messagesPreview;

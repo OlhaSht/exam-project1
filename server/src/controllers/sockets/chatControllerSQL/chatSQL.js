@@ -139,23 +139,51 @@ module.exports.addMessage = async (req, res, next) => {
   
   //---------------------------------------------------------------------
 
-  module.exports.blackList = async (req, res, next) => {
-    const index = req.body.participants.indexOf(req.tokenData.userId);
-    try {
-      const chat = await Conversation.update(               //заменила update на findOne    
-        { [`blackList[${index}]`]: req.body.blackListFlag },
-        {
-          where: { participants: req.body.participants },
-          returning: true,
-        }
-      );
+  // module.exports.blackList = async (req, res, next) => {
+  //   const index = req.body.participants.indexOf(req.tokenData.userId);
+  //   try {
+  //     const chat = await Conversation.update(               //заменила update на findOne    
+  //       { [`blackList[${index}]`]: req.body.blackListFlag },
+  //       {
+  //         where: { participants: req.body.participants },
+  //         returning: true,
+  //       }
+  //     );
       
-      const interlocutorId = req.body.participants.find(p => p !== req.tokenData.userId);
-      controller.getChatController().emitChangeBlockStatus(interlocutorId, chat);
+  //     const interlocutorId = req.body.participants.find(p => p !== req.tokenData.userId);
+  //     controller.getChatController().emitChangeBlockStatus(interlocutorId, chat);
   
-      await res.send(chat);
+  //     await res.send(chat);
+  //   } catch (err) {
+  //     res.send(err);
+  //   }
+  // };
+
+  module.exports.blackList = async (req, res, next) => {
+    try {
+      const sortedParticipants = [...req.body.participants].sort((a, b) => a - b);
+      const index = sortedParticipants.indexOf(req.tokenData.userId);
+  
+      const conversation = await Conversation.findOne({
+        where: { participants: sortedParticipants },
+      });
+  
+      if (!conversation) {
+        return res.status(404).send({ message: 'Conversation not found' });
+      }
+      
+      const updatedBlackList = [...conversation.blackList];
+      console.log('----', updatedBlackList)
+      console.log('Value of blackListFlag:', req.body.blackListFlag);
+      updatedBlackList[index] = req.body.blackListFlag;
+  
+      conversation.blackList = updatedBlackList;
+      await conversation.save(); 
+  
+      res.send(conversation);
     } catch (err) {
-      res.send(err);
+      console.error('Error updating conversation:', err);
+      res.status(500).send({ message: 'Server error', error: err });
     }
   };
 

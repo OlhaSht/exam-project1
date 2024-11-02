@@ -19,27 +19,36 @@ import CatalogListHeader from '../../CatalogComponents/CatalogListHeader/Catalog
 import ChatError from '../../../ChatError/ChatError';
 
 class Chat extends React.Component {
-  chatRef = React.createRef();
+  // chatRef = React.createRef();
 
   componentDidMount() {
     chatController.subscribeChat(this.props.userStore.data.id);
     this.props.getPreviewChat();
 
-    document.addEventListener('mousedown', this.handleClickOutside);
+    // document.addEventListener('click', this.handleClickOutside);
   }
 
   componentWillUnmount() {
     chatController.unsubscribeChat(this.props.userStore.data.id);
 
-    document.removeEventListener('mousedown', this.handleClickOutside);
+    // document.removeEventListener('click', this.handleClickOutside);
   }
 
-  handleClickOutside = (event) => {
-    // Проверяем, если клик был вне контейнера чата
-    if (this.chatRef.current && !this.chatRef.current.contains(event.target)) {
-      this.props.changeShow(); // Закрываем чат
-    }
-  };
+  // handleClickOutside = (event) => {
+  //   // Проверяем, если клик был вне контейнера чата
+  //   if (this.chatRef.current && !this.chatRef.current.contains(event.target)) {
+  //     console.log("Click outside, closing chat...");
+  //     this.props.changeShow(false); // Закрываем чат
+  //   }
+  // };
+
+  // handleToggleChat = () => {
+  //   console.log("Toggling chat, current state:", this.props.chatStore.isShow);
+  //   if (!this.props.chatStore.isShow) {
+  //     this.props.changeShow(false); // Открыть чат
+  //   }
+  // };
+
 
   renderDialogList = () => {
     const { setChatPreviewMode } = this.props;
@@ -108,10 +117,10 @@ class Chat extends React.Component {
     const { isExpanded, isShow, isShowCatalogCreation, error } =
       this.props.chatStore;
     const { id } = this.props.userStore.data;
-    const { changeShow, getPreviewChat } = this.props;
+    const {  getPreviewChat } = this.props;
     return (
       <div
-        ref={this.chatRef} 
+        // ref={this.chatRef} 
         className={classNames(styles.chatContainer, {
           [styles.showChat]: isShow,
         })}
@@ -119,9 +128,11 @@ class Chat extends React.Component {
         {error && <ChatError getData={getPreviewChat} />}
         {isShowCatalogCreation && <CatalogCreation />}
         {isExpanded ? <Dialog userId={id} /> : this.renderDialogList()}
-        <div className={styles.toggleChat} onClick={() => changeShow()}>
+        
+        <div className={styles.toggleChat} onClick={() => this.props.changeShow()}>
           {isShow ? 'Hide Chat' : 'Show Chat'}
         </div>
+
       </div>
     );
   }
@@ -133,7 +144,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeShow: () => dispatch(changeChatShow()),
+  changeShow: () => dispatch(changeChatShow()), 
+
   setChatPreviewMode: (mode) => dispatch(setPreviewChatMode(mode)),
   changeShowModeCatalog: () => dispatch(changeShowModeCatalog()),
   clearChatError: () => dispatch(clearChatError()),
