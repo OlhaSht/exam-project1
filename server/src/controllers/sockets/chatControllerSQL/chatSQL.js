@@ -239,7 +239,8 @@ module.exports.addMessage = async (req, res, next) => {
   
       // Обновляем favoriteList вручную, чтобы избежать проблем с индексами
       const updatedFavoriteList = [...conversation.favoriteList];
-      console.log('----', updatedFavoriteList)
+      // console.log('----', updatedFavoriteList)
+      // console.log("Favorite Flag://///", req.body.favoriteFlag);
       updatedFavoriteList[index] = req.body.favoriteFlag;
   
       conversation.favoriteList = updatedFavoriteList;
@@ -252,3 +253,5 @@ module.exports.addMessage = async (req, res, next) => {
     }
   };
   
+
+
