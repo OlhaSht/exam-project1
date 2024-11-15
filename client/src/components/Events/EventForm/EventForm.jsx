@@ -2,9 +2,11 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { connect } from 'react-redux';
+import styles from './EventForm.module.sass'
 
 const EventForm = ({ setTasks }) => {  // Принимаем setTasks как проп
   return (
+    <div className={styles.formContainer}>
     <Formik
       initialValues={{
         eventName: '',
@@ -17,7 +19,8 @@ const EventForm = ({ setTasks }) => {  // Принимаем setTasks как п�
     >
       {({ isSubmitting }) => (
         <Form>
-          <div>
+          <div className={styles.inputContainer}>
+          <div className={styles.inputForm}>
             <label htmlFor="eventName">Event</label>
             <Field 
               id="eventName" 
@@ -27,7 +30,7 @@ const EventForm = ({ setTasks }) => {  // Принимаем setTasks как п�
             />
           </div>
 
-          <div>
+          <div className={styles.inputForm}>
             <label htmlFor="eventDate">Date</label>
             <Field 
               id="eventDate" 
@@ -37,12 +40,24 @@ const EventForm = ({ setTasks }) => {  // Принимаем setTasks как п�
             />
           </div>
 
-          <button type="submit" disabled={isSubmitting}>
+          <div className={styles.inputForm}>
+            <label htmlFor="eventDate">Date</label>
+            <Field 
+              id="eventDate" 
+              name="eventDate" 
+              type="date" 
+              required 
+            />
+          </div>
+
+          <button type="submit" className={styles.buttonForm} disabled={isSubmitting}>
             Done
           </button>
+          </div>
         </Form>
       )}
     </Formik>
+    </div>
   );
 };
 
