@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../../components/Header/Header';
 import EventForm from '../../components/Events/EventForm/EventForm';
 import Footer from '../../components/Footer/Footer';
+import EventTimerBar from '../../components/Events/EventTimerBar/EventTimerBar';
 
 const EventPage = () => {
   // Инициализируем состояние tasks с проверкой localStorage
@@ -24,6 +25,11 @@ const EventPage = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
+  // Удаляем завершенные задачи и обновляем бейджик
+  const handleComplete = (id) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
+
   return (
     <div>
       <Header />
@@ -31,10 +37,16 @@ const EventPage = () => {
       <div>
         <h2>Список событий:</h2>
         <ul>
-          {tasks.map((task) => (
+          {tasks
+          .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate)) // Сортировка по дате
+          .map((task) => (
             <li key={task.id}>
-              {task.eventName} - {task.eventDate}
-            </li>
+              <EventTimerBar
+                eventName={task.eventName}
+                eventDate={task.eventDate}
+                onComplete={() => handleComplete(task.id)}
+              />
+            </li>  
           ))}
         </ul>
       </div>
