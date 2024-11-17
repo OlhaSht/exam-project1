@@ -35,7 +35,7 @@ const EventPage = () => {
       <Header />
       <EventForm setTasks={addTask} /> {/* Передаем функцию addTask в EventForm */}
       <div>
-        <h2>Список событий:</h2>
+        <h2>Time Left:</h2>
         <ul>
           {tasks
           .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate)) // Сортировка по дате
