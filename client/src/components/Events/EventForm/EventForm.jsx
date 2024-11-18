@@ -41,7 +41,7 @@ const EventForm = ({ setTasks }) => {  // Принимаем setTasks как п�
           </div>
 
           <div className={styles.inputForm}>
-            <label htmlFor="eventDate">Date</label>
+            <label htmlFor="eventDate">Notify by</label>
             <Field 
               id="eventDate" 
               name="eventDate" 

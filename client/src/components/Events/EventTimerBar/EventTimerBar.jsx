@@ -56,8 +56,8 @@ const EventTimerBar = ({ eventName, eventDate, onComplete }) => {
 
   return (
     <div className={styles.timerContainer}>
-      <h3>{eventName}</h3>
-      <div className={styles.progressBar}>
+      <h3 className={styles.eventName}>{eventName}</h3>
+      <div className={styles.inputProgressBar}>
         <Line
           percent={percentage}
           strokeWidth={4}

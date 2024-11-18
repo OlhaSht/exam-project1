@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header';
 import EventForm from '../../components/Events/EventForm/EventForm';
 import Footer from '../../components/Footer/Footer';
 import EventTimerBar from '../../components/Events/EventTimerBar/EventTimerBar';
+import styles from '../../components/Events/EventTimerBar/EventTimerBar.module.sass';
 
 const EventPage = () => {
   // Инициализируем состояние tasks с проверкой localStorage
@@ -33,9 +34,10 @@ const EventPage = () => {
   return (
     <div>
       <Header />
+      <div className={styles.eventContainer}>
       <EventForm setTasks={addTask} /> {/* Передаем функцию addTask в EventForm */}
-      <div>
-        <h2>Time Left:</h2>
+      <div className={styles.progressBarContainer}>
+        <h2 className={styles.timeListName}>Time Left:</h2>
         <ul>
           {tasks
           .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate)) // Сортировка по дате
@@ -49,6 +51,7 @@ const EventPage = () => {
             </li>  
           ))}
         </ul>
+      </div>
       </div>
       <Footer />
     </div>
