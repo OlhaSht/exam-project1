@@ -35,7 +35,8 @@ const EventPage = () => {
     <div>
       <Header />
       <div className={styles.eventContainer}>
-      <EventForm setTasks={addTask} /> 
+        <div>
+        <EventForm setTasks={addTask} /> 
       <div className={styles.progressBarContainer}>
         <h2 className={styles.timeListName}>Time Left:</h2>
         <ul>
@@ -52,6 +53,8 @@ const EventPage = () => {
           ))}
         </ul>
       </div>
+        </div>
+      
       </div>
       <Footer />
     </div>
