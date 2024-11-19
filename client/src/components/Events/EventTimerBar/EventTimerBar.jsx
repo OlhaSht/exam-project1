@@ -3,8 +3,11 @@ import { Line } from 'rc-progress';
 import styles from './EventTimerBar.module.sass';
 
 const EventTimerBar = ({ eventName, eventDate, onComplete }) => {
+  const totalTime = new Date(eventDate).getTime() - Date.now();
   const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(eventDate));
   const [percentage, setPercentage] = useState(0);
+
+  // const totalTime = new Date(eventDate).getTime() - new Date().getTime();
 
   // Функция для вычисления оставшегося времени в часах и минутах
   function calculateTimeLeft(eventDate) {
@@ -16,7 +19,7 @@ const EventTimerBar = ({ eventName, eventDate, onComplete }) => {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
 
-    return { hours, minutes };
+    return { hours, minutes, timeLeftInMs };
   }
 
   // Обновляем таймер и процентный прогресс
@@ -25,23 +28,30 @@ const EventTimerBar = ({ eventName, eventDate, onComplete }) => {
       const newTimeLeft = calculateTimeLeft(eventDate);
       setTimeLeft(newTimeLeft);
 
-      // Вычисляем прогресс (процент оставшегося времени)
-      const totalTime = new Date(eventDate).getTime() - new Date().getTime();
-      const elapsedTime =
-        totalTime -
-        (newTimeLeft.hours * 3600 * 1000 + newTimeLeft.minutes * 60 * 1000);
-      setPercentage(((elapsedTime / totalTime) * 100));
+    //   // Вычисляем прогресс (процент оставшегося времени)
+    //   const totalTime = new Date(eventDate).getTime() - new Date().getTime();
+    //   const elapsedTime =
+    //     totalTime -
+    //     (newTimeLeft.hours * 3600 * 1000 + newTimeLeft.minutes * 60 * 1000);
+    //   setPercentage(((elapsedTime / totalTime) * 100));
 
-      // Проверяем, если время истекло
-      if (newTimeLeft.hours === 0 && newTimeLeft.minutes === 0) {
+        // Вычисляем прошедшее время
+      const elapsedTime = totalTime - newTimeLeft.timeLeftInMs;
+      const newPercentage = (elapsedTime / totalTime) * 100;
+
+      // Обновляем процент прогресса
+      setPercentage(Math.min(newPercentage, 100));
+
+    // Проверяем, если время истекло
+    if (newTimeLeft.timeLeftInMs <= 0) {
         clearInterval(intervalId);
-        onComplete(); // Уведомляем, что событие завершилось
+        // onComplete(); // Уведомляем, что событие завершилось
       }
     }, 1000);
 
     // Очищаем таймер при размонтировании
     return () => clearInterval(intervalId);
-  }, [eventDate, onComplete]);
+  }, [eventDate, onComplete, totalTime]);
 
   // Форматирование оставшегося времени в строку
   const formatTimeLeft = (hours, minutes) => {
@@ -60,11 +70,12 @@ const EventTimerBar = ({ eventName, eventDate, onComplete }) => {
       <div className={styles.inputProgressBar}>
         <Line
           percent={percentage}
-          strokeWidth={4}
+          strokeWidth={3}
+          trailWidth={3}
           strokeColor={timeLeft.hours === 0 && timeLeft.minutes === 0 ? 'red' : '#4CAF50'}
         />
       </div>
-      <p>Left: {formatTimeLeft(timeLeft.hours, timeLeft.minutes)}</p>
+      <p className={styles.eventName}>Left: {formatTimeLeft(timeLeft.hours, timeLeft.minutes)}</p>
     </div>
   );
 };

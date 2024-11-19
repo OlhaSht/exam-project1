@@ -27,15 +27,15 @@ const EventPage = () => {
   }, [tasks]);
 
   // Удаляем завершенные задачи и обновляем бейджик
-  const handleComplete = (id) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-  };
+  // const handleComplete = (id) => {
+  //   setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  // };
 
   return (
     <div>
       <Header />
       <div className={styles.eventContainer}>
-      <EventForm setTasks={addTask} /> {/* Передаем функцию addTask в EventForm */}
+      <EventForm setTasks={addTask} /> 
       <div className={styles.progressBarContainer}>
         <h2 className={styles.timeListName}>Time Left:</h2>
         <ul>
@@ -46,7 +46,7 @@ const EventPage = () => {
               <EventTimerBar
                 eventName={task.eventName}
                 eventDate={task.eventDate}
-                onComplete={() => handleComplete(task.id)}
+                // onComplete={() => handleComplete(task.id)}
               />
             </li>  
           ))}
