@@ -77,7 +77,7 @@ const StartContestPage = props => {
       </div>
 
       <div className={styles.baseButtonContainer}>   
-        <div className={styles.baseButton}>
+        <div className={styles.baseButtons}>
           <ButtonGruop
             path={['Name.png']}
             header='Name'

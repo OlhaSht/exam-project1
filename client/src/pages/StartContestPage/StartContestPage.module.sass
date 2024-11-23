@@ -101,11 +101,22 @@
 
 
 .baseButtonContainer
-   background-color: #e6eefb
+   background: radial-gradient(circle at center, #f2f9ff, #e6f3ff, #e6edfa, #f2f4f8) !important
    padding: 25px 0
    display: flex
    flex-direction: column
-   align-items: center        
+   align-items: center  
+
+   .baseButtons
+    display: flex        
+    flex-direction: row
+    align-items: center
+    justify-content: space-around
+    padding-right: 15px
+    padding-left: 15px
+    box-sizing: border-box
+    flex-wrap: wrap
+    max-width: 1200px  
 
 
 .startContestHeader

@@ -50,9 +50,9 @@ const BundleBox = props => {
     >
       <div>{renderImage()}</div>
       <div className={styles.infoButtonContainer}>
-        <span className={styles.bundleName}>{header}</span>
+        <span className={styles.buttonName}>{header}</span>
         <hr />
-        <span className={styles.infoBundle}>{describe}</span>
+        <span className={styles.infoButton}>{describe}</span>
       </div>
     </div>
   );
