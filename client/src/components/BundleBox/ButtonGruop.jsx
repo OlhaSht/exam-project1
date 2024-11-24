@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ButtonGruop.module.sass';
 import CONSTANTS from '../../constants';
 
-const BundleBox = props => {
+const ButtonGruop = props => {
   const defaultPathToImages = `${CONSTANTS.STATIC_IMAGES_PATH}contestLabels/`;
 
   const renderImage = () => {
@@ -10,10 +10,10 @@ const BundleBox = props => {
     for (let i = 0; i < props.path.length; i++) {
       array.push(
         <img
-          src={defaultPathToImages + props.path[i]}
+          src={`${defaultPathToImages}${props.path[i]}`}
           key={i}
           className={styles.imgContainer}
-          alt={props.path[i].replace(/.png/g, 'Contest')}
+          alt={props.path[i].replace(/.svg/g, 'SVG Icon')}
         />
       );
     }
@@ -51,11 +51,10 @@ const BundleBox = props => {
       <div>{renderImage()}</div>
       <div className={styles.infoButtonContainer}>
         <span className={styles.buttonName}>{header}</span>
-        <hr />
         <span className={styles.infoButton}>{describe}</span>
       </div>
     </div>
   );
 };
 
-export default BundleBox;
+export default ButtonGruop;

@@ -79,19 +79,19 @@ const StartContestPage = props => {
       <div className={styles.baseButtonContainer}>   
         <div className={styles.baseButtons}>
           <ButtonGruop
-            path={['Name.png']}
+            path={['name-icon.svg']}
             header='Name'
             describe='Get up and running with the perfect name.'
             setBundle={setBundle}
           />
           <ButtonGruop
-            path={['Logo.png']}
+            path={['name-icon.svg']}
             header='Logo'
             describe='Kickstart your venture with a unique, memorable logo.'
             setBundle={setBundle}
           />
           <ButtonGruop
-            path={['Tagline.png']}
+            path={['name-icon.svg']}
             header='Tagline'
             describe='Connect deeply with your target audience with an on-target tagline.'
             setBundle={setBundle}
