@@ -118,3 +118,11 @@ module.exports.canUpdateContest = async (req, res, next) => {
   }
 };
 
+module.exports.onlyForModerator = (req, res, next) => {
+  if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+    return next(new RightsError('This page is only for moderators'));
+  }
+  next();
+};
+
+
