@@ -99,6 +99,137 @@ module.exports.getContestById = async (req, res, next) => {
   }
 };
 
+//вариант 2------------------------------------------
+
+// module.exports.getContestById = async (req, res, next) => {
+//   try {
+//     let contestInfo = await db.Contests.findOne({
+//       where: { id: req.headers.contestid },
+//       order: [
+//         [db.Offers, 'id', 'asc'],
+//       ],
+//       include: [
+//         {
+//           model: db.Users,
+//           required: true,
+//           attributes: {
+//             exclude: [
+//               'password',
+//               'role',
+//               'balance',
+//               'accessToken',
+//             ],
+//           },
+//         },
+//         {
+//             model: db.Offers,
+//             required: false,
+//             where: req.tokenData.role === CONSTANTS.MODERATOR
+//               ? {}
+//               : { id: null }, // Пустой набор, если не модератор
+//             attributes: { exclude: ['userId', 'contestId'] },
+//             include: [
+//               {
+//                 model: db.Users,
+//                 required: true,
+//                 attributes: {
+//                   exclude: [
+//                     'password',
+//                     'role',
+//                     'balance',
+//                     'accessToken',
+//                   ],
+//                 },
+//               },
+//               {
+//                 model: db.Ratings,
+//                 required: false,
+//                 where: { userId: req.tokenData.userId },
+//                 attributes: { exclude: ['userId', 'offerId'] },
+//               },
+//             ],
+//           }          
+//       ],
+//     });
+//     contestInfo = contestInfo.get({ plain: true });
+//     contestInfo.Offers.forEach(offer => {
+//       if (offer.Rating) {
+//         offer.mark = offer.Rating.mark;
+//       }
+//       delete offer.Rating;
+//     });
+//     res.send(contestInfo);
+//   } catch (e) {
+//     next(new ServerError());
+//   }
+// };
+
+//вариант 3---------------------------------------------------------------------
+
+// module.exports.getContestById = async (req, res, next) => {
+//   try {
+//     if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+//       return next(new RightsError('Only moderators can view offers'));
+//     }
+//     let contestInfo = await db.Contests.findOne({
+//       where: { id: req.headers.contestid },
+//       order: [
+//         [db.Offers, 'id', 'asc'],
+//       ],
+//       include: [
+//         {
+//           model: db.Users,
+//           required: true,
+//           attributes: {
+//             exclude: [
+//               'password',
+//               'role',
+//               'balance',
+//               'accessToken',
+//             ],
+//           },
+//         },
+//         {
+//           model: db.Offers,
+//           required: false,
+//           attributes: { exclude: ['userId', 'contestId'] },
+//           include: [
+//             {
+//               model: db.Users,
+//               required: true,
+//               attributes: {
+//                 exclude: [
+//                   'password',
+//                   'role',
+//                   'balance',
+//                   'accessToken',
+//                 ],
+//               },
+//             },
+//             {
+//               model: db.Ratings,
+//               required: false,
+//               attributes: { exclude: ['userId', 'offerId'] },
+//             },
+//           ],
+//         },
+//       ],
+//     });
+//     contestInfo = contestInfo.get({ plain: true });
+//     contestInfo.Offers.forEach(offer => {
+//       if (offer.Rating) {
+//         offer.mark = offer.Rating.mark;
+//       }
+//       delete offer.Rating;
+//     });
+//     res.send(contestInfo);
+//   } catch (e) {
+//     next(new ServerError());
+//   }
+// };
+
+
+
 module.exports.downloadFile = async (req, res, next) => {
   const file = CONSTANTS.CONTESTS_DEFAULT_DIR + req.params.fileName;
   res.download(file);

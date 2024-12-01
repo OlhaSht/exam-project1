@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { updateBundle } from '../../store/slices/bundleSlice';
 import BundleBox from '../../components/BundleBox/BundleBox';
-import ButtonGruop from '../../components/BundleBox/ButtonGruop'
+// import ButtonGruop from '../../components/BundleBox/ButtonGruop';
 import CONSTANTS from '../../constants';
 import styles from './StartContestPage.module.sass';
 import Footer from '../../components/Footer/Footer';
@@ -76,7 +76,7 @@ const StartContestPage = props => {
         </div>
       </div>
 
-      <div className={styles.baseButtonContainer}>   
+      {/* <div className={styles.baseButtonContainer}>   
         <div className={styles.baseButton}>
           <ButtonGruop
             path={['Name.png']}
@@ -97,7 +97,7 @@ const StartContestPage = props => {
             setBundle={setBundle}
           />
         </div>
-      </div>  
+      </div>   */}
       
       <div className={styles.combinedBundles}>
         <div className={styles.infoCombinedBundles}>

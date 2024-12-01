@@ -88,6 +88,48 @@ class CreatorDashboard extends React.Component {
     );
   };
 
+  // renderIndustryType = () => {
+  //   const array = [];
+  //   const { creatorFilter } = this.props;
+  //   const dataForContest = this.props.dataForContest?.data;
+  //   const industry = dataForContest?.industry || []; // Безопасное обращение и установка пустого массива по умолчанию
+  
+  //   array.push(
+  //     <option key={0} value={null}>
+  //       Choose industry
+  //     </option>
+  //   );
+  
+  //   // Проверяем, является ли industry массивом
+  //   if (Array.isArray(industry)) {
+  //     industry.forEach((industry, i) =>
+  //       array.push(
+  //         <option key={i + 1} value={industry}>
+  //           {industry}
+  //         </option>
+  //       )
+  //     );
+  //   } else {
+  //     console.warn('Industry is not an array or undefined:', industry);
+  //   }
+  
+  //   return (
+  //     <select
+  //       onChange={({ target }) =>
+  //         this.changePredicate({
+  //           name: 'industry',
+  //           value: target.value,
+  //         })
+  //       }
+  //       value={creatorFilter.industry || ''}
+  //       className={styles.input}
+  //     >
+  //       {array}
+  //     </select>
+  //   );
+  // };
+  
+
   componentWillReceiveProps(nextProps, nextContext) {
     if (nextProps.location.search !== this.props.location.search) {
       this.parseUrlForParams(nextProps.location.search);
