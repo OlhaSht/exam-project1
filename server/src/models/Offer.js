@@ -34,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: 'pending',
     },
+    moderatorStatus: {
+      type: DataTypes.ENUM('pending', 'approved', 'rejected'),
+      allowNull: true,
+      defaultValue: 'pending',
+    },
   },
   {
     timestamps: false,

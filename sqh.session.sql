@@ -2,9 +2,9 @@
 -- -- ALTER TYPE "enum_Users_role" 
 -- -- ADD VALUE 'moderator';
 
--- UPDATE "Users"
--- SET role = 'moderator'
--- WHERE id = 1;
+UPDATE "Users"
+SET role = 'moderator'
+WHERE id = 3;
 
 -- SELECT "accessToken" 
 -- FROM "Users"
@@ -17,11 +17,11 @@
 --   WHERE id = 1
 -- ) u;
 
-SELECT json_build_object(
-  'accessToken', "accessToken"
-) AS user_data
-FROM "Users"
-WHERE id = 3;
+-- SELECT json_build_object(
+--   'accessToken', "accessToken"
+-- ) AS user_data
+-- FROM "Users"
+-- WHERE id = 3;
 
 -- INSERT INTO "Contests" 
 -- ("orderId", "userId", "contestType", "title", "status", "prize", "priority")

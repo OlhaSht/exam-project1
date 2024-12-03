@@ -9,6 +9,7 @@ const validators = require('../middlewares/validators');
 const chatSQL = require('../controllers/sockets/chatControllerSQL/chatSQL');
 const catalogSQL = require('../controllers/sockets/chatControllerSQL/catalogSQL');
 const upload = require('../utils/fileUpload');
+const offerController = require('../controllers/offersController')
 const moderatorController = require('../controllers/moderatorController');
 const router = express.Router();
 
@@ -192,26 +193,46 @@ router.post(
   // chatController.getCatalogs,
 );
 
+// router.get(
+//   '/getAllOffers',
+//   checkToken.checkToken,
+//   basicMiddlewares.onlyForModerator,
+//   moderatorController.getAllOffers
+// );
+
+// router.post(
+//   '/approveOffer',
+//   checkToken.checkToken,
+//   basicMiddlewares.onlyForModerator,
+//   moderatorController.approveOffer
+// );
+
+// router.put(
+//   '/rejectOffer',
+//   checkToken.checkToken,
+//   basicMiddlewares.onlyForModerator,
+//   moderatorController.rejectOffer
+// );
+
 router.get(
   '/getAllOffers',
   checkToken.checkToken,
-  basicMiddlewares.onlyForModerator,
-  moderatorController.getAllOffers
+  offerController.getAllOffers
 );
-
+router.get(
+  '/updateOfferStatus',
+  checkToken.checkToken,
+  offerController.updateOfferStatus
+);
 router.post(
-  '/approveOffer',
+  '/getMyOffers',
   checkToken.checkToken,
-  basicMiddlewares.onlyForModerator,
-  moderatorController.approveOffer
+  offerController.getMyOffers
 );
-
-router.put(
-  '/rejectOffer',
+router.patch(
+  '/createOffer',
   checkToken.checkToken,
-  basicMiddlewares.onlyForModerator,
-  moderatorController.rejectOffer
+  offerController.createOffer
 );
-
 
 module.exports = router;
