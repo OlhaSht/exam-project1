@@ -1,5 +1,39 @@
 const db = require('../models');
 const ServerError =require('../errors/ServerError');
+const RightsError = require('../errors/RightsError');
+const CONSTANTS = require('../constants');
+
+module.exports.getAllOffersForModerator = async (req, res, next) => {
+  try {
+    if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+      return next(new RightsError('Access denied. Only moderators can view offers.'));
+    }
+
+    const allOffers = await db.Offers.findAll({
+      attributes: { exclude: ['userId', 'contestId'] },
+      include: [
+        {
+          model: db.Users,
+          required: true,
+          attributes: {
+            exclude: ['password', 'role', 'balance', 'accessToken'],
+          },
+        },
+        {
+          model: db.Ratings,
+          required: false,
+          attributes: { exclude: ['userId', 'offerId'] },
+        },
+      ],
+    });
+
+    res.send(allOffers);
+  } catch (error) {
+    console.error(error);
+    next(new ServerError('Failed to retrieve offers for moderator.'));
+  }
+};
+//-----------------------------------------------------------------------------------------------------------
 
 module.exports.getAllOffers = async (req, res, next) => {
   try {

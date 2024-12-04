@@ -11,6 +11,7 @@ const catalogSQL = require('../controllers/sockets/chatControllerSQL/catalogSQL'
 const upload = require('../utils/fileUpload');
 const offerController = require('../controllers/offersController')
 const moderatorController = require('../controllers/moderatorController');
+const customerOfferController = require('../controllers/customerOfferController');
 const router = express.Router();
 
 router.post(
@@ -193,46 +194,60 @@ router.post(
   // chatController.getCatalogs,
 );
 
-// router.get(
-//   '/getAllOffers',
-//   checkToken.checkToken,
-//   basicMiddlewares.onlyForModerator,
-//   moderatorController.getAllOffers
-// );
-
-// router.post(
-//   '/approveOffer',
-//   checkToken.checkToken,
-//   basicMiddlewares.onlyForModerator,
-//   moderatorController.approveOffer
-// );
-
-// router.put(
-//   '/rejectOffer',
-//   checkToken.checkToken,
-//   basicMiddlewares.onlyForModerator,
-//   moderatorController.rejectOffer
-// );
+router.get(
+  '/getAllOffersForModerator',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  moderatorController.getAllOffersForModerator
+);
 
 router.get(
   '/getAllOffers',
   checkToken.checkToken,
-  offerController.getAllOffers
+  basicMiddlewares.onlyForModerator,
+  moderatorController.getAllOffers
 );
-router.get(
-  '/updateOfferStatus',
-  checkToken.checkToken,
-  offerController.updateOfferStatus
-);
+
 router.post(
-  '/getMyOffers',
+  '/approveOffer',
   checkToken.checkToken,
-  offerController.getMyOffers
+  basicMiddlewares.onlyForModerator,
+  moderatorController.approveOffer
 );
-router.patch(
-  '/createOffer',
+
+router.put(
+  '/rejectOffer',
   checkToken.checkToken,
-  offerController.createOffer
+  basicMiddlewares.onlyForModerator,
+  moderatorController.rejectOffer
 );
+
+router.get(
+  '/getApprovedOffersForCustomer',
+  checkToken.checkToken,
+  customerOfferController.getApprovedOffersForCustomer
+);
+
+// router.get(
+//   '/getAllOffers',
+//   checkToken.checkToken,
+//   basicMiddlewares.onlyForModerator,
+//   offerController.getAllOffers
+// );
+// router.get(
+//   '/updateOfferStatus',
+//   checkToken.checkToken,
+//   offerController.updateOfferStatus
+// );
+// router.post(
+//   '/getMyOffers',
+//   checkToken.checkToken,
+//   offerController.getMyOffers
+// );
+// router.patch(
+//   '/createOffer',
+//   checkToken.checkToken,
+//   offerController.createOffer
+// );
 
 module.exports = router;
