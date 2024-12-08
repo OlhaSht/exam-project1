@@ -93,8 +93,7 @@ router.post(
 router.post(
   '/setOfferStatus',
   checkToken.checkToken,
-  basicMiddlewares.onlyForModerator,
-  // basicMiddlewares.onlyForCustomerWhoCreateContest,
+  basicMiddlewares.onlyForCustomerWhoCreateContest,
   contestController.setOfferStatus,
 );
 
@@ -196,19 +195,19 @@ router.post(
   // chatController.getCatalogs,
 );
 
-// router.get(
-//   '/getAllOffersForModerator',
-//   checkToken.checkToken,
-//   basicMiddlewares.onlyForModerator,
-//   moderatorController.getAllOffersForModerator
-// );
+router.get(
+  '/getAllOffersForModerator',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  moderatorController.getAllOffersForModerator
+);
 
-// router.get(
-//   '/getAllOffers',
-//   checkToken.checkToken,
-//   basicMiddlewares.onlyForModerator,
-//   moderatorController.getAllOffers
-// );
+router.put(
+  '/updateOfferStatus',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  moderatorController.updateOfferStatus
+);
 
 router.put(
   '/approveOfferByModerator/:id',
