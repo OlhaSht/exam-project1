@@ -5,12 +5,12 @@ const CONSTANTS = require('../constants');
 
 module.exports.getAllOffersForModerator = async (req, res, next) => {
   try {
-    if (req.tokenData.role !== CONSTANTS.MODERATOR) {
-      return next(new RightsError('Access denied. Only moderators can view offers.'));
-    }
+    // if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+    //   return next(new RightsError('Access denied. Only moderators can view offers.'));
+    // }
 
     const allOffers = await db.Offers.findAll({
-      attributes: { exclude: ['userId', 'contestId'] },
+      attributes: { exclude: ['userId', 'contestId', 'moderatorStatus'] },
       include: [
         {
           model: db.Users,
@@ -35,6 +35,76 @@ module.exports.getAllOffersForModerator = async (req, res, next) => {
 };
 //-----------------------------------------------------------------------------------------------------------
 
+module.exports.approveOfferByModerator = async (req, res, next) => {
+  try {
+    // if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+    //   return next(new RightsError('Access denied. Only moderators can approve offers.'));
+    // }
+
+    const offer = await db.Offers.findByPk(req.params.id);
+    if (!offer) {
+      return res.status(404).send({ message: 'Offer not found' });
+    }
+
+    offer.moderatorStatus = 'approved';
+    await offer.save();
+
+    res.send({ message: 'Offer approved by moderator' });
+  } catch (error) {
+    console.error(error);
+    next(new ServerError('Failed to approve the offer.'));
+  }
+};
+
+// module.exports.getAllOffers = async (req, res, next) => {
+//   try {
+//     const offers = await db.Offers.findAll({
+//       include: ['Users', 'Contests'], 
+//     });
+//     res.send(offers);
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+// module.exports.approveOffer = async (req, res, next) => {
+//   try {
+//     const offer = await db.Offers.findByPk(req.params.id);
+//     if (!offer) return res.status(404).send({ message: 'Offer not found' });
+
+//     offer.status = 'approved';
+//     await offer.save();
+//     res.send({ message: 'Offer approved' });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+
+//------------------------------------------------------------------------------
+
+module.exports.rejectOfferByModerator = async (req, res, next) => {
+  try {
+    // if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+    //   return next(new RightsError('Access denied. Only moderators can reject offers.'));
+    // }
+
+    const offer = await db.Offers.findByPk(req.params.id);
+    if (!offer) {
+      return res.status(404).send({ message: 'Offer not found' });
+    }
+
+    offer.moderatorStatus = 'rejected';
+    await offer.save();
+
+    res.send({ message: 'Offer rejected by moderator' });
+  } catch (error) {
+    console.error(error);
+    next(new ServerError('Failed to reject the offer.'));
+  }
+};
+
+// Получение всех оферов для общего использования
 module.exports.getAllOffers = async (req, res, next) => {
   try {
     const offers = await db.Offers.findAll({
@@ -42,32 +112,20 @@ module.exports.getAllOffers = async (req, res, next) => {
     });
     res.send(offers);
   } catch (err) {
-    next(err);
+    console.error(err);
+    next(new ServerError('Failed to retrieve all offers.'));
   }
 };
 
-module.exports.approveOffer = async (req, res, next) => {
-  try {
-    const offer = await db.Offers.findByPk(req.params.id);
-    if (!offer) return res.status(404).send({ message: 'Offer not found' });
+// module.exports.rejectOffer = async (req, res, next) => {
+//   try {
+//     const offer = await db.Offers.findByPk(req.params.id);
+//     if (!offer) return res.status(404).send({ message: 'Offer not found' });
 
-    offer.status = 'approved';
-    await offer.save();
-    res.send({ message: 'Offer approved' });
-  } catch (err) {
-    next(err);
-  }
-};
-
-module.exports.rejectOffer = async (req, res, next) => {
-  try {
-    const offer = await db.Offers.findByPk(req.params.id);
-    if (!offer) return res.status(404).send({ message: 'Offer not found' });
-
-    offer.status = 'rejected';
-    await offer.save();
-    res.send({ message: 'Offer rejected' });
-  } catch (err) {
-    next(err);
-  }
-};
+//     offer.status = 'rejected';
+//     await offer.save();
+//     res.send({ message: 'Offer rejected' });
+//   } catch (err) {
+//     next(err);
+//   }
+// };

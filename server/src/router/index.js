@@ -52,7 +52,8 @@ router.post(
 router.get(
   '/getContestById',
   checkToken.checkToken,
-  basicMiddlewares.canGetContest,
+  basicMiddlewares.onlyForModerator,
+  // basicMiddlewares.canGetContest,
   contestController.getContestById,
 );
 
@@ -92,7 +93,8 @@ router.post(
 router.post(
   '/setOfferStatus',
   checkToken.checkToken,
-  basicMiddlewares.onlyForCustomerWhoCreateContest,
+  basicMiddlewares.onlyForModerator,
+  // basicMiddlewares.onlyForCustomerWhoCreateContest,
   contestController.setOfferStatus,
 );
 
@@ -194,39 +196,39 @@ router.post(
   // chatController.getCatalogs,
 );
 
-router.get(
-  '/getAllOffersForModerator',
-  checkToken.checkToken,
-  basicMiddlewares.onlyForModerator,
-  moderatorController.getAllOffersForModerator
-);
+// router.get(
+//   '/getAllOffersForModerator',
+//   checkToken.checkToken,
+//   basicMiddlewares.onlyForModerator,
+//   moderatorController.getAllOffersForModerator
+// );
 
-router.get(
-  '/getAllOffers',
-  checkToken.checkToken,
-  basicMiddlewares.onlyForModerator,
-  moderatorController.getAllOffers
-);
+// router.get(
+//   '/getAllOffers',
+//   checkToken.checkToken,
+//   basicMiddlewares.onlyForModerator,
+//   moderatorController.getAllOffers
+// );
 
-router.post(
-  '/approveOffer',
+router.put(
+  '/approveOfferByModerator/:id',
   checkToken.checkToken,
   basicMiddlewares.onlyForModerator,
-  moderatorController.approveOffer
+  moderatorController.approveOfferByModerator
 );
 
 router.put(
-  '/rejectOffer',
+  '/rejectOfferByModerator/:id',
   checkToken.checkToken,
   basicMiddlewares.onlyForModerator,
-  moderatorController.rejectOffer
+  moderatorController.rejectOfferByModerator
 );
 
-router.get(
-  '/getApprovedOffersForCustomer',
-  checkToken.checkToken,
-  customerOfferController.getApprovedOffersForCustomer
-);
+// router.get(
+//   '/getApprovedOffersForCustomer',
+//   checkToken.checkToken,
+//   customerOfferController.getApprovedOffersForCustomer
+// );
 
 // router.get(
 //   '/getAllOffers',
