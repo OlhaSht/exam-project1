@@ -4,7 +4,7 @@ const ServerError =require('../errors/ServerError');
 module.exports.getAllOffersForModerator = async (req, res, next) => {
   try {
     const allOffers = await db.Offers.findAll({
-      attributes: { exclude: ['userId', 'contestId', 'moderatorStatus'] },
+      attributes: { exclude: ['userId', 'contestId', 'status'] },
       include: [
         {
           model: db.Users,
@@ -65,12 +65,12 @@ module.exports.rejectOfferByModerator = async (req, res, next) => {
   }
 };
 
-module.exports.updateOfferStatus = async (req, res, next) => {
-  try {
-    const { offerId, moderatorStatus } = req.body;
-    if (![CONSTANTS.OFFER_STATUS_REJECTED].includes(moderatorStatus)) {
-      return next(new ServerError('Invalid status'));
-    }
+// module.exports.updateOfferStatus = async (req, res, next) => {
+//   try {
+//     const { offerId, moderatorStatus } = req.body;
+//     if (![CONSTANTS.OFFER_STATUS_REJECTED].includes(moderatorStatus)) {
+//       return next(new ServerError('Invalid status'));
+//     }
 
 //     const updatedOffer = await db.Offers.update(
 //       { moderatorStatus },
