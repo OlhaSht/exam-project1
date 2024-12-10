@@ -72,31 +72,31 @@ module.exports.updateOfferStatus = async (req, res, next) => {
       return next(new ServerError('Invalid status'));
     }
 
-    const updatedOffer = await db.Offers.update(
-      { moderatorStatus },
-      { where: { id: offerId }, returning: true }
-    );
+//     const updatedOffer = await db.Offers.update(
+//       { moderatorStatus },
+//       { where: { id: offerId }, returning: true }
+//     );
 
-    if (!updatedOffer[0]) {
-      return next(new ServerError('Offer not found'));
-    }
+//     if (!updatedOffer[0]) {
+//       return next(new ServerError('Offer not found'));
+//     }
 
-    res.send(updatedOffer[1][0]);
-  } catch (err) {
-    next(new ServerError('Failed to update offer status'));
-  }
-};
+//     res.send(updatedOffer[1][0]);
+//   } catch (err) {
+//     next(new ServerError('Failed to update offer status'));
+//   }
+// };
 
 
-// Получение всех оферов для общего использования
-module.exports.getAllOffers = async (req, res, next) => {
-  try {
-    const offers = await db.Offers.findAll({
-      include: ['Users', 'Contests'], 
-    });
-    res.send(offers);
-  } catch (err) {
-    console.error(err);
-    next(new ServerError('Failed to retrieve all offers.'));
-  }
-};
+// // Получение всех оферов для общего использования
+// module.exports.getAllOffers = async (req, res, next) => {
+//   try {
+//     const offers = await db.Offers.findAll({
+//       include: ['Users', 'Contests'], 
+//     });
+//     res.send(offers);
+//   } catch (err) {
+//     console.error(err);
+//     next(new ServerError('Failed to retrieve all offers.'));
+//   }
+// };
