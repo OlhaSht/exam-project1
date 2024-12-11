@@ -9,13 +9,6 @@ import ModeratorPage from '../ModeratorPage/ModeratorPage';
 const Dashboard = props => {
   const { role, history } = props;
 
-  // useEffect(() => {
-  //   if (role === CONSTANTS.MODERATOR) {
-  //     history.push('/moderator'); // Перенаправляем на страницу модератора
-  //   }
-  // }, [role, history]);
-
-
   return (
     <div>
       <Header />

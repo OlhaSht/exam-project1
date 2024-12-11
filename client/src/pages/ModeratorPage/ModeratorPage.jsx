@@ -97,6 +97,7 @@
 
 
 import React, { useEffect } from 'react';
+import styles from './ModeratorPage.module.sass'
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getModeratorOffers,
@@ -140,33 +141,36 @@ const ModeratorPage = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <h1>Moderator Page</h1>
-      <table border="1">
+    <div className={styles.moderatorContainer}>
+      <table className = {styles.tableContainer} border="1">
         <thead>
+          <div className = {styles.trWrapper}>
           <tr>
-            <th>ID</th>
-            <th>User</th>
-            <th>Details</th>
+            <th>Creator</th>
+            <th>Result</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
+          </div>
+          
         </thead>
         <tbody>
           {offers.map((offer) => (
+            <div className = {styles.trWrapper}>
             <tr key={offer.id}>
-              <td>{offer.id}</td>
               <td>{offer.User?.firstName} {offer.User?.lastName}</td>
               <td>{offer.text || 'No details available'}</td>
               <td>{offer.moderatorStatus || 'Pending'}</td>
               <td>
                 <button
+                  className={styles.buttonApprove}
                   onClick={() => handleApprove(offer.id)}
                   disabled={offer.moderatorStatus === 'approved'}
                 >
                   Approve
                 </button>
                 <button
+                  className={styles.buttonReject}
                   onClick={() => handleReject(offer.id)}
                   disabled={offer.moderatorStatus === 'rejected'}
                 >
@@ -174,7 +178,11 @@ const ModeratorPage = () => {
                 </button>
               </td>
             </tr>
-          ))}
+            </div>
+            ))}
+          
+          
+          
         </tbody>
       </table>
     </div>

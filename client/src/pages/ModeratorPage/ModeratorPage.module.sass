@@ -1,0 +1,54 @@
+.moderatorContainer
+  width: 100%  
+  margin: 0 auto
+  margin-top: 50px
+  display: flex
+  flex-direction: row
+  justify-content: space-around
+  border: 3px solid black
+  @media(max-width: 1400px)
+    width: auto
+  @media(max-width: 1000px)
+    flex-direction: column
+
+  .tableContainer
+    width: 80%
+    margin: 20px
+    padding: 10px
+    border-radius: 10px
+    background-color: white
+
+    .trWrapper
+        margin-bottom: 15px
+        padding: 5px  
+        border-radius: 10px 
+        box-shadow: 0 5px 10px 3px rgba(0, 0, 0, 0.1)
+    th      
+        width: 15%             
+        padding: 30px  
+        color: #556da5
+        font-size: 16px
+        font-weight: 500
+    td        
+        width: 15%         
+        padding: 20px  
+        color: #556da5
+        font-size: 16px
+        font-weight: 500            
+
+    .buttonApprove,
+    .buttonReject    
+        width: 100px
+        margin: 2px
+        padding: 10px
+        cursor: pointer
+        color: white
+        border: none
+        border-radius: 8px  
+
+    .buttonApprove
+        background-color: #8aca6b
+
+    .buttonReject 
+        background-color: #CD5C5C
+
