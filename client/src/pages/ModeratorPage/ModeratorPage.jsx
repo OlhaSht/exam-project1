@@ -142,26 +142,20 @@ const ModeratorPage = () => {
 
   return (
     <div className={styles.moderatorContainer}>
-      <table className = {styles.tableContainer} border="1">
-        <thead>
-          <div className = {styles.trWrapper}>
-          <tr>
-            <th>Creator</th>
-            <th>Result</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
+      <section className = {styles.tableContainer} border="1">
+       
+          <div className = {styles.inputWrapper}>
+            <h1>Offers</h1>
           </div>
-          
-        </thead>
-        <tbody>
+        
+        <article>
           {offers.map((offer) => (
-            <div className = {styles.trWrapper}>
-            <tr key={offer.id}>
-              <td>{offer.User?.firstName} {offer.User?.lastName}</td>
-              <td>{offer.text || 'No details available'}</td>
-              <td>{offer.moderatorStatus || 'Pending'}</td>
-              <td>
+            <div className = {styles.inputWrapper}>
+            <div className = {styles.wrapperInputInfo} key={offer.id}>
+              <span className={styles.inputInfo}>{offer.User?.firstName} {offer.User?.lastName}</span>
+              <span className={styles.inputInfo}>{offer.text || 'No details available'}</span>
+              <span className={styles.inputInfo}>{offer.moderatorStatus || 'Pending'}</span>
+              <span className={styles.inputInfo}>
                 <button
                   className={styles.buttonApprove}
                   onClick={() => handleApprove(offer.id)}
@@ -176,15 +170,12 @@ const ModeratorPage = () => {
                 >
                   Reject
                 </button>
-              </td>
-            </tr>
+              </span>
+            </div>
             </div>
             ))}
-          
-          
-          
-        </tbody>
-      </table>
+        </article>
+      </section>
     </div>
   );
 };
