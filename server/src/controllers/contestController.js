@@ -36,141 +36,8 @@ module.exports.dataForContest = async (req, res, next) => {
   }
 };
 
-module.exports.getContestById = async (req, res, next) => {
-  try {
-    let contestInfo = await db.Contests.findOne({
-      where: { id: req.headers.contestid },
-      order: [
-        [db.Offers, 'id', 'asc'],
-      ],
-      include: [
-        {
-          model: db.Users,
-          required: true,
-          attributes: {
-            exclude: [
-              'password',
-              'role',
-              'balance',
-              'accessToken',
-            ],
-          },
-        },
-        {
-          model: db.Offers,
-          required: false,
-          where: req.tokenData.role === CONSTANTS.CREATOR
-            ? { userId: req.tokenData.userId }
-            : {},
-          attributes: { exclude: ['userId', 'contestId'] },
-          include: [
-            {
-              model: db.Users,
-              required: true,
-              attributes: {
-                exclude: [
-                  'password',
-                  'role',
-                  'balance',
-                  'accessToken',
-                ],
-              },
-            },
-            {
-              model: db.Ratings,
-              required: false,
-              where: { userId: req.tokenData.userId },
-              attributes: { exclude: ['userId', 'offerId'] },
-            },
-          ],
-        },
-      ],
-    });
-    contestInfo = contestInfo.get({ plain: true });
-    contestInfo.Offers.forEach(offer => {
-      if (offer.Rating) {
-        offer.mark = offer.Rating.mark;
-      }
-      delete offer.Rating;
-    });
-    res.send(contestInfo);
-  } catch (e) {
-    next(new ServerError());
-  }
-};
-
-//вариант 2------------------------------------------
-
 // module.exports.getContestById = async (req, res, next) => {
 //   try {
-//     let contestInfo = await db.Contests.findOne({
-//       where: { id: req.headers.contestid },
-//       order: [
-//         [db.Offers, 'id', 'asc'],
-//       ],
-//       include: [
-//         {
-//           model: db.Users,
-//           required: true,
-//           attributes: {
-//             exclude: [
-//               'password',
-//               'role',
-//               'balance',
-//               'accessToken',
-//             ],
-//           },
-//         },
-//         {
-//             model: db.Offers,
-//             required: false,
-//             where: req.tokenData.role === CONSTANTS.MODERATOR
-//               ? {}
-//               : { id: null }, // Пустой набор, если не модератор
-//             attributes: { exclude: ['userId', 'contestId'] },
-//             include: [
-//               {
-//                 model: db.Users,
-//                 required: true,
-//                 attributes: {
-//                   exclude: [
-//                     'password',
-//                     'role',
-//                     'balance',
-//                     'accessToken',
-//                   ],
-//                 },
-//               },
-//               {
-//                 model: db.Ratings,
-//                 required: false,
-//                 where: { userId: req.tokenData.userId },
-//                 attributes: { exclude: ['userId', 'offerId'] },
-//               },
-//             ],
-//           }          
-//       ],
-//     });
-//     contestInfo = contestInfo.get({ plain: true });
-//     contestInfo.Offers.forEach(offer => {
-//       if (offer.Rating) {
-//         offer.mark = offer.Rating.mark;
-//       }
-//       delete offer.Rating;
-//     });
-//     res.send(contestInfo);
-//   } catch (e) {
-//     next(new ServerError());
-//   }
-// };
-
-//вариант 3---------------------------------------------------------------------
-
-// module.exports.getContestById = async (req, res, next) => {
-//   try {
-//     if (req.tokenData.role !== CONSTANTS.MODERATOR) {
-//       return next(new RightsError('Only moderators can view offers'));
-//     }
 //     let contestInfo = await db.Contests.findOne({
 //       where: { id: req.headers.contestid },
 //       order: [
@@ -192,6 +59,9 @@ module.exports.getContestById = async (req, res, next) => {
 //         {
 //           model: db.Offers,
 //           required: false,
+//           where: req.tokenData.role === CONSTANTS.CREATOR
+//             ? { userId: req.tokenData.userId }
+//             : {},
 //           attributes: { exclude: ['userId', 'contestId'] },
 //           include: [
 //             {
@@ -209,6 +79,7 @@ module.exports.getContestById = async (req, res, next) => {
 //             {
 //               model: db.Ratings,
 //               required: false,
+//               where: { userId: req.tokenData.userId },
 //               attributes: { exclude: ['userId', 'offerId'] },
 //             },
 //           ],
@@ -228,6 +99,72 @@ module.exports.getContestById = async (req, res, next) => {
 //   }
 // };
 
+
+module.exports.getContestById = async (req, res, next) => {
+  try {
+    let contestInfo = await db.Contests.findOne({
+      where: { id: req.headers.contestid },
+      order: [[db.Offers, 'id', 'asc']],
+      include: [
+        {
+          model: db.Users,
+          required: true,
+          attributes: {
+            exclude: ['password', 'role', 'balance', 'accessToken'],
+          },
+        },
+        {
+          model: db.Offers,
+          required: false,
+          where: req.tokenData.role === CONSTANTS.CREATOR
+            ? { userId: req.tokenData.userId }
+            : {},
+          attributes: { exclude: ['userId', 'contestId'] },
+          include: [
+            {
+              model: db.Users,
+              required: true,
+              attributes: {
+                exclude: ['password', 'role', 'balance', 'accessToken'],
+              },
+            },
+            {
+              model: db.Ratings,
+              required: false,
+              where: { userId: req.tokenData.userId },
+              attributes: { exclude: ['userId', 'offerId'] },
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!contestInfo) {
+      throw new Error('Contest not found');
+    }
+
+    // Преобразование результата в объект
+    contestInfo = contestInfo.get({ plain: true });
+
+    // Фильтрация офферов по статусу модерации
+    contestInfo.Offers = contestInfo.Offers.filter(
+      (offer) => offer.moderatorStatus === 'approved'
+    );
+
+    // Преобразование офферов
+    contestInfo.Offers.forEach((offer) => {
+      if (offer.Rating) {
+        offer.mark = offer.Rating.mark;
+      }
+      delete offer.Rating;
+    });
+
+    // Отправка результата
+    res.send(contestInfo);
+  } catch (e) {
+    next(new ServerError());
+  }
+};
 
 
 module.exports.downloadFile = async (req, res, next) => {

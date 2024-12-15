@@ -65,3 +65,5 @@ export const getContestById = data =>
   export const getAllOffersForModerator = () =>http.get('getAllOffersForModerator');
   export const approveOfferByModerator = id =>http.put(`approveOfferByModerator/${id}`);
   export const rejectOfferByModerator = id =>http.put(`rejectOfferByModerator/${id}`);
+
+  export const getApprovedOffersForCustomer = () =>http.get('getApprovedOffersForCustomer');

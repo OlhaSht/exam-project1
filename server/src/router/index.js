@@ -9,7 +9,6 @@ const validators = require('../middlewares/validators');
 const chatSQL = require('../controllers/sockets/chatControllerSQL/chatSQL');
 const catalogSQL = require('../controllers/sockets/chatControllerSQL/catalogSQL');
 const upload = require('../utils/fileUpload');
-const offerController = require('../controllers/offersController')
 const moderatorController = require('../controllers/moderatorController');
 const customerOfferController = require('../controllers/customerOfferController');
 const router = express.Router();
@@ -52,8 +51,7 @@ router.post(
 router.get(
   '/getContestById',
   checkToken.checkToken,
-  basicMiddlewares.onlyForModerator,
-  // basicMiddlewares.canGetContest,
+  basicMiddlewares.canGetContest,
   contestController.getContestById,
 );
 
@@ -202,12 +200,12 @@ router.get(
   moderatorController.getAllOffersForModerator
 );
 
-router.put(
-  '/updateOfferStatus',
-  checkToken.checkToken,
-  basicMiddlewares.onlyForModerator,
-  moderatorController.updateOfferStatus
-);
+// router.put(
+//   '/updateOfferStatus',
+//   checkToken.checkToken,
+//   basicMiddlewares.onlyForModerator,
+//   moderatorController.updateOfferStatus
+// );
 
 router.put(
   '/approveOfferByModerator/:id',
@@ -223,32 +221,11 @@ router.put(
   moderatorController.rejectOfferByModerator
 );
 
-// router.get(
-//   '/getApprovedOffersForCustomer',
-//   checkToken.checkToken,
-//   customerOfferController.getApprovedOffersForCustomer
-// );
-
-// router.get(
-//   '/getAllOffers',
-//   checkToken.checkToken,
-//   basicMiddlewares.onlyForModerator,
-//   offerController.getAllOffers
-// );
-// router.get(
-//   '/updateOfferStatus',
-//   checkToken.checkToken,
-//   offerController.updateOfferStatus
-// );
-// router.post(
-//   '/getMyOffers',
-//   checkToken.checkToken,
-//   offerController.getMyOffers
-// );
-// router.patch(
-//   '/createOffer',
-//   checkToken.checkToken,
-//   offerController.createOffer
-// );
+router.get(
+  '/getApprovedOffersForCustomer',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForCustomer,
+  customerOfferController.getApprovedOffersForCustomer
+);
 
 module.exports = router;
