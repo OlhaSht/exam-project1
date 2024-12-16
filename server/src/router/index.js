@@ -200,13 +200,6 @@ router.get(
   moderatorController.getAllOffersForModerator
 );
 
-// router.put(
-//   '/updateOfferStatus',
-//   checkToken.checkToken,
-//   basicMiddlewares.onlyForModerator,
-//   moderatorController.updateOfferStatus
-// );
-
 router.put(
   '/approveOfferByModerator/:id',
   checkToken.checkToken,
