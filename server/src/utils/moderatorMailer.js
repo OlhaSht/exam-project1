@@ -14,7 +14,7 @@ async function sendModeratorDecision(email, subject, text) {
   try {
     const mailOptions = {
       from: 'olya12414@gmail.com', 
-      to: 'olgaolga2414@gmail.com',                    
+      to: email,                    
       subject: subject,             
       text: text                    
     };
@@ -28,20 +28,20 @@ async function sendModeratorDecision(email, subject, text) {
   }
 }
 
-async function testEmail() {
-  const email = 'olgaolga2414@gmail.com'; // Получатель
-  const subject = 'Тестовое письмо';
-  const message = 'Это тестовое письмо, отправленное с помощью Nodemailer.';
+// async function testEmail() {
+//   const email = 'olgaolga2414@gmail.com'; // Получатель
+//   const subject = 'Тестовое письмо';
+//   const message = 'Это тестовое письмо, отправленное с помощью Nodemailer.';
 
-  try {
-    const result = await sendModeratorDecision(email, subject, message);
-    console.log('Email отправлен успешно:', result);
-  } catch (error) {
-    console.error('Ошибка при отправке email:', error);
-  }
-}
+//   try {
+//     const result = await sendModeratorDecision(email, subject, message);
+//     console.log('Email отправлен успешно:', result);
+//   } catch (error) {
+//     console.error('Ошибка при отправке email:', error);
+//   }
+// }
 
-testEmail();
+// testEmail();
 
 
 module.exports = sendModeratorDecision;

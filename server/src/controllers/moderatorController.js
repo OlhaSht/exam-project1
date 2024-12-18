@@ -30,22 +30,62 @@ module.exports.getAllOffersForModerator = async (req, res, next) => {
 };
 //-----------------------------------------------------------------------------------------------------------
 
+// module.exports.approveOfferByModerator = async (req, res, next) => {
+//   try {
+//     const offer = await db.Offers.findByPk(req.params.id);
+//     if (!offer) {
+//       return res.status(404).send({ message: 'Offer not found' });
+//     }
+
+//     offer.moderatorStatus = 'approved';
+//     await offer.save();
+
+//     res.send({ message: 'Offer approved by moderator' });
+//   } catch (error) {
+//     console.error(error);
+//     next(new ServerError('Failed to approve the offer.'));
+//   }
+// };
+
 module.exports.approveOfferByModerator = async (req, res, next) => {
   try {
-    const offer = await db.Offers.findByPk(req.params.id);
+    // Находим оффер по ID
+    const offer = await db.Offers.findByPk(req.params.id, {
+      include: [
+        {
+          model: db.Users, // Подключаем пользователя, чтобы получить email
+          attributes: ['email'],
+        },
+      ],
+    });
+
     if (!offer) {
       return res.status(404).send({ message: 'Offer not found' });
     }
 
+    // Обновляем статус офера
     offer.moderatorStatus = 'approved';
     await offer.save();
 
-    res.send({ message: 'Offer approved by moderator' });
+    // Отправляем email пользователю
+    const email = offer.User.email; // Получаем email из связанной модели
+    const subject = 'Ваш оффер был одобрен';
+    const message = `Поздравляем! Ваш оффер с ID ${offer.id} был успешно одобрен модератором. Спасибо за использование нашей платформы!`;
+
+    try {
+      await sendModeratorDecision(email, subject, message);
+      console.log(`Email успешно отправлен на ${email}`);
+    } catch (error) {
+      console.error('Ошибка при отправке email:', error);
+    }
+
+    res.send({ message: 'Offer approved by moderator and email sent' });
   } catch (error) {
     console.error(error);
     next(new ServerError('Failed to approve the offer.'));
   }
 };
+
 
 //------------------------------------------------------------------------------
 
@@ -79,41 +119,3 @@ module.exports.sendEmail = async (req, res) => {
     res.status(500).json({ success: false, message: 'Ошибка при отправке email', error });
   }
 };
-
-
-
-// module.exports.updateOfferStatus = async (req, res, next) => {
-//   try {
-//     const { offerId, moderatorStatus } = req.body;
-//     if (![CONSTANTS.OFFER_STATUS_REJECTED].includes(moderatorStatus)) {
-//       return next(new ServerError('Invalid status'));
-//     }
-
-//     const updatedOffer = await db.Offers.update(
-//       { moderatorStatus },
-//       { where: { id: offerId }, returning: true }
-//     );
-
-//     if (!updatedOffer[0]) {
-//       return next(new ServerError('Offer not found'));
-//     }
-
-//     res.send(updatedOffer[1][0]);
-//   } catch (err) {
-//     next(new ServerError('Failed to update offer status'));
-//   }
-// };
-
-
-// // Получение всех оферов для общего использования
-// module.exports.getAllOffers = async (req, res, next) => {
-//   try {
-//     const offers = await db.Offers.findAll({
-//       include: ['Users', 'Contests'], 
-//     });
-//     res.send(offers);
-//   } catch (err) {
-//     console.error(err);
-//     next(new ServerError('Failed to retrieve all offers.'));
-//   }
-// };
