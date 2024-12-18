@@ -1,5 +1,6 @@
 const db = require('../models');
 const ServerError =require('../errors/ServerError');
+const sendModeratorDecision = require('../utils/moderatorMailer'); 
 
 module.exports.getAllOffersForModerator = async (req, res, next) => {
   try {
@@ -64,6 +65,22 @@ module.exports.rejectOfferByModerator = async (req, res, next) => {
     next(new ServerError('Failed to reject the offer.'));
   }
 };
+
+
+
+module.exports.sendEmail = async (req, res) => {
+  const { email, subject, message } = req.body; 
+
+  try {
+    await sendModeratorDecision(email, subject, message);
+    res.status(200).json({ success: true, message: 'Email успешно отправлен!' });
+  } catch (error) {
+    console.error('Ошибка при отправке email:', error);
+    res.status(500).json({ success: false, message: 'Ошибка при отправке email', error });
+  }
+};
+
+
 
 // module.exports.updateOfferStatus = async (req, res, next) => {
 //   try {

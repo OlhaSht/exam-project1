@@ -221,4 +221,9 @@ router.get(
   customerOfferController.getApprovedOffersForCustomer
 );
 
+router.post(
+  './sendEmail',
+  moderatorController.sendEmail
+);
+
 module.exports = router;
