@@ -2,9 +2,46 @@ const db = require('../models');
 const ServerError =require('../errors/ServerError');
 const sendModeratorDecision = require('../utils/moderatorMailer'); 
 
+// module.exports.getAllOffersForModerator = async (req, res, next) => {
+//   try {
+//     const allOffers = await db.Offers.findAll({
+//       attributes: { exclude: ['userId', 'contestId', 'status'] },
+//       include: [
+//         {
+//           model: db.Users,
+//           required: true,
+//           attributes: {
+//             exclude: ['password', 'role', 'balance', 'accessToken'],
+//           },
+//         },
+//         {
+//           model: db.Ratings,
+//           required: false,
+//           attributes: { exclude: ['userId', 'offerId'] },
+//         },
+//       ],
+//     });
+
+//     res.send(allOffers);
+//   } catch (error) {
+//     console.error(error);
+//     next(new ServerError('Failed to retrieve offers for moderator.'));
+//   }
+// };
+
+
 module.exports.getAllOffersForModerator = async (req, res, next) => {
+  const { page = 1, limit = 5 } = req.query; 
+
   try {
-    const allOffers = await db.Offers.findAll({
+    const offset = (page - 1) * limit; 
+
+    console.log('/////////',`Page: ${page}, Limit: ${limit}, Offset: ${offset}`);
+
+
+    const allOffers = await db.Offers.findAndCountAll({
+      limit: parseInt(limit), 
+      offset: parseInt(offset), 
       attributes: { exclude: ['userId', 'contestId', 'status'] },
       include: [
         {
@@ -22,12 +59,20 @@ module.exports.getAllOffersForModerator = async (req, res, next) => {
       ],
     });
 
-    res.send(allOffers);
+    res.send({
+      total: allOffers.count, 
+      offers: allOffers.rows, 
+      totalPages: Math.ceil(allOffers.count / limit), 
+      currentPage: parseInt(page), 
+    });
   } catch (error) {
     console.error(error);
     next(new ServerError('Failed to retrieve offers for moderator.'));
   }
 };
+
+
+
 //-----------------------------------------------------------------------------------------------------------
 
 // module.exports.approveOfferByModerator = async (req, res, next) => {

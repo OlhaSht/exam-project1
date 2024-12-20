@@ -107,11 +107,17 @@ import {
 
 const ModeratorPage = () => {
   const dispatch = useDispatch();
-  const { offers, isFetching, error } = useSelector((state) => state.moderator);
+  const { offers, isFetching, error, currentPage, totalPages } = useSelector((state) => state.moderator);
 
   useEffect(() => {
-    dispatch(getModeratorOffers());
-  }, [dispatch]);
+    dispatch(getModeratorOffers({page: currentPage}));
+  }, [dispatch, currentPage]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      dispatch(getModeratorOffers({ page: newPage }));
+    }
+  };
 
   const handleApprove = (offerId) => {
     dispatch(approveModeratorOffer(offerId))
@@ -137,19 +143,23 @@ const ModeratorPage = () => {
       });
   };
 
+  console.log('Offers from state:', offers);
+
   if (isFetching) return <p>Loading offers...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className={styles.moderatorContainer}>
-      <section className = {styles.tableContainer} border="1">
+      {/* <section className = {styles.tableContainer} border="1"> */}
+      <section className = {styles.tableContainer}>
        
           <div className = {styles.inputWrapper}>
             <h1>Offers</h1>
           </div>
         
         <article>
-          {offers.map((offer) => (
+          {offers.length > 0 ? (
+            offers.map((offer) => (
             <div className = {styles.inputWrapper}>
             <div className = {styles.wrapperInputInfo} key={offer.id}>
               <span className={styles.inputInfo}>{offer.User?.firstName} {offer.User?.lastName}</span>
@@ -173,8 +183,26 @@ const ModeratorPage = () => {
               </span>
             </div>
             </div>
-            ))}
+            ))
+          ) : (
+            <p>No offers available</p>
+          )}
         </article>
+        <div className={styles.pagination}>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage} of {totalPages}</span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Next
+          </button>
+        </div>
       </section>
     </div>
   );

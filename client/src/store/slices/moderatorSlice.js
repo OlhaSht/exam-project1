@@ -8,12 +8,23 @@ const initialState = {
   isFetching: true,
   error: null,
   offers: [],
+  currentPage: 1,
+  totalPages: 1,
+  total: 0,
 };
 
+// export const getModeratorOffers = decorateAsyncThunk({
+//   key: `${MODERATOR_SLICE_NAME}/getModeratorOffers`,
+//   thunk: async () => {
+//     const { data } = await restController.getAllOffersForModerator();
+//     return data;
+//   },
+// });
 export const getModeratorOffers = decorateAsyncThunk({
   key: `${MODERATOR_SLICE_NAME}/getModeratorOffers`,
-  thunk: async () => {
-    const { data } = await restController.getAllOffersForModerator();
+  thunk: async ({ page = 1, limit = 5 }) => {
+    console.log(`Fetching page ${page} with limit ${limit}`);
+    const { data } = await restController.getAllOffersForModerator({ page, limit });
     return data;
   },
 });
@@ -39,10 +50,16 @@ const reducers = {};
 const extraReducers = (builder) => {
   builder
     // Получение офферов
-    .addCase(getModeratorOffers.pending, pendingReducer)
+    // .addCase(getModeratorOffers.pending, pendingReducer)
+    .addCase(getModeratorOffers.pending, (state) => {
+      state.isFetching = true;
+    })
     .addCase(getModeratorOffers.fulfilled, (state, { payload }) => {
       state.isFetching = false;
-      state.offers = payload;
+      state.offers = payload.offers;
+      state.currentPage = payload.currentPage;
+      state.totalPages = payload.totalPages;
+      state.total = payload.total;
     })
     .addCase(getModeratorOffers.rejected, (state, { payload }) => {
       state.isFetching = false;
