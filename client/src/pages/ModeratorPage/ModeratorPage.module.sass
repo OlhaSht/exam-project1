@@ -34,7 +34,8 @@
         padding: 20px  
         color: #556da5
         font-size: 16px
-        font-weight: 500    
+        font-weight: 500  
+          
         @media(max-width:942px)
           display: flex
           flex-direction: column
@@ -55,4 +56,55 @@
 
     .buttonReject 
         background-color: #CD5C5C
+
+.pagination
+    display: flex
+    flex-direction: row
+    justify-content: space-around 
+    padding: 15px
+
+
+    .pageNamber
+        font-size: 26px
+        font-weight: 400
+        color: #556da5
+        padding: 15px 
+        @media(max-width:800px)
+            display: none
+
+    .buttonBack,
+    .buttonNext
+        width: 160px
+        height: 60px
+        padding: 15px 25px
+        color: white
+        font-size: 22px
+        font-weight: 700
+        border-radius: 10px
+        border-style: none
+        cursor: pointer
+        @media(max-width:600px)
+            width: 100px
+            height: 45px
+            font-size: 16px
+        @media(max-width:400px)
+            width: 70px
+            height: 30px
+            padding: 5px
+            font-size: 14px
+            font-weight: 400
+                
+            
+
+        &:hover
+            font-size: 28px
+            transition: font-size 0.1s ease-in-out
+
+    .buttonBack
+        background-color: #888
+
+    .buttonNext
+        background-color: #f3875d        
+
+
 

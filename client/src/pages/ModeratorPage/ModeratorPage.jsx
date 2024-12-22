@@ -190,13 +190,15 @@ const ModeratorPage = () => {
         </article>
         <div className={styles.pagination}>
           <button
+            className={styles.buttonBack}
             disabled={currentPage === 1}
             onClick={() => handlePageChange(currentPage - 1)}
           >
-            Previous
+            Back
           </button>
-          <span>Page {currentPage} of {totalPages}</span>
+          <span className={styles.pageNamber}>Page {currentPage} of {totalPages}</span>
           <button
+            className={styles.buttonNext}
             disabled={currentPage === totalPages}
             onClick={() => handlePageChange(currentPage + 1)}
           >
