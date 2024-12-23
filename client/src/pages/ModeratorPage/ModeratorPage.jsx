@@ -162,10 +162,10 @@ const ModeratorPage = () => {
             offers.map((offer) => (
             <div className = {styles.inputWrapper}>
             <div className = {styles.wrapperInputInfo} key={offer.id}>
-              <span className={styles.inputInfo}>{offer.User?.firstName} {offer.User?.lastName}</span>
-              <span className={styles.inputInfo}>{offer.text || 'No details available'}</span>
-              <span className={styles.inputInfo}>{offer.moderatorStatus || 'Pending'}</span>
-              <span className={styles.inputInfo}>
+              <div className={styles.inputInfo}>{offer.User?.firstName} {offer.User?.lastName}</div>
+              <div className={styles.inputInfo}>{offer.text || 'No details available'}</div>
+              <div className={styles.inputInfo}>{offer.moderatorStatus || 'Pending'}</div>
+              <div className={styles.inputInfo}>
                 <button
                   className={styles.buttonApprove}
                   onClick={() => handleApprove(offer.id)}
@@ -180,7 +180,7 @@ const ModeratorPage = () => {
                 >
                   Reject
                 </button>
-              </span>
+              </div>
             </div>
             </div>
             ))
