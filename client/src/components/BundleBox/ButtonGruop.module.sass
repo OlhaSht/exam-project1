@@ -12,11 +12,36 @@
   flex: 1 1
   min-width: 170px
   max-width: 340px
+  position: relative
+
+  &:hover
+    box-shadow: 0 8px 32px rgb(0 0 0 / .08)   
+    border-bottom: 4px solid #637CF7
+
+  .parent
+  &:hover
+    .arrow
+      visibility: visible
+      opacity: 1
+      right: 20px  
 
   .imgContainer
     height: 36px
     width: 36px
-    margin: 10px 0  
+    margin: 10px 0 
+    
+  .arrow
+    visibility: hidden
+    opacity: 0
+    position: absolute
+    top: 24px
+    right: 30px
+    background-image: url("https://www.atom.com/html/html/static_images/icon-arrow-blue-right.svg")
+    background-repeat: no-repeat
+    width: 26px
+    height: 20px
+    transition: all ease 0.3s
+   
 
 .infoButtonContainer
    display: flex

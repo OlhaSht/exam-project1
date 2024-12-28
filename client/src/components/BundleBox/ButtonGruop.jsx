@@ -49,6 +49,7 @@ const ButtonGruop = props => {
       className={styles.buttonContainer + getBackClass()}
     >
       <div>{renderImage()}</div>
+      <div className={styles.arrow}></div>
       <div className={styles.infoButtonContainer}>
         <span className={styles.buttonName}>{header}</span>
         <span className={styles.infoButton}>{describe}</span>
