@@ -1,0 +1,52 @@
+2024-12-31T17:14:55.126Z - Error: need token
+Stack: TokenError: need token
+    at module.exports.checkAuth (/server/src/middlewares/checkToken.js:9:17)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+    at next (/server/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/server/node_modules/express/lib/router/index.js:175:3)
+    at router (/server/node_modules/express/lib/router/index.js:47:12)
+
+2024-12-31T17:15:10.198Z - Error: not enough rights
+Stack: RightsError: not enough rights
+    at module.exports.canGetContest (/server/src/middlewares/basicMiddlewares.js:39:28)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:36:5)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+
+2024-12-31T17:15:19.705Z - Error: not enough rights
+Stack: RightsError: not enough rights
+    at module.exports.canGetContest (/server/src/middlewares/basicMiddlewares.js:39:28)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:36:5)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+
+2024-12-31T17:22:35.166Z - Error: not enough rights
+Stack: RightsError: not enough rights
+    at module.exports.canGetContest (/server/src/middlewares/basicMiddlewares.js:39:28)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at module.exports.checkToken (/server/src/middlewares/checkToken.js:36:5)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/server/node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (/server/node_modules/express/lib/router/route.js:114:3)
+    at Layer.handle [as handle_request] (/server/node_modules/express/lib/router/layer.js:95:5)
+    at /server/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/server/node_modules/express/lib/router/index.js:346:12)
+
