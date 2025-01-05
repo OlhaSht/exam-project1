@@ -9,6 +9,8 @@ const validators = require('../middlewares/validators');
 const chatSQL = require('../controllers/sockets/chatControllerSQL/chatSQL');
 const catalogSQL = require('../controllers/sockets/chatControllerSQL/catalogSQL');
 const upload = require('../utils/fileUpload');
+const moderatorController = require('../controllers/moderatorController');
+const customerOfferController = require('../controllers/customerOfferController');
 const router = express.Router();
 
 router.post(
@@ -192,5 +194,37 @@ router.post(
 );
 
 
+router.get(
+  '/getAllOffersForModerator',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  moderatorController.getAllOffersForModerator
+);
+
+router.put(
+  '/approveOfferByModerator/:id',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  moderatorController.approveOfferByModerator
+);
+
+router.put(
+  '/rejectOfferByModerator/:id',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  moderatorController.rejectOfferByModerator
+);
+
+router.get(
+  '/getApprovedOffersForCustomer',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForCustomer,
+  customerOfferController.getApprovedOffersForCustomer
+);
+
+router.post(
+  './sendEmail',
+  moderatorController.sendEmail
+);
 
 module.exports = router;

@@ -28,6 +28,7 @@ module.exports.checkAuth = async (req, res, next) => {
 
 module.exports.checkToken = async (req, res, next) => {
   const accessToken = req.headers.authorization;
+  console.log('Access Token:', accessToken);
   if (!accessToken) {
     return next(new TokenError('need token'));
   }
@@ -35,6 +36,7 @@ module.exports.checkToken = async (req, res, next) => {
     req.tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
     next();
   } catch (err) {
+    console.error('JWT verification failed:', err);
     next(new TokenError());
   }
 };

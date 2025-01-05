@@ -61,3 +61,16 @@ export const getContestById = data =>
       contestId: data.contestId,
     },
   });
+
+  export const getAllOffersForModerator = ({
+    page = 1, 
+    limit = 5
+  }) =>http.get('getAllOffersForModerator', {
+    params: { 
+      page, limit 
+    },
+  });
+  export const approveOfferByModerator = id =>http.put(`approveOfferByModerator/${id}`);
+  export const rejectOfferByModerator = id =>http.put(`rejectOfferByModerator/${id}`);
+
+  export const getApprovedOffersForCustomer = () =>http.get('getApprovedOffersForCustomer');

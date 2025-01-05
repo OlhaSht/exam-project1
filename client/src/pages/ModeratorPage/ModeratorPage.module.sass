@@ -1,0 +1,112 @@
+.moderatorContainer
+  width: 80% 
+  margin: auto
+  margin-top: 50px
+  padding: 20px
+  border: 1px solid #556da5
+
+  .tableContainer
+    width: 80%
+    margin: auto
+    padding: 10px
+    border-radius: 10px
+    background-color: white
+
+    .inputWrapper
+        margin-bottom: 15px
+        padding: 5px  
+        border-radius: 10px 
+        box-shadow: 0 5px 10px 3px rgba(0, 0, 0, 0.1)
+
+    h1                
+        padding: 20px  
+        color: #556da5
+        font-size: 20px
+        font-weight: 500
+    .wrapperInputInfo
+      display: flex
+      flex-direction: row
+      justify-content: space-between  
+      @media(max-width:760px)
+        flex-direction: column
+        align-items: center   
+    .inputInfo   
+        flex: 0 0 20%
+        word-break: break-word
+        padding: 10px  
+        color: #556da5
+        font-size: 16px
+        font-weight: 500  
+          
+        @media(max-width:942px)
+          display: flex
+          flex-direction: column
+          flex-wrap: wrap        
+
+    .buttonApprove,
+    .buttonReject    
+        width: 100px
+        margin: 2px
+        padding: 10px
+        cursor: pointer
+        color: white
+        border: none
+        border-radius: 8px  
+
+    .buttonApprove
+        background-color: #8aca6b
+
+    .buttonReject 
+        background-color: #CD5C5C
+
+.pagination
+    display: flex
+    flex-direction: row
+    justify-content: space-around 
+    padding: 15px
+
+
+    .pageNamber
+        font-size: 26px
+        font-weight: 400
+        color: #556da5
+        padding: 15px 
+        @media(max-width:800px)
+            display: none
+
+    .buttonBack,
+    .buttonNext
+        width: 160px
+        height: 60px
+        padding: 15px 25px
+        color: white
+        font-size: 22px
+        font-weight: 700
+        border-radius: 10px
+        border-style: none
+        cursor: pointer
+        @media(max-width:600px)
+            width: 100px
+            height: 45px
+            font-size: 16px
+        @media(max-width:400px)
+            width: 70px
+            height: 30px
+            padding: 5px
+            font-size: 14px
+            font-weight: 400
+                
+            
+
+        &:hover
+            font-size: 28px
+            transition: font-size 0.1s ease-in-out
+
+    .buttonBack
+        background-color: #888
+
+    .buttonNext
+        background-color: #f3875d        
+
+
+
