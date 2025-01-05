@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { updateBundle } from '../../store/slices/bundleSlice';
 import BundleBox from '../../components/BundleBox/BundleBox';
+import ButtonGruop from '../../components/BundleBox/ButtonGruop'
 import CONSTANTS from '../../constants';
 import styles from './StartContestPage.module.sass';
 import Footer from '../../components/Footer/Footer';
@@ -52,6 +53,7 @@ const StartContestPage = props => {
           </span>
           <hr />
         </div>
+
         <div className={styles.baseBundles}>
           <BundleBox
             path={['Name.png']}
@@ -73,6 +75,30 @@ const StartContestPage = props => {
           />
         </div>
       </div>
+
+      <div className={styles.baseButtonContainer}>   
+        <div className={styles.baseButtons}>
+          <ButtonGruop
+            path={['name-icon.svg']}
+            header='Name'
+            describe='Get up and running with the perfect name.'
+            setBundle={setBundle}
+          />
+          <ButtonGruop
+            path={['name-icon.svg']}
+            header='Logo'
+            describe='Kickstart your venture with a unique, memorable logo.'
+            setBundle={setBundle}
+          />
+          <ButtonGruop
+            path={['name-icon.svg']}
+            header='Tagline'
+            describe='Connect deeply with your target audience with an on-target tagline.'
+            setBundle={setBundle}
+          />
+        </div>
+      </div>  
+      
       <div className={styles.combinedBundles}>
         <div className={styles.infoCombinedBundles}>
           <span className={styles.headerInfo}>

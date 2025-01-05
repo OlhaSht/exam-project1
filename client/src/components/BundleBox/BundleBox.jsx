@@ -28,7 +28,7 @@ const BundleBox = props => {
       ].src = `${defaultPathToImages}blue_${props.path[i]}`;
     }
   };
-
+ 
   const mouseOutHandler = () => {
     const element = document.getElementById(props.header);
     for (let i = 0; i < element.children[0].children.length; i++) {

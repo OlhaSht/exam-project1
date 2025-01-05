@@ -27,9 +27,8 @@ const DialogList = (props) => {
     event.stopPropagation();
   };
 
-  const onlyFavoriteDialogs = (chatPreview, userId) =>{
+  const onlyFavoriteDialogs = (chatPreview, userId) =>
     chatPreview.Conversation.favoriteList[chatPreview.Conversation.participants.indexOf(userId)];
-  };
   
   const onlyBlockDialogs = (chatPreview, userId) =>
     chatPreview.Conversation.blackList[chatPreview.Conversation.participants.indexOf(userId)];

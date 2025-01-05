@@ -48,6 +48,11 @@ class Header extends React.Component {
                 </Link>
               </li>
               <li>
+                <Link to="/event" style={{ textDecoration: 'none' }}>
+                  <span>Events</span>
+                </Link>
+              </li>
+              <li>
                 <Link to="/account" style={{ textDecoration: 'none' }}>
                   <span>My Account</span>
                 </Link>
@@ -116,11 +121,13 @@ class Header extends React.Component {
           </div>
         </div>
         <div className={styles.navContainer}>
+          <Link to='/'>
           <img
             src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
             className={styles.logo}
             alt="blue_logo"
           />
+          </Link>
           <div className={styles.leftNav}>
             <div className={styles.nav}>
               <ul>
