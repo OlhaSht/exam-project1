@@ -5,13 +5,13 @@ db.foods.aggregate([
       $match: { body: "hi"}
     },
     {
-      $count: "total" // Подсчитывает количество записей
+      $count: "total" 
     }
   ])
   
 
 //   {
 //     message: {
-//       $regex: /"Milk"/i // Ищет в поле message слово "паровоз", без учета регистра
+//       $regex: /"паравоз"/i 
 //     }
 //   }

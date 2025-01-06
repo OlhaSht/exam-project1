@@ -1,10 +1,10 @@
-// src/components/Events/EventForm/EventForm.js
+
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { connect } from 'react-redux';
 import styles from './EventForm.module.sass'
 
-const EventForm = ({ setTasks }) => {  // Принимаем setTasks как проп
+const EventForm = ({ setTasks }) => {  
   return (
     <div className={styles.formContainer}>
     <Formik
@@ -13,7 +13,7 @@ const EventForm = ({ setTasks }) => {  // Принимаем setTasks как п�
         eventDate: '',
       }}
       onSubmit={(values, { resetForm }) => {
-        setTasks(values.eventName, values.eventDate);  // Вызываем setTasks с нужными аргументами
+        setTasks(values.eventName, values.eventDate);  
         resetForm(); 
       }}
     >

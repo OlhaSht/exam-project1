@@ -142,24 +142,20 @@ module.exports.getContestById = async (req, res, next) => {
     if (!contestInfo) {
       throw new Error('Contest not found');
     }
-
-    // Преобразование результата в объект
+    
     contestInfo = contestInfo.get({ plain: true });
-
-    // Фильтрация офферов по статусу модерации
+    
     contestInfo.Offers = contestInfo.Offers.filter(
       (offer) => offer.moderatorStatus === 'approved'
     );
-
-    // Преобразование офферов
+    
     contestInfo.Offers.forEach((offer) => {
       if (offer.Rating) {
         offer.mark = offer.Rating.mark;
       }
       delete offer.Rating;
     });
-
-    // Отправка результата
+    
     res.send(contestInfo);
   } catch (e) {
     next(new ServerError());

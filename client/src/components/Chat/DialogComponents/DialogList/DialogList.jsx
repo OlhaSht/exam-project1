@@ -86,7 +86,7 @@ const DialogList = (props) => {
 
   const groupMessagesByConversationId = (messages) => {
     return messages.reduce((acc, message) => {
-      const chatId = message.conversationId; // предполагается, что у каждого сообщения есть идентификатор диалога
+      const chatId = message.conversationId; 
       if (!acc[chatId]) {
         acc[chatId] = [];
       }
@@ -101,7 +101,7 @@ const DialogList = (props) => {
     const arrayList = [];
   
     Object.entries(groupedChats).forEach(([chatId, messages]) => {
-      const chatPreview = messages[0]; // Используем первое сообщение как представителя диалога
+      const chatPreview = messages[0]; 
 
       const dialogNode = (
         <DialogBox

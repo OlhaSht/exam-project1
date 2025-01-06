@@ -94,11 +94,10 @@ module.exports.getAllOffersForModerator = async (req, res, next) => {
 
 module.exports.approveOfferByModerator = async (req, res, next) => {
   try {
-    // Находим оффер по ID
     const offer = await db.Offers.findByPk(req.params.id, {
       include: [
         {
-          model: db.Users, // Подключаем пользователя, чтобы получить email
+          model: db.Users, 
           attributes: ['email'],
         },
       ],
@@ -107,15 +106,13 @@ module.exports.approveOfferByModerator = async (req, res, next) => {
     if (!offer) {
       return res.status(404).send({ message: 'Offer not found' });
     }
-
-    // Обновляем статус офера
+    
     offer.moderatorStatus = 'approved';
     await offer.save();
-
-    // Отправляем email пользователю
-    const email = offer.User.email; // Получаем email из связанной модели
-    const subject = 'Ваш оффер был одобрен';
-    const message = `Поздравляем! Ваш оффер с ID ${offer.id} был успешно одобрен модератором. Спасибо за использование нашей платформы!`;
+    
+    const email = offer.User.email; 
+    const subject = 'Ваш оффер схвалено';
+    const message = `Вітаємо! Ваш оффер с ID ${offer.id} було  схвалено модератором. Дякуємо, що обрали нас!`;
 
     try {
       await sendModeratorDecision(email, subject, message);
