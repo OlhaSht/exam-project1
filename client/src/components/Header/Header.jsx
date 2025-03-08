@@ -172,7 +172,8 @@ class Header extends React.Component {
                   />
                   <ul>
                     <li>
-                      <a href="https://olhasht.github.io/Layout/">HOW IT WORKS</a>
+                      <Link to ="/atom">HOW IT WORKS</Link>
+                      {/* <a href="https://olhasht.github.io/Layout/">HOW IT WORKS</a> */}
                     </li>
                     <li>
                       <a href="http://www.google.com">PRICING</a>
