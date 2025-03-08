@@ -1,17 +1,55 @@
-use('messages')
 
-db.foods.aggregate([
-    {
-      $match: { body: "hi"}
-    },
-    {
-      $count: "total" 
-    }
-  ])
-  
+use ('messages')
+// db.messages.insertMany([
+//   { text: "Паровоз мчится по рельсам", author: "Иван", createdAt: new Date("2024-03-04T10:00:00Z") },
+//   { text: "В детстве я любил паровозы", author: "Мария", createdAt: new Date("2024-03-04T10:05:00Z") },
+//   { text: "Этот поезд похож на старый паровоз", author: "Андрей", createdAt: new Date("2024-03-04T10:10:00Z") },
+//   { text: "Сегодня прекрасный день!", author: "Светлана", createdAt: new Date("2024-03-04T10:15:00Z") },
+//   { text: "Паровозик из Ромашково — любимый мультфильм", author: "Дмитрий", createdAt: new Date("2024-03-04T10:20:00Z") },
+//   { text: "Я купил билет на поезд", author: "Ольга", createdAt: new Date("2024-03-04T10:25:00Z") },
+//   { text: "Паровозная тяга использовалась в 19 веке", author: "Анна", createdAt: new Date("2024-03-04T10:30:00Z") }
+// ])
 
-//   {
-//     message: {
-//       $regex: /"паравоз"/i 
-//     }
-//   }
+// db.messages.find().pretty()
+
+// db.messages.countDocuments()  //1. цей рядок просто знаходить кількість документів(49)
+
+// db.messages.find({ text: { $regex: "паровоз", $options: "i" } }).pretty()
+//2. цей знайшов усі записи в коллекции messages, в яких є слово «паровоз».
+
+// db.messages.aggregate([
+//   { $match: { text: { $regex: "паровоз", $options: "i" } } },
+//   { $count: "total" } 
+// ]);
+//3. цей знайшов і підрахував 
+
+// db.messages.aggregate([
+//   { $match: { text: { $regex: "паровоз", $options: "i" } } } 
+// ]);
+//4. цей також вивів усі записи але за допомогою  aggregate
+
+// db.messages.aggregate([
+//   { $match: { text: { $regex: "паровоз", $options: "i" } } },
+//   { $facet: { 
+//       results: [ { $match: {} } ], 
+//       totalCount: [ { $count: "total" } ]
+//   } }
+// ]);
+//5. цей ще і підрахував ці записи
+
+db.messages.aggregate([
+  { 
+    $match: { 
+      text: { $regex: "(^|\\s|[.,!?])паровоз($|\\s|[.,!?])", $options: "i" } 
+    } 
+  },
+  { 
+    $facet: { 
+      results: [ { $match: {} } ], 
+      totalCount: [ { $count: "total" } ] 
+    } 
+  }
+]);
+//6. а тут тільки записи і кількість самого слова
+
+
