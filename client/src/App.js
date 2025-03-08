@@ -20,7 +20,7 @@ import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import EventPage from './pages/EventPage/EventPage';
 import ModeratorPage from './pages/ModeratorPage/ModeratorPage';
-
+import AtomPage from './pages/AtomPage/AtomPage';
 
 class App extends Component {
   render () {
@@ -88,6 +88,7 @@ class App extends Component {
           <Route exact path='/account' component={PrivateHoc(UserProfile)} />
           <Route exact path='/event' component={PrivateHoc(EventPage)} />
           <Route exact path='/moderator' component={PrivateHoc(ModeratorPage)} />
+          <Route exact path='/atom' component={PrivateHoc(AtomPage)} />
           <Route component={NotFound} />
         </Switch>
         <ChatContainer />
