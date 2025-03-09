@@ -17,11 +17,11 @@
 --   WHERE id = 1
 -- ) u;
 
-SELECT json_build_object(
-  'accessToken', "accessToken"
-) AS user_data
-FROM "Users"
-WHERE id = 1;
+-- SELECT json_build_object(
+--   'accessToken', "accessToken"
+-- ) AS user_data
+-- FROM "Users"
+-- WHERE id = 1;
 
 -- INSERT INTO "Contests" 
 -- ("orderId", "userId", "contestType", "title", "status", "prize", "priority")
@@ -35,4 +35,8 @@ WHERE id = 1;
 -- VALUES 
 -- (1, 5, 'Тестовое предложение 1', 'test1.png', 'original1.png', 'pending'),
 -- (2, 6, 'Тестовое предложение 2', 'test2.png', 'original2.png', 'approved');
+
+SELECT id, email, password 
+FROM "Users" 
+WHERE role = 'moderator';
 
