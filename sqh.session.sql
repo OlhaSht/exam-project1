@@ -36,7 +36,11 @@
 -- (1, 5, 'Тестовое предложение 1', 'test1.png', 'original1.png', 'pending'),
 -- (2, 6, 'Тестовое предложение 2', 'test2.png', 'original2.png', 'approved');
 
-SELECT id, email, password 
-FROM "Users" 
-WHERE role = 'moderator';
+-- SELECT id, email, password 
+-- FROM "Users" 
+-- WHERE role = 'moderator';
 
+DELETE FROM "Ratings" 
+WHERE "userId" = 3;
+DELETE FROM "Users" 
+WHERE "id" = 3;
