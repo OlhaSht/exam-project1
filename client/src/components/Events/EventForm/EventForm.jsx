@@ -1,19 +1,24 @@
-// src/components/Events/EventForm/EventForm.js
+
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { connect } from 'react-redux';
 import styles from './EventForm.module.sass'
 
-const EventForm = ({ setTasks }) => {  // Принимаем setTasks как проп
+const EventForm = ({ setTasks }) => {  
   return (
     <div className={styles.formContainer}>
     <Formik
       initialValues={{
         eventName: '',
         eventDate: '',
+        eventTimeHours:'12',
+        eventTimeMinutes:'00',
+        notifyDate: '',
       }}
       onSubmit={(values, { resetForm }) => {
-        setTasks(values.eventName, values.eventDate);  // Вызываем setTasks с нужными аргументами
+        // setTasks(values.eventName, values.eventDate);  
+        const fullDateTime = `${values.eventDate} ${values.eventTimeHours}:${values.eventTimeMinutes}`;
+        setTasks(values.eventName, fullDateTime);
         resetForm(); 
       }}
     >
@@ -41,10 +46,31 @@ const EventForm = ({ setTasks }) => {  // Принимаем setTasks как п�
           </div>
 
           <div className={styles.inputForm}>
-            <label htmlFor="eventDate">Notify by</label>
+                <label htmlFor="eventTimeHours">Time</label>
+                <div className={styles.timeSelect}>
+                  <Field as="select" id="eventTimeHours" name="eventTimeHours">
+                    {Array.from({ length: 24 }, (_, i) => (
+                      <option key={i} value={String(i).padStart(2, '0')}>
+                        {String(i).padStart(2, '0')}
+                      </option>
+                    ))}
+                  </Field>
+                  <span>:</span>
+                  <Field as="select" id="eventTimeMinutes" name="eventTimeMinutes">
+                    {Array.from({ length: 60 }, (_, i) => (
+                      <option key={i} value={String(i).padStart(2, '0')}>
+                        {String(i).padStart(2, '0')}
+                      </option>
+                    ))}
+                  </Field>
+                </div>
+          </div>
+
+          <div className={styles.inputForm}>
+            <label htmlFor="notifyDate">Notify by</label>
             <Field 
-              id="eventDate" 
-              name="eventDate" 
+              id="notifyDate" 
+              name="notifyDate" 
               type="date" 
               required 
             />
