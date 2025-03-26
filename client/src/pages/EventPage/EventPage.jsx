@@ -21,6 +21,10 @@ const EventPage = () => {
     ]);
   };
 
+  const deleteTask = (eventDate) => {
+    setTasks((prevTasks) => prevTasks.filter(task => task.eventDate !== eventDate));
+  };
+
   // Сохраняем tasks в localStorage при каждом изменении tasks
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -42,6 +46,7 @@ const EventPage = () => {
               <EventTimerBar
                 eventName={task.eventName}
                 eventDate={task.eventDate}
+                onDelete={deleteTask}
                 // onComplete={() => handleComplete(task.id)}
               />
             </li>  

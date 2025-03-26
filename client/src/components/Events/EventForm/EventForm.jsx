@@ -1,10 +1,29 @@
 
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { connect } from 'react-redux';
-import styles from './EventForm.module.sass'
+import styles from './EventForm.module.sass';
+import * as Yup from 'yup';
 
 const EventForm = ({ setTasks }) => {  
+
+  const validationSchema = Yup.object().shape({
+    eventDate: Yup.string().required('Required'),
+    eventTimeHours: Yup.string().required('Required'),
+    eventTimeMinutes: Yup.string().required('Required'),
+    notifyDate: Yup.string()
+      .required('Required')
+      .test('isBeforeEvent', 'Notify date must be before or same as event date', function (value) {
+        const { eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
+        if (!value || !eventDate) return false; 
+
+        const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
+        const notifyDateTime = new Date(`${value}T23:59:59`); 
+
+        return notifyDateTime <= eventDateTime;
+      }),
+  });
+
   return (
     <div className={styles.formContainer}>
     <Formik
@@ -15,6 +34,7 @@ const EventForm = ({ setTasks }) => {
         eventTimeMinutes:'00',
         notifyDate: '',
       }}
+      validationSchema={validationSchema}
       onSubmit={(values, { resetForm }) => {
         // setTasks(values.eventName, values.eventDate);  
         const fullDateTime = `${values.eventDate} ${values.eventTimeHours}:${values.eventTimeMinutes}`;
@@ -22,7 +42,7 @@ const EventForm = ({ setTasks }) => {
         resetForm(); 
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, resetForm }) => (
         <Form>
           <div className={styles.inputContainer}>
           <div className={styles.inputForm}>
@@ -74,11 +94,17 @@ const EventForm = ({ setTasks }) => {
               type="date" 
               required 
             />
+            <ErrorMessage name="notifyDate" component="div" className={styles.error} />
           </div>
 
           <button type="submit" className={styles.buttonForm} disabled={isSubmitting}>
             Done
           </button>
+
+          <button type="button" className={styles.buttonForm} onClick={resetForm}>
+            Reset
+          </button>
+
           </div>
         </Form>
       )}
@@ -94,4 +120,6 @@ const mapDispatchToProps = {
   export default connect(null, mapDispatchToProps)(EventForm);
   
 
+
+  
 

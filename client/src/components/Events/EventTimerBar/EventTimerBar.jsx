@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Line } from 'rc-progress';
 import styles from './EventTimerBar.module.sass';
 
-const EventTimerBar = ({ eventName, eventDate }) => {
+const EventTimerBar = ({ eventName, eventDate, onDelete }) => {
   const [percentage, setPercentage] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0 });
 
@@ -76,6 +76,9 @@ const EventTimerBar = ({ eventName, eventDate }) => {
         />
       </div>
       <p className={styles.eventName}>Left: {formatTimeLeft(timeLeft.hours, timeLeft.minutes)}</p>
+      <button className={styles.removeButton} onClick={() => onDelete(eventDate)}>
+        Clear
+      </button>
     </div>
   );
 };
