@@ -1,11 +1,11 @@
-
 import React, { useEffect, useState } from 'react';
 import { Line } from 'rc-progress';
 import styles from './EventTimerBar.module.sass';
 
-const EventTimerBar = ({ eventName, eventDate, onDelete }) => {
+const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemove }) => {
   const [percentage, setPercentage] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0 });
+  const [isCompleted, setIsCompleted] = useState(false); // ✅ Добавили флаг завершения
 
   const calculateProgressAndTimeLeft = (eventDate) => {
     const now = new Date();
@@ -16,20 +16,16 @@ const EventTimerBar = ({ eventName, eventDate, onDelete }) => {
     let totalSeconds = Math.floor((eventTime - now.getTime()) / 1000);
   
     if (eventTime < now.getTime()) {
-      // Событие завершено
       percentage = 100;
-      totalSeconds = 0; // Время истекло
+      totalSeconds = 0;
     } else {
-      // Событие в будущем: прогресс считается от начала дня до времени события
       const totalEventTime = eventTime - startOfDay;
       const elapsedEventTime = now.getTime() - startOfDay;
       percentage = (elapsedEventTime / totalEventTime) * 100;
     }
   
-    // Ограничиваем значение процента
     percentage = Math.min(Math.max(percentage, 0), 100);
   
-    // Расчёт оставшегося времени
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
   
@@ -43,17 +39,17 @@ const EventTimerBar = ({ eventName, eventDate, onDelete }) => {
       setPercentage(percentage);
       setTimeLeft({ hours, minutes });
 
-      // Останавливаем таймер, если событие завершено
-      if (hours === 0 && minutes === 0) {
+      // ✅ Если событие завершилось, вызываем onComplete ОДИН РАЗ
+      if (hours === 0 && minutes === 0 && !isCompleted) {
+        setIsCompleted(true);
+        onComplete();
         clearInterval(intervalId);
       }
     }, 1000);
 
-    // Очищаем таймер при размонтировании
     return () => clearInterval(intervalId);
-  }, [eventDate]);
+  }, [eventDate, isCompleted, onComplete]);
 
-  // Форматирование оставшегося времени в строку
   const formatTimeLeft = (hours, minutes) => {
     if (hours === 0 && minutes === 0) {
       return 'The event has ended';
@@ -76,7 +72,7 @@ const EventTimerBar = ({ eventName, eventDate, onDelete }) => {
         />
       </div>
       <p className={styles.eventName}>Left: {formatTimeLeft(timeLeft.hours, timeLeft.minutes)}</p>
-      <button className={styles.removeButton} onClick={() => onDelete(eventDate)}>
+      <button className={styles.removeButton} onClick={() => [onDelete(eventDate), onTaskRemove()]}>
         Clear
       </button>
     </div>

@@ -8,9 +8,23 @@ import * as Yup from 'yup';
 const EventForm = ({ setTasks }) => {  
 
   const validationSchema = Yup.object().shape({
-    eventDate: Yup.string().required('Required'),
+    eventDate: Yup.string()
+    .required('Required')
+    .test('isFuture', 'Date must be today or in the future', (value) => {
+      return value && new Date(value).setHours(0, 0, 0, 0) >= new Date().setHours(0, 0, 0, 0);
+    }),
     eventTimeHours: Yup.string().required('Required'),
     eventTimeMinutes: Yup.string().required('Required'),
+
+    eventTime: Yup.string()
+    .test('isFutureTime', 'Time must be in the future', function () {
+      const { eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
+      if (!eventDate) return false;
+  
+      const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
+      return eventDateTime > new Date(); // Проверяем, что время не в прошлом
+    }),
+    
     notifyDate: Yup.string()
       .required('Required')
       .test('isBeforeEvent', 'Notify date must be before or same as event date', function (value) {
@@ -18,8 +32,8 @@ const EventForm = ({ setTasks }) => {
         if (!value || !eventDate) return false; 
 
         const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
-        const notifyDateTime = new Date(`${value}T23:59:59`); 
-
+        // const notifyDateTime = new Date(`${value}T23:59:59`); 
+        const notifyDateTime = new Date(); 
         return notifyDateTime <= eventDateTime;
       }),
   });
@@ -30,11 +44,13 @@ const EventForm = ({ setTasks }) => {
       initialValues={{
         eventName: '',
         eventDate: '',
-        eventTimeHours:'12',
+        eventTimeHours:'00',
         eventTimeMinutes:'00',
         notifyDate: '',
       }}
       validationSchema={validationSchema}
+      // validateOnChange={true}
+      // validateOnBlur={true}   //не лишние ли это два поля?(52, 53)не вижу их работы...
       onSubmit={(values, { resetForm }) => {
         // setTasks(values.eventName, values.eventDate);  
         const fullDateTime = `${values.eventDate} ${values.eventTimeHours}:${values.eventTimeMinutes}`;
@@ -62,7 +78,9 @@ const EventForm = ({ setTasks }) => {
               name="eventDate" 
               type="date" 
               required 
+              min={new Date().toISOString().split('T')[0]}
             />
+            <ErrorMessage name="eventDate" component="div" className={styles.error} /> 
           </div>
 
           <div className={styles.inputForm}>
@@ -93,8 +111,9 @@ const EventForm = ({ setTasks }) => {
               name="notifyDate" 
               type="date" 
               required 
+              min={new Date().toISOString().split('T')[0]}
             />
-            <ErrorMessage name="notifyDate" component="div" className={styles.error} />
+            <ErrorMessage name="notifyDate" component="div" className={styles.error} />  
           </div>
 
           <button type="submit" className={styles.buttonForm} disabled={isSubmitting}>

@@ -13,6 +13,8 @@ const EventPage = () => {
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
+  const [completedEventsCount, setCompletedEventsCount] = useState(0);
+
   // Функция для добавления новой задачи
   const addTask = (eventName, eventDate) => {
     setTasks((prevTasks) => [
@@ -24,6 +26,14 @@ const EventPage = () => {
   const deleteTask = (eventDate) => {
     setTasks((prevTasks) => prevTasks.filter(task => task.eventDate !== eventDate));
   };
+
+  const handleEventComplete = () => {
+    setCompletedEventsCount((prev) => prev + 1);
+  };
+  const handleTaskRemove = () => {
+    setCompletedEventsCount(prev => Math.max(0, prev - 1));
+  };
+
 
   // Сохраняем tasks в localStorage при каждом изменении tasks
   useEffect(() => {
@@ -37,7 +47,11 @@ const EventPage = () => {
         <div>
         <EventForm setTasks={addTask} /> 
       <div className={styles.progressBarContainer}>
-        <h2 className={styles.timeListName}>Time Left:</h2>
+        <h2 className={styles.timeListName}>Time Left:
+              {completedEventsCount > 0 && (
+                <span className={styles.badge}>{completedEventsCount}</span>
+              )}
+        </h2>
         <ul>
           {tasks
           .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate)) // Сортировка по дате
@@ -47,7 +61,8 @@ const EventPage = () => {
                 eventName={task.eventName}
                 eventDate={task.eventDate}
                 onDelete={deleteTask}
-                // onComplete={() => handleComplete(task.id)}
+                onComplete={handleEventComplete}
+                onTaskRemove={handleTaskRemove}
               />
             </li>  
           ))}
