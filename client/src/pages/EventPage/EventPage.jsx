@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import CONSTANTS from '../../constants';
 import Header from '../../components/Header/Header';
 import EventForm from '../../components/Events/EventForm/EventForm';
 import Footer from '../../components/Footer/Footer';
 import EventTimerBar from '../../components/Events/EventTimerBar/EventTimerBar';
 import styles from '../../components/Events/EventTimerBar/EventTimerBar.module.sass';
 
-const EventPage = () => {
+const EventPage = ({role}) => {
   // Инициализируем состояние tasks с проверкой localStorage
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem('tasks');
@@ -39,6 +40,10 @@ const EventPage = () => {
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
+
+  if (role !== CONSTANTS.CUSTOMER) {
+    return <p>Only customers can create events</p>
+  }
 
   return (
     <div>
@@ -76,7 +81,6 @@ const EventPage = () => {
   );
 };
 
-// Функция для подключения Redux-состояния
 const mapStateToProps = (state) => state.userStore.data;
 
  export default connect(mapStateToProps)(EventPage);
