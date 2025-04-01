@@ -51,28 +51,33 @@ const EventPage = ({role}) => {
       <div className={styles.eventContainer}>
         <div>
         <EventForm setTasks={addTask} /> 
-      <div className={styles.progressBarContainer}>
-        <h2 className={styles.timeListName}>Time Left:
-              {completedEventsCount > 0 && (
-                <span className={styles.badge}>{completedEventsCount}</span>
-              )}
-        </h2>
-        <ul>
-          {tasks
-          .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate)) // Сортировка по дате
-          .map((task) => (
-            <li key={task.id}>
-              <EventTimerBar
-                eventName={task.eventName}
-                eventDate={task.eventDate}
-                onDelete={deleteTask}
-                onComplete={handleEventComplete}
-                onTaskRemove={handleTaskRemove}
-              />
-            </li>  
-          ))}
-        </ul>
-      </div>
+          <div className={styles.progressBarContainer}>
+            <div className={styles.nameContainer}>
+              <h2 className={styles.timeListName}>Time Left:
+                  {completedEventsCount > 0 && (
+                    <span className={styles.closedEvents}>Closed Events
+                    <span className={styles.badge}>{completedEventsCount}</span>
+                    </span>
+                  )}
+              </h2>
+            </div>
+
+            <ul>
+              {tasks
+              .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate)) // Сортировка по дате
+              .map((task) => (
+                <li key={task.id}>
+                  <EventTimerBar
+                    eventName={task.eventName}
+                    eventDate={task.eventDate}
+                    onDelete={deleteTask}
+                    onComplete={handleEventComplete}
+                    onTaskRemove={handleTaskRemove}
+                  />
+                </li>  
+              ))}
+            </ul>
+          </div>
         </div>
       
       </div>
