@@ -4,14 +4,16 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const configPath = env === 'production' ? path.join(__dirname, '..', '..', '..',
-  'src/server/config/postgresConfig.json') : path.join(__dirname, '..',
-  '/config/postgresConfig.json');
+const sequelizerc = require(path.resolve(__dirname, '..', '..', '.sequelizerc'));
+const configPath = sequelizerc.config;
 const config = require(configPath)[ env ];
 const db = {};
 
 const sequelize = new Sequelize(config.database, config.username,
   config.password, config);
+
+  console.log('Path to config:', sequelizerc.config);
+  console.log('Loaded config:', config);
 
 fs
   .readdirSync(__dirname)
