@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import CONSTANTS from '../../constants';
 import Header from '../../components/Header/Header';
 import EventForm from '../../components/Events/EventForm/EventForm';
@@ -18,9 +19,11 @@ const EventPage = ({role}) => {
 
   // Функция для добавления новой задачи
   const addTask = (eventName, eventDate) => {
+    const newEvent = {
+      id: uuidv4(), eventDate, eventName
+    };
     setTasks((prevTasks) => [
-      ...prevTasks,
-      { id: prevTasks.length + 1, eventName, eventDate }
+      ...prevTasks, newEvent
     ]);
   };
 
