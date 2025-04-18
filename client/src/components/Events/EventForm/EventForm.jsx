@@ -47,14 +47,14 @@ const EventForm = ({ setTasks }) => {
         eventTimeHours:'00',
         eventTimeMinutes:'00',
         notifyDate: '',
+        notifyTimeHours: '00',
+        notifyTimeMinutes: '00',
       }}
       validationSchema={validationSchema}
-      // validateOnChange={true}
-      // validateOnBlur={true}   //не лишние ли это два поля?(52, 53)не вижу их работы...
-      onSubmit={(values, { resetForm }) => {
-        // setTasks(values.eventName, values.eventDate);  
+      onSubmit={(values, { resetForm }) => { 
         const fullDateTime = `${values.eventDate} ${values.eventTimeHours}:${values.eventTimeMinutes}`;
-        setTasks(values.eventName, fullDateTime);
+        const notifyFullDateTime = `${values.notifyDate}T${values.notifyTimeHours.padStart(2, '0')}:${values.notifyTimeMinutes.padStart(2, '0')}`;
+        setTasks(values.eventName, fullDateTime, notifyFullDateTime);
         resetForm(); 
       }}
     >
@@ -115,6 +115,27 @@ const EventForm = ({ setTasks }) => {
             />
             <ErrorMessage name="notifyDate" component="div" className={styles.error} />  
           </div>
+
+          <div className={styles.inputForm}>
+            <label htmlFor="eventTimeHours">Time</label>
+              <div className={styles.timeSelect}>
+              <Field as="select" name="notifyTimeHours">
+                {Array.from({ length: 24 }, (_, i) => (
+                  <option key={i} value={String(i).padStart(2, '0')}>
+                    {String(i).padStart(2, '0')}
+                  </option>
+                ))}
+              </Field>
+              <span>:</span>
+              <Field as="select" name="notifyTimeMinutes">
+                {Array.from({ length: 60 }, (_, i) => (
+                  <option key={i} value={String(i).padStart(2, '0')}>
+                    {String(i).padStart(2, '0')}
+                  </option>
+                ))}
+              </Field>
+              </div>
+            </div>
 
           <button type="submit" className={styles.buttonForm} disabled={isSubmitting}>
             Done

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 import CONSTANTS from '../../constants';
 import Header from '../../components/Header/Header';
 import EventForm from '../../components/Events/EventForm/EventForm';
@@ -18,9 +19,9 @@ const EventPage = ({role}) => {
   const [completedEventsCount, setCompletedEventsCount] = useState(0);
 
   // Функция для добавления новой задачи
-  const addTask = (eventName, eventDate) => {
+  const addTask = (eventName, eventDate, notifyFullDateTime) => {
     const newEvent = {
-      id: uuidv4(), eventDate, eventName
+      id: uuidv4(), eventDate, eventName, notifyDate: notifyFullDateTime
     };
     setTasks((prevTasks) => [
       ...prevTasks, newEvent
@@ -38,6 +39,34 @@ const EventPage = ({role}) => {
     setCompletedEventsCount(prev => Math.max(0, prev - 1));
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+  
+      tasks.forEach(task => {
+        if (!task.notifyDate) return;
+  
+        const notifyTime = new Date(task.notifyDate);
+        
+        if (!isNaN(notifyTime.getTime())) {
+          // Если разница между notify и now меньше минуты и еще не было уведомления
+          const diff = notifyTime.getTime() - now.getTime();
+  
+          if (diff >= 0 && diff < 60000) {
+            toast.info(`⏰ You have an event: ${task.eventName}`, {
+              position: "top-right",
+              autoClose: false,
+            });
+          }
+        } else {
+          console.warn('⚠️ Invalid notifyDate:', task.notifyDate);
+        }
+      });
+    }, 60000); 
+  
+    return () => clearInterval(interval);
+  }, [tasks]);
+  
 
   // Сохраняем tasks в localStorage при каждом изменении tasks
   useEffect(() => {
