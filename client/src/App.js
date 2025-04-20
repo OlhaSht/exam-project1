@@ -19,6 +19,7 @@ import CONSTANTS from './constants';
 import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import EventPage from './pages/EventPage/EventPage';
+import NotificationEvent from './components/NotificationEvent/NotificationEvent';
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
           draggable
           pauseOnHover
         />
+        <NotificationEvent />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route

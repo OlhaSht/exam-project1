@@ -39,33 +39,32 @@ const EventPage = ({role}) => {
     setCompletedEventsCount(prev => Math.max(0, prev - 1));
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const now = new Date();
   
-      tasks.forEach(task => {
-        if (!task.notifyDate) return;
+  //     tasks.forEach(task => {
+  //       if (!task.notifyDate) return;
   
-        const notifyTime = new Date(task.notifyDate);
+  //       const notifyTime = new Date(task.notifyDate);
         
-        if (!isNaN(notifyTime.getTime())) {
-          // Если разница между notify и now меньше минуты и еще не было уведомления
-          const diff = notifyTime.getTime() - now.getTime();
+  //       if (!isNaN(notifyTime.getTime())) {
+  //         const diff = notifyTime.getTime() - now.getTime();
   
-          if (diff >= 0 && diff < 60000) {
-            toast.info(`⏰ You have an event: ${task.eventName}`, {
-              position: "top-right",
-              autoClose: false,
-            });
-          }
-        } else {
-          console.warn('⚠️ Invalid notifyDate:', task.notifyDate);
-        }
-      });
-    }, 60000); 
+  //         if (diff >= 0 && diff < 60000) {
+  //           toast.info(`⏰ You have an event: ${task.eventName}`, {
+  //             position: "top-right",
+  //             autoClose: false,
+  //           });
+  //         }
+  //       } else {
+  //         console.warn('⚠️ Invalid notifyDate:', task.notifyDate);
+  //       }
+  //     });
+  //   }, 60000); 
   
-    return () => clearInterval(interval);
-  }, [tasks]);
+  //   return () => clearInterval(interval);
+  // }, [tasks]);
   
 
   // Сохраняем tasks в localStorage при каждом изменении tasks
