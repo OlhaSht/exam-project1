@@ -5,7 +5,7 @@ import styles from './EventTimerBar.module.sass';
 const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemove }) => {
   const [percentage, setPercentage] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0 });
-  const [isCompleted, setIsCompleted] = useState(false); // ✅ Добавили флаг завершения
+  const [isCompleted, setIsCompleted] = useState(false); 
 
   const calculateProgressAndTimeLeft = (eventDate) => {
     const now = new Date();
@@ -38,8 +38,7 @@ const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemov
 
       setPercentage(percentage);
       setTimeLeft({ hours, minutes });
-
-      // ✅ Если событие завершилось, вызываем onComplete ОДИН РАЗ
+      
       if (hours === 0 && minutes === 0 && !isCompleted) {
         setIsCompleted(true);
         onComplete();
@@ -55,9 +54,9 @@ const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemov
       return 'The event has ended';
     }
     if (hours > 0) {
-      return `${hours}ч ${minutes}м`;
+      return `${hours}h ${minutes}m`;
     }
-    return `${minutes}м`;
+    return `${minutes}m`;
   };
 
   return (
@@ -72,7 +71,12 @@ const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemov
         />
       </div>
       <p className={styles.eventName}>Left: {formatTimeLeft(timeLeft.hours, timeLeft.minutes)}</p>
-      <button className={styles.removeButton} onClick={() => [onDelete(eventDate), onTaskRemove()]}>
+      <button className={styles.removeButton} onClick={() => {
+         onDelete(eventDate);
+         if (isCompleted) {
+          onTaskRemove();
+         }
+         }}>
         Clear
       </button>
     </div>
