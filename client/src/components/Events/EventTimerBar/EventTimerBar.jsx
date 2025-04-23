@@ -93,15 +93,6 @@ const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemov
             }
           });
         }
-          // const confirmed = window.confirm('❗ The event is not completed yet. Are you sure want to delete it?');
-          // if (confirmed) {
-          //   onDelete(eventDate);
-          // }
-        
-        //  onDelete(eventDate);
-        //  if (isCompleted) {
-        //   onTaskRemove();
-        //  }
          }}>
         Clear
       </button>
