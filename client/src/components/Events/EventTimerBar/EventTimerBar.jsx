@@ -71,11 +71,21 @@ const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemov
         />
       </div>
       <p className={styles.eventName}>Left: {formatTimeLeft(timeLeft.hours, timeLeft.minutes)}</p>
-      <button className={styles.removeButton} onClick={() => {
-         onDelete(eventDate);
-         if (isCompleted) {
+      <button className={styles.removeButton} 
+      onClick={() => {
+        if (isCompleted) {
+          onDelete(eventDate);
           onTaskRemove();
-         }
+        } else {
+          const confirmed = window.confirm('❗ The event is not completed yet. Are you sure want to delete it?');
+          if (confirmed) {
+            onDelete(eventDate);
+          }
+        }
+        //  onDelete(eventDate);
+        //  if (isCompleted) {
+        //   onTaskRemove();
+        //  }
          }}>
         Clear
       </button>
