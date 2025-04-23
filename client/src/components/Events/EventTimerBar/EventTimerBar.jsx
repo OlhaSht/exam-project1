@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'rc-progress';
+import Swal from 'sweetalert2';
 import styles from './EventTimerBar.module.sass';
 
 const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemove }) => {
@@ -77,11 +78,26 @@ const EventTimerBar = ({ eventName, eventDate, onDelete, onComplete, onTaskRemov
           onDelete(eventDate);
           onTaskRemove();
         } else {
-          const confirmed = window.confirm('❗ The event is not completed yet. Are you sure want to delete it?');
-          if (confirmed) {
-            onDelete(eventDate);
-          }
+          Swal.fire({
+            title: 'The event is not completed yet.',
+            text: "Are you sure want to delete it?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4caf50',
+            cancelButtonColor: '#ff0000',
+            confirmButtonText: 'Yes, delet it',
+            cancelButtonText: 'Cancel'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              onDelete(eventDate);
+            }
+          });
         }
+          // const confirmed = window.confirm('❗ The event is not completed yet. Are you sure want to delete it?');
+          // if (confirmed) {
+          //   onDelete(eventDate);
+          // }
+        
         //  onDelete(eventDate);
         //  if (isCompleted) {
         //   onTaskRemove();
