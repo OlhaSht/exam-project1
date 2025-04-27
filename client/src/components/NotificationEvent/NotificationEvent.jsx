@@ -55,35 +55,3 @@ export default NotificationEvent;
 
 
 
-// import { useEffect } from 'react';
-// import { toast } from 'react-toastify';
-
-// const NotificationEvent = () => {
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       const now = new Date();
-//       const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-//       tasks.forEach(task => {
-//         const notifyTime = new Date(task.notifyDate);
-//         const nowString = now.toISOString().slice(0, 16);
-//         const notifyString = notifyTime.toISOString().slice(0, 16);
-        
-//         if (notifyString === nowString) {
-//           toast.info(`⏰ you have an event: ${task.eventName}`, {
-//             position: "top-right",
-//             autoClose: false, 
-//             closeOnClick: true,
-//             draggable: true,
-//           });
-//         }
-//       });
-//     }, 60000);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   return null; 
-// };
-
-// export default NotificationEvent;

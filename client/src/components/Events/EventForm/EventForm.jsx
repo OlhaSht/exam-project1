@@ -22,12 +22,12 @@ const EventForm = ({ setTasks }) => {
       if (!eventDate) return false;
   
       const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
-      return eventDateTime > new Date(); // Проверяем, что время не в прошлом
+      return eventDateTime > new Date(); 
     }),
     
     notifyDate: Yup.string()
       .required('Required')
-      .test('isBeforeEvent', 'Notify date must be before or same as event date', function (value) {
+      .test('isBeforeEvent', 'Notify date must be before event date', function (value) {
         const { eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
         if (!value || !eventDate) return false; 
 
@@ -59,7 +59,7 @@ const EventForm = ({ setTasks }) => {
       }}
     >
       {({ isSubmitting, resetForm }) => (
-        <Form>
+        <Form noValidate>
           <div className={styles.inputContainer}>
           <div className={styles.inputForm}>
             <label htmlFor="eventName">Event</label>
@@ -80,7 +80,7 @@ const EventForm = ({ setTasks }) => {
               required 
               min={new Date().toISOString().split('T')[0]}
             />
-            <ErrorMessage name="eventDate" component="div" className={styles.error} /> 
+            <ErrorMessage name="eventDate" component="div" className={styles.errorMessege} /> 
           </div>
 
           <div className={styles.inputForm}>
@@ -113,7 +113,7 @@ const EventForm = ({ setTasks }) => {
               required 
               min={new Date().toISOString().split('T')[0]}
             />
-            <ErrorMessage name="notifyDate" component="div" className={styles.error} />  
+            <ErrorMessage name="notifyDate" component="div" className={styles.errorMessege} />  
           </div>
 
           <div className={styles.inputForm}>
