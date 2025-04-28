@@ -8,34 +8,82 @@ import * as Yup from 'yup';
 const EventForm = ({ setTasks }) => {  
 
   const validationSchema = Yup.object().shape({
+    eventName: Yup.string()
+    .required('Required'),
+
     eventDate: Yup.string()
     .required('Required')
-    .test('isFuture', 'Date must be today or in the future', (value) => {
-      return value && new Date(value).setHours(0, 0, 0, 0) >= new Date().setHours(0, 0, 0, 0);
-    }),
-    eventTimeHours: Yup.string().required('Required'),
-    eventTimeMinutes: Yup.string().required('Required'),
-
-    eventTime: Yup.string()
     .test('isFutureTime', 'Time must be in the future', function () {
       const { eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
-      if (!eventDate) return false;
-  
+      if (!eventDate || !eventTimeHours || !eventTimeMinutes) {
+        return false;
+      }
       const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
       return eventDateTime > new Date(); 
     }),
+    // .test('isFuture', 'Date must be today or in the future', (value) => {
+    //   return value && new Date(value).setHours(0, 0, 0, 0) >= new Date().setHours(0, 0, 0, 0);
+    // }),
+    
+    eventTimeHours: Yup.string().required('Required'),
+    eventTimeMinutes: Yup.string().required('Required'),
+
+    // eventTime: Yup.string()
+    // .test('isFutureTime', 'Time must be in the future', function () {
+    //   const { eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
+    //   if (!eventDate || !eventTimeHours || !eventTimeMinutes) {
+    //     return this.createError({ message: 'Event time must be in the future' });
+    //   }
+    //   const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
+    //   return eventDateTime > new Date(); 
+    // }),
     
     notifyDate: Yup.string()
       .required('Required')
-      .test('isBeforeEvent', 'Notify date must be before event date', function (value) {
-        const { eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
-        if (!value || !eventDate) return false; 
+      .test('isValidNotifyDate', 'Notify must be in the future and before event', function (value) {
+        const { notifyTimeHours, notifyTimeMinutes, eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
+        if (!value || !eventDate) return false;
 
         const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
-        // const notifyDateTime = new Date(`${value}T23:59:59`); 
-        const notifyDateTime = new Date(); 
-        return notifyDateTime <= eventDateTime;
+        const notifyDateTime = new Date(`${value}T${notifyTimeHours}:${notifyTimeMinutes}:00`);
+        const now = new Date();
+        
+        if (notifyDateTime <= now) {
+          return this.createError({ message: 'Notify time must be in the future' });
+        }
+        
+        if (notifyDateTime > eventDateTime) {
+          return this.createError({ message: 'Notify must be before event time' });
+        }
+
+        return true;
       }),
+
+
+    // notifyDate: Yup.string()
+    // .required('Required')
+    // .test('isBeforeEvent', 'Notify date must be before event date', function (value) {
+    //   const { notifyTimeHours, notifyTimeMinutes, eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
+    //   if (!value || !eventDate) return false;
+  
+    //   const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
+    //   const notifyDateTime = new Date(`${value}T${notifyTimeHours}:${notifyTimeMinutes}:00`);
+    //   return notifyDateTime <= eventDateTime;
+    // }),
+  
+  
+
+    // notifyDate: Yup.string()
+    //   .required('Required')
+    //   .test('isBeforeEvent', 'Notify date must be before event date', function (value) {
+    //     const { eventDate, eventTimeHours, eventTimeMinutes } = this.parent;
+    //     if (!value || !eventDate) return false; 
+
+    //     const eventDateTime = new Date(`${eventDate}T${eventTimeHours}:${eventTimeMinutes}:00`);
+    //     const notifyDateTime = new Date(`${value}T23:59:59`); 
+    //     // const notifyDateTime = new Date(); 
+    //     return notifyDateTime <= eventDateTime;
+    //   }),
   });
 
   return (
@@ -51,6 +99,7 @@ const EventForm = ({ setTasks }) => {
         notifyTimeMinutes: '00',
       }}
       validationSchema={validationSchema}
+      validateOnChange={true}
       onSubmit={(values, { resetForm }) => { 
         const fullDateTime = `${values.eventDate} ${values.eventTimeHours}:${values.eventTimeMinutes}`;
         const notifyFullDateTime = `${values.notifyDate}T${values.notifyTimeHours.padStart(2, '0')}:${values.notifyTimeMinutes.padStart(2, '0')}`;
@@ -69,6 +118,7 @@ const EventForm = ({ setTasks }) => {
               placeholder="Enter event name" 
               required 
             />
+            <ErrorMessage name="eventName" component="div" className={styles.errorMessege} /> 
           </div>
 
           <div className={styles.inputForm}>
