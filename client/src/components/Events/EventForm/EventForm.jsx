@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 const EventForm = ({ setTasks }) => {  
 
   const validationSchema = Yup.object().shape({
-    
+
     eventName: Yup.string()
     .required('Required'),
 
@@ -91,7 +91,7 @@ const EventForm = ({ setTasks }) => {
               required 
               min={new Date().toISOString().split('T')[0]}
             />
-            <ErrorMessage name="eventDate" component="div" className={styles.errorMessege} /> 
+            <ErrorMessage name="eventDate" component="div"  className={styles.errorMessege} /> 
           </div>
 
           <div className={styles.inputForm}>
