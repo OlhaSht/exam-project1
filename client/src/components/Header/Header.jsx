@@ -14,7 +14,7 @@ class Header extends React.Component {
   }
 
   logOut = () => {
-    localStorage.clear();
+    localStorage.removeItem('accessToken');
     this.props.clearUserStore();
     this.props.history.replace('/login');
   };
@@ -47,11 +47,12 @@ class Header extends React.Component {
                   <span>View Dashboard</span>
                 </Link>
               </li>
-              <li>
+              {this.props.data.role === CONSTANTS.CUSTOMER && (
+                <li>
                 <Link to="/event" style={{ textDecoration: 'none' }}>
                   <span>Events</span>
                 </Link>
-              </li>
+              </li>)}
               <li>
                 <Link to="/account" style={{ textDecoration: 'none' }}>
                   <span>My Account</span>
