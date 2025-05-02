@@ -31,7 +31,7 @@ const NotificationEvent = () => {
         const notifyString = notifyTime.toISOString().slice(0, 16);
 
         if (notifyString === nowString) {
-            const audio = new Audio(`${CONSTANTS.NOTIFICATION_AUDIO}cat-meow-7-fx-306186.mp3`);
+            const audio = new Audio(`${CONSTANTS.NOTIFICATION_AUDIO}Marimba-notification-tone.mp3`);
             console.log(audio);
             audio.play();
 
