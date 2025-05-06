@@ -17,13 +17,6 @@ class Dialog extends React.Component {
   }
 
   messagesEnd = React.createRef();
-  
-  // scrollToBottom = () => {
-  //   if (this.messagesEnd.current) {
-  //     this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // };
-
   scrollToBottom = () => {
     this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
   };

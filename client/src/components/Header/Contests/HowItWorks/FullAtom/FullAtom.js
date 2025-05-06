@@ -1,18 +1,19 @@
 import React from "react";
-import "./FullAtom.css";
+import "./FullAtom.css"
 import "./Font.css";
 import "./Reset.css";
 import CONSTANTS from '../../../../../constants';
 
 
 const FullAtom = () => {
-    const customFontStyle = {
-        fontFamily: "Product Sans, sans-serif",
-    };
+    // const customFontStyle = {
+    //     fontFamily: "Product Sans, sans-serif",
+    // };
+    // class="body" style={customFontStyle}
 
-
+   
     return (
-        <div class="body" style={customFontStyle}>
+        <div  style={{ fontFamily: 'Product Sans, sans-serif' }}>
             <header class="header">
                 
                 <section class="header-container">
