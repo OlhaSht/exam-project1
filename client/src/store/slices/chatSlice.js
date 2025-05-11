@@ -101,17 +101,7 @@ const sendMessageExtraReducers = createExtraReducers({
     if (isNew) {
       messagesPreview.push(payload.preview);
     }
-    // const chatData = {
-    //   _id: payload.preview.id || state.chatData._id,
-    //   participants: payload.preview.participants || state.chatData.participants,
-    //   favoriteList: payload.preview.favoriteList || state.chatData.favoriteList,
-    //   blackList: payload.preview.blackList || state.chatData.blackList,
-    //   // _id: payload.preview._id,
-    //   // participants: payload.preview.participants,
-    //   // favoriteList: payload.preview.favoriteList,
-    //   // blackList: payload.preview.blackList,
-    // };
-    // state.chatData = { ...state.chatData, ...chatData };
+    
     state.messagesPreview = messagesPreview;
     state.messages = [...state.messages, payload.message];
   },
@@ -141,10 +131,6 @@ const changeChatFavoriteExtraReducers = createExtraReducers({
         preview.favoriteList = payload.favoriteList || [];
     });
     state.chatData = payload;
-    // state.chatData = {
-    //   ...state.chatData,
-    //   favoriteList: payload.favoriteList || [],
-    // };
     state.messagesPreview = messagesPreview;
   },
   rejectedReducer: (state, { payload }) => {

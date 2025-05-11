@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import * as restController from '../../api/rest/restController';
-import { decorateAsyncThunk, pendingReducer } from '../../utils/store';
+import { decorateAsyncThunk } from '../../utils/store';
 
 const MODERATOR_SLICE_NAME = 'moderator';
 
@@ -13,13 +13,6 @@ const initialState = {
   total: 0,
 };
 
-// export const getModeratorOffers = decorateAsyncThunk({
-//   key: `${MODERATOR_SLICE_NAME}/getModeratorOffers`,
-//   thunk: async () => {
-//     const { data } = await restController.getAllOffersForModerator();
-//     return data;
-//   },
-// });
 export const getModeratorOffers = decorateAsyncThunk({
   key: `${MODERATOR_SLICE_NAME}/getModeratorOffers`,
   thunk: async ({ page = 1, limit = 5 }) => {
@@ -50,7 +43,6 @@ const reducers = {};
 const extraReducers = (builder) => {
   builder
     // Получение офферов
-    // .addCase(getModeratorOffers.pending, pendingReducer)
     .addCase(getModeratorOffers.pending, (state) => {
       state.isFetching = true;
     })

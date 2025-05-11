@@ -5,7 +5,6 @@ import isEqual from 'lodash/isEqual';
 import LightBox from 'react-18-image-lightbox';
 import { goToExpandedDialog } from '../../store/slices/chatSlice';
 import {
-  getApprovedOffersForCustomer,
   getContestById,
   setOfferStatus,
   clearSetOfferStatusError,

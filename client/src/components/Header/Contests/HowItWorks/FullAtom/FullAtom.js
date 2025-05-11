@@ -6,14 +6,13 @@ import CONSTANTS from '../../../../../constants';
 
 
 const FullAtom = () => {
-    // const customFontStyle = {
-    //     fontFamily: "Product Sans, sans-serif",
-    // };
-    // class="body" style={customFontStyle}
+    const customFontStyle = {
+        fontFamily: "Product Sans, sans-serif",
+    };
 
-   
+//    style={{ fontFamily: 'Product Sans, sans-serif' }}
     return (
-        <div  style={{ fontFamily: 'Product Sans, sans-serif' }}>
+        <div  class="body" style={customFontStyle}>
             <header class="header">
                 
                 <section class="header-container">
@@ -336,7 +335,7 @@ const FullAtom = () => {
                                 </div>
                                 <p class="win-content-text">Rate the submissions and provide feedback to creatives. Creatives 
                                     submit even more names based on your feedback.</p>
-                                <img class="win-arrow"  src={`${CONSTANTS.STATIC_IMAGES_PATH_ATOM}arrow-right-blue.svg"`} alt="arrow" />
+                                <img class="win-arrow"  src={`${CONSTANTS.STATIC_IMAGES_PATH_ATOM}arrow-right-blue.svg`} alt="arrow" />
                         </article>
 
                         <article class="win-content-block">
@@ -345,7 +344,7 @@ const FullAtom = () => {
                                 </div>
                                 <p class="win-content-text">Our team helps you test your favorite names with your target 
                                     audience. We also assist with Trademark screening.</p>
-                            <img class="win-arrow"  src={`${CONSTANTS.STATIC_IMAGES_PATH_ATOM}arrow-right-blue.svg`} alt="arrow" />
+                                <img class="win-arrow"  src={`${CONSTANTS.STATIC_IMAGES_PATH_ATOM}arrow-right-blue.svg`} alt="arrow" />
                         </article>
 
                         <article class="win-content-block">

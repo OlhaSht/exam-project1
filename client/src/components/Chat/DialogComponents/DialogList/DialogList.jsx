@@ -41,49 +41,6 @@ const DialogList = (props) => {
     return moment(time).format('MMMM DD, YYYY');
   };
 
-  // const renderPreview = (filterFunc) => {
-  //   const arrayList = [];
-  //   const {
-  //     userId,
-  //     preview,
-  //     goToExpandedDialog,
-  //     chatMode,
-  //     removeChat,
-  //     interlocutor,
-  //   } = props;
-  //   preview.forEach((chatPreview, index) => {
-  //     const dialogNode = (
-  //       <DialogBox
-  //         interlocutor={chatPreview.interlocutor}
-  //         chatPreview={chatPreview}
-  //         userId={userId}
-  //         key={index}
-  //         getTimeStr={getTimeStr}
-  //         changeFavorite={changeFavorite}
-  //         changeBlackList={changeBlackList}
-  //         chatMode={chatMode}
-  //         catalogOperation={
-  //           chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
-  //             ? removeChat
-  //             : changeShowCatalogCreation
-  //         }
-  //         goToExpandedDialog={goToExpandedDialog}
-  //       />
-  //     );
-  //     if (filterFunc && filterFunc(chatPreview, userId)) {
-  //       arrayList.push(dialogNode);
-  //     } else if (!filterFunc) {
-  //       arrayList.push(dialogNode);
-  //     }
-  //   });
-  //   console.log(arrayList);
-  //   return arrayList.length ? (
-  //     arrayList
-  //   ) : (
-  //     <span className={styles.notFound}>Not found</span>
-  //   );
-  // };
-
   const groupMessagesByConversationId = (messages) => {
     return messages.reduce((acc, message) => {
       const chatId = message.conversationId; 
