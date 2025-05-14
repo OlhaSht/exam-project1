@@ -1,9 +1,13 @@
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import CONSTANTS from '../../constants';
 
-const NotificationEvent = () => {
+const NotificationEvent = ({role}) => {
   useEffect(() => {
+
+    if (role!== CONSTANTS.CUSTOMER) return;
+
     const interval = setInterval(() => {
       const now = new Date();
       const nowString = now.toISOString().slice(0, 16);
@@ -51,7 +55,13 @@ const NotificationEvent = () => {
   return null;
 };
 
-export default NotificationEvent;
+const mapDispatchToProps = (state) =>({
+  role: state.userState?.data?.role,
+});
+
+export default connect(mapDispatchToProps)(NotificationEvent);
+
+// export default NotificationEvent;
 
 
 
