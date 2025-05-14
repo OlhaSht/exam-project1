@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
 import { updateBundle } from '../../store/slices/bundleSlice';
 import BundleBox from '../../components/BundleBox/BundleBox';
 import ButtonGruop from '../../components/BundleBox/ButtonGruop';
@@ -10,10 +9,17 @@ import Footer from '../../components/Footer/Footer';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Header from '../../components/Header/Header';
 
-const StartContestPage = props => {
-  if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
-    props.history.replace('/');
-  }
+// const StartContestPage = props => {
+//   if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
+//     props.history.replace('/');
+//   }
+
+  const StartContestPage = props => {
+    useEffect(() => {
+      if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
+        props.history.replace('/');
+      }
+    }, [props.userStore.data.role, props.history]);
 
   const setBundle = bundleStr => {
     const array = bundleStr.toLowerCase().split('+');
