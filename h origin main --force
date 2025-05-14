@@ -1,0 +1,83 @@
+[33mbd69d7f[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m Merge branch 'task-react'
+[33mff11b9c[m[33m ([m[1;31morigin/task-react[m[33m, [m[1;32mtask-react[m[33m)[m change melody notification
+[33mce7604d[m add adaptive event
+[33mf17dcf3[m clear comments
+[33m83aabb6[m event&notifiy validation changed
+[33m2e2a384[m styles errorMessages
+[33m5bbf1f2[m clear comment
+[33m69d98b7[m add sweetalert2& logic Swal
+[33m7307b6f[m window.confirm
+[33m5c7162e[m cleared comments&logic button clear
+[33mff39fc3[m notification available in all pages
+[33m5a4f520[m add notification in eventPage&Form
+[33m52eea14[m appliet uuid
+[33mb24926b[m add uuid for client
+[33m248b923[m changed path in index/model
+[33m8ad2c3e[m add some styles for closedEvents
+[33ma59f3c1[m role checking, option2, header
+[33m605c817[m role checking, option1, eventpage
+[33mba718e7[m add badge logik&styles add validation for past time
+[33mb0002fe[m add Clear&Delete button, select time
+[33mc5699f9[m add eventTimeHours&eventTimeMinutes
+[33m0b73328[m changed from localStorage.clear to localStorage.removeItem('accessToken')
+[33md70eec4[m Merge branch 'task-fullstack'
+[33m5158158[m[33m ([m[1;31morigin/task-fullstack[m[33m, [m[1;32mtask-fullstack[m[33m)[m changed seed for bulkInsert
+[33m631542f[m update seed mjderator whith bcrypt&upsert
+[33mfd3e15a[m fixed email mark
+[33mc216058[m Merge branch 'task-fullstack'
+[33m5d8b43f[m seed moderator added&edited readme.md
+[33m0091cb7[m Merge branch 'task-mongodb'
+[33m5c8f2a9[m[33m ([m[1;31morigin/task-mongodb[m[33m, [m[1;32mtask-mongodb[m[33m)[m add search queries mongo db aggregate
+[33m1ef5dca[m add  .node_modules/ in .gitignore
+[33m735067e[m delete some comments
+[33m10945d3[m change after marge bransh
+[33m6907160[m Merge branch 'task-fullstack'
+[33m81908cb[m Merge branch 'task-postrges'
+[33m6298408[m[33m ([m[1;31morigin/task-postgres[m[33m, [m[1;32mtask-postgres[m[33m)[m add cashback&creator sql request
+[33m10f9a28[m[33m ([m[1;31morigin/task-node[m[33m, [m[1;32mtask-node[m[33m)[m changed logger with getCurrentLogFilePath
+[33m3725a6b[m[33m ([m[1;31morigin/task-react-button[m[33m, [m[1;32mtask-react-button[m[33m)[m changed ButtonGruop component
+[33ma6cbcec[m add arrow
+[33m6835cc4[m fixed some styles
+[33m18e79c7[m add pagination styles
+[33m202863d[m add logics pagination for moderatorOffers
+[33m0c83e9b[m changed approveOfferByModerator with User email for sender
+[33m685f353[m add moderatorMailer&sendEmail with nodemailer
+[33md602309[m install nodemailer
+[33m90358ab[m changed getContestById for moderatorStatus
+[33m2ea2094[m changed layout&styles
+[33m083e5fc[m add start styles for moderatorPage
+[33mee2ee5c[m add moderatorSlice&provide requests via moderatorSlice
+[33ma4ed0ad[m fixed problems status
+[33m6af6b07[m add role moderator
+[33m3f76e3a[m add path in moderatorPage
+[33mcd2bd54[m add changes for front - moderatorPage&path
+[33m8585ce1[m fixed problems
+[33m6951e51[m add getAllOffersForModerator&getApprovedOffersForCustomer& path
+[33m4ffe026[m add offerContest&modeeratorStatus&path
+[33md2e4116[m add moderatorController&path router
+[33m01a91fd[m add role moderator, chek onlyForModerator, CONSTANTS
+[33mc4c21a1[m add name-icon.svg&style
+[33mea0b21f[m add style for ButtonGruop
+[33m75c54a7[m add initial changes ButtonGruop module& structure page
+[33m2c4087c[m add some styles
+[33m9390fd5[m changed function for percentage
+[33m99570a9[m delete onComplete
+[33mb53da6e[m add style for EventTimeBar
+[33m935f49e[m add link to events&home
+[33m718e735[m change function calculateTimeLeft from ms to hours&minutes
+[33ma3efca7[m add rc-progress in client&EventTimeBar component
+[33m2ed939d[m add npm i rc-progress
+[33mc2a34d3[m add styles for EventForm
+[33m1641d89[m created event page with useState&useEffect, event form, add route path in app.js
+[33mf3089e5[m fixed blackList in chatSQL
+[33mbfe46c1[m chahge logic click chat with handleClickOutside
+[33mdec1bec[m fixed groupMessagesByChatId from chatId to conversationId&groupMessagesByChatId to groupMessagesByConversationId
+[33m056d23f[m add fild 'chats' in model Catalog&corrected CatalogConversations
+[33m2f9d2e7[m add logger&node-cron
+[33me302809[m changed favoriteChat with updatedFavoriteList
+[33m96b1491[m remove chatData
+[33mb3b99eb[m replased update method with findOne
+[33m586bd74[m fixed chat
+[33me3c07c0[m request count users by role
+[33maafd752[m initial commit
+[33me3a26a7[m[33m ([m[1;32mdev-refactoring[m[33m)[m Initial commit
