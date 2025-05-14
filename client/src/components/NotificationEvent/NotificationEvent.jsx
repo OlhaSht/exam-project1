@@ -5,8 +5,10 @@ import CONSTANTS from '../../constants';
 
 const NotificationEvent = ({role}) => {
   useEffect(() => {
+    console.log(role); 
+    if (!role) return;
 
-    if (role!== CONSTANTS.CUSTOMER) return;
+    if (role !== CONSTANTS.CUSTOMER) return;
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -50,18 +52,17 @@ const NotificationEvent = ({role}) => {
     }, 60000); 
 
     return () => clearInterval(interval);
-  }, []);
+  }, [role]);
 
   return null;
 };
 
-const mapDispatchToProps = (state) =>({
-  role: state.userState?.data?.role,
+const mapStateToProps = (state) => ({
+  role: state.userStore?.data?.role ?? null,
 });
 
-export default connect(mapDispatchToProps)(NotificationEvent);
+export default connect(mapStateToProps)(NotificationEvent);
 
-// export default NotificationEvent;
 
 
 
