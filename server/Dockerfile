@@ -24,5 +24,7 @@ COPY . .
 
 EXPOSE 5000
 
-CMD sequelize db:migrate && sequelize db:seed:all && npm start
-# CMD npm start
+CMD ["sh", "-c", "sequelize db:migrate && sequelize db:seed:all && npm start"]
+
+# CMD sequelize db:migrate && sequelize db:seed:all && npm start
+# # CMD npm start

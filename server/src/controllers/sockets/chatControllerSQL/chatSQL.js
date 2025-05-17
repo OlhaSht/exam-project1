@@ -1,4 +1,4 @@
-// const db = require ('../../../models');
+
 const { Message, Conversation, Users } = require('../../../models');
 const controller = require('../../../socketInit');
 const { Op } = require('sequelize');
@@ -139,26 +139,6 @@ module.exports.addMessage = async (req, res, next) => {
   
   //---------------------------------------------------------------------
 
-  // module.exports.blackList = async (req, res, next) => {
-  //   const index = req.body.participants.indexOf(req.tokenData.userId);
-  //   try {
-  //     const chat = await Conversation.update(               //заменила update на findOne    
-  //       { [`blackList[${index}]`]: req.body.blackListFlag },
-  //       {
-  //         where: { participants: req.body.participants },
-  //         returning: true,
-  //       }
-  //     );
-      
-  //     const interlocutorId = req.body.participants.find(p => p !== req.tokenData.userId);
-  //     controller.getChatController().emitChangeBlockStatus(interlocutorId, chat);
-  
-  //     await res.send(chat);
-  //   } catch (err) {
-  //     res.send(err);
-  //   }
-  // };
-
   module.exports.blackList = async (req, res, next) => {
     try {
       const sortedParticipants = [...req.body.participants].sort((a, b) => a - b);
@@ -186,43 +166,6 @@ module.exports.addMessage = async (req, res, next) => {
       res.status(500).send({ message: 'Server error', error: err });
     }
   };
-
-  // module.exports.favoriteChat = async (req, res, next) => {
-  //   try {
-  //     // Убедимся, что участники отсортированы по возрастанию для согласованности
-  //     const sortedParticipants = req.body.participants.sort((a, b) => a - b);
-  //     const userId = req.tokenData.userId;
-  
-  //     // Найдем индекс пользователя в массиве `favoriteList`, где его ID соответствует текущему `userId`
-  //     const conversation = await Conversation.findOne({
-  //       where: { participants: sortedParticipants },
-  //     });
-  //     console.log('....',conversation )
-  
-  //     if (!conversation) {
-  //       return res.status(404).send({ message: 'Conversation not found' });
-  //     }
-  
-  //     const index = conversation.participants.findIndex(
-  //       (participant) => participant === userId
-  //     );
-  
-  //     if (index === -1) {
-  //       return res.status(400).send({ message: 'User is not a participant in the conversation' });
-  //     }
-  
-  //     // Обновляем нужный элемент в массиве `favoriteList` по найденному индексу
-  //     conversation.favoriteList[index] = req.body.favoriteFlag;
-  
-  //     // Сохраняем обновленную беседу
-  //     await conversation.save();
-  
-  //     await res.send(conversation);
-  //   } catch (err) {
-  //     console.error('Error updating conversation:', err);
-  //     res.status(500).send({ message: 'Server error', error: err });
-  //   }
-  // };
   
   module.exports.favoriteChat = async (req, res, next) => {
     try {

@@ -1,22 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
     const Conversation = sequelize.define('Conversation', {
       participants: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER), // Массив чисел для участников
+        type: DataTypes.ARRAY(DataTypes.INTEGER), 
         allowNull: false,
       },
       blackList: {
-        type: DataTypes.ARRAY(DataTypes.BOOLEAN), // Массив булевых значений для черного списка
+        type: DataTypes.ARRAY(DataTypes.BOOLEAN), 
         allowNull: false,
       },
       favoriteList: {
-        type: DataTypes.ARRAY(DataTypes.BOOLEAN), // Массив булевых значений для избранного списка
+        type: DataTypes.ARRAY(DataTypes.BOOLEAN), 
         allowNull: false,
       },
     }, {
-      timestamps: true, // Автоматически добавляем createdAt и updatedAt
+      timestamps: true, 
     });
-  
-    // Связь с моделью Message
+    
     Conversation.associate = (models) => {
       Conversation.hasMany(models.Message, { foreignKey: 'conversationId' });
     };

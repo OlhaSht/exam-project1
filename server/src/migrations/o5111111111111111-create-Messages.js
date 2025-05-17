@@ -10,11 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Users', // Связываем с таблицей Users
+          model: 'Users', 
           key: 'id',
         },
-        onUpdate: 'CASCADE', // Обновляем связанные данные
-        onDelete: 'CASCADE', // Удаляем связанные сообщения, если пользователь удалён
+        onUpdate: 'CASCADE', 
+        onDelete: 'CASCADE', 
       },
       body: {
         type: Sequelize.STRING,

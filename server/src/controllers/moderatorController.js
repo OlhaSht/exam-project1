@@ -2,34 +2,6 @@ const db = require('../models');
 const ServerError =require('../errors/ServerError');
 const sendModeratorDecision = require('../utils/moderatorMailer'); 
 
-// module.exports.getAllOffersForModerator = async (req, res, next) => {
-//   try {
-//     const allOffers = await db.Offers.findAll({
-//       attributes: { exclude: ['userId', 'contestId', 'status'] },
-//       include: [
-//         {
-//           model: db.Users,
-//           required: true,
-//           attributes: {
-//             exclude: ['password', 'role', 'balance', 'accessToken'],
-//           },
-//         },
-//         {
-//           model: db.Ratings,
-//           required: false,
-//           attributes: { exclude: ['userId', 'offerId'] },
-//         },
-//       ],
-//     });
-
-//     res.send(allOffers);
-//   } catch (error) {
-//     console.error(error);
-//     next(new ServerError('Failed to retrieve offers for moderator.'));
-//   }
-// };
-
-
 module.exports.getAllOffersForModerator = async (req, res, next) => {
   const { page = 1, limit = 5 } = req.query; 
 
@@ -71,26 +43,7 @@ module.exports.getAllOffersForModerator = async (req, res, next) => {
   }
 };
 
-
-
 //-----------------------------------------------------------------------------------------------------------
-
-// module.exports.approveOfferByModerator = async (req, res, next) => {
-//   try {
-//     const offer = await db.Offers.findByPk(req.params.id);
-//     if (!offer) {
-//       return res.status(404).send({ message: 'Offer not found' });
-//     }
-
-//     offer.moderatorStatus = 'approved';
-//     await offer.save();
-
-//     res.send({ message: 'Offer approved by moderator' });
-//   } catch (error) {
-//     console.error(error);
-//     next(new ServerError('Failed to approve the offer.'));
-//   }
-// };
 
 module.exports.approveOfferByModerator = async (req, res, next) => {
   try {

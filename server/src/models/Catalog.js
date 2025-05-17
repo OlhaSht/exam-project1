@@ -9,20 +9,18 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       chats: {
-        type: DataTypes.VIRTUAL, // Используем VIRTUAL, так как данные будут получены через ассоциацию
+        type: DataTypes.VIRTUAL, 
         get() {
-          // Получаем чаты через ассоциацию
           return this.getConversations();
         },
       },
     }, {
-      timestamps: false, // Отключаем timestamps для этой модели
+      timestamps: false, 
     });
-  
-    // Связь с моделью Conversation
+    
     Catalog.associate = (models) => {
       Catalog.belongsToMany(models.Conversation, {
-        through: 'CatalogConversations', // Дополнительная таблица для связи
+        through: 'CatalogConversations', 
         foreignKey: 'catalogId',
         otherKey: 'conversationId',
       });

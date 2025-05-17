@@ -57,8 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
   console.log('User model:', User);
-
-  // Добавляем связь с моделью Message
+  
   User.associate = function (models) {
     User.hasMany(models.Message, { foreignKey: 'sender', sourceKey: 'id' });
   };

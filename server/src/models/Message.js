@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Users', // Указываем таблицу Users
+        model: 'Users', 
         key: 'id',
       },
     },
@@ -16,15 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Conversations', // Указываем таблицу Conversations
+        model: 'Conversations', 
         key: 'id',
       },
     },
   }, {
     timestamps: true,
   });
-
-  // Связываем сообщения с пользователями через поле sender
+  
     Message.associate = (models) => {
     Message.belongsTo(models.Users, { foreignKey: 'sender' });
     Message.belongsTo(models.Conversation, { foreignKey: 'conversationId' });

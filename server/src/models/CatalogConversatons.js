@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    timestamps: false, // Можно отключить timestamps, если не нужно отслеживать время создания и обновления записей
-    tableName: 'CatalogConversations', // Указываем имя таблицы, чтобы соответствовать названию в миграции
+    timestamps: false, 
+    tableName: 'CatalogConversations', 
   });
 
   return CatalogConversations;
