@@ -1,14 +1,33 @@
+# .idea/
+# .vscode/
+# node_modules/
+
+# ./client/node_modules/
+# ./server/node_modules/
+# ./server/uploadFiles
+# ./server/upload
+# ./server/public
+
+# ./server/public/images
+# .server/public/images
+# **server/public/*
+# *server/public/*
+
+
+# IDE config
 .idea/
 .vscode/
-.node_modules/
 
-./client/node_modules/
-./server/node_modules/
-./server/uploadFiles
-./server/upload
-./server/public
+# Node modules
+node_modules/
+client/node_modules/
+server/node_modules/
 
-./server/public/images
-.server/public/images
-**server/public/*
-*server/public/*
+# Upload folders 
+server/uploadFiles/
+server/upload/
+
+# Public uploads 
+server/public/images/
+server/public/
+
