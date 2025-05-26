@@ -11,6 +11,7 @@ const catalogSQL = require('../controllers/sockets/chatControllerSQL/catalogSQL'
 const upload = require('../utils/fileUpload');
 const moderatorController = require('../controllers/moderatorController');
 const customerOfferController = require('../controllers/customerOfferController');
+const financeController = require('../controllers/financeController');
 const router = express.Router();
 
 router.post(
@@ -39,7 +40,7 @@ router.post(
   upload.uploadContestFiles,
   basicMiddlewares.parseBody,
   validators.validateContestCreation,
-  userController.payment,
+  financeController.payment,
 );
 
 router.post(
@@ -99,7 +100,7 @@ router.post(
   '/changeMark',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomer,
-  userController.changeMark,
+  financeController.changeMark,
 );
 
 router.post(
@@ -113,7 +114,8 @@ router.post(
   '/cashout',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
-  userController.cashout,
+  financeController.cashout,
+  // userController.cashout,
 );
 
 router.post(
