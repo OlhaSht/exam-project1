@@ -50,11 +50,25 @@ const reducers = {
 
 const extraReducers = builder => {
   builder.addCase(getContests.pending, pendingReducer);
+
   builder.addCase(getContests.fulfilled, (state, { payload }) => {
     state.isFetching = false;
-    state.contests = [...state.contests, ...payload.contests];
+    const merged = [...state.contests, ...payload.contests];
+    const uniqueContestsMap = new Map();
+    for (const contest of merged) {
+      uniqueContestsMap.set(contest.id, contest); 
+    }
+    state.contests = Array.from(uniqueContestsMap.values());
     state.haveMore = payload.haveMore;
   });
+  
+
+  // builder.addCase(getContests.fulfilled, (state, { payload }) => {
+  //   state.isFetching = false;
+  //   state.contests = [...state.contests, ...payload.contests];
+  //   state.haveMore = payload.haveMore;
+  // });
+
   builder.addCase(getContests.rejected, (state, { payload }) => {
     state.isFetching = false;
     state.error = payload;
