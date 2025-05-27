@@ -1,31 +1,26 @@
-
-const { Message, Conversation, Users } = require('../../../models');
-const controller = require('../../../socketInit');
+const { Message, Conversation, Users } = require('../../models');
+const controller = require('../../socketInit');
 const { Op } = require('sequelize');
-const db = require('../../../models');
+const db = require('../../models');
 
 
 
 module.exports.addMessage = async (req, res, next) => {
     const participants = [req.tokenData.userId, req.body.recipient].sort();
     try {
-      // Найдем или создадим новую беседу
       const [newConversation, created] = await Conversation.findOrCreate({
         where: { participants },
         defaults: { blackList: [false, false], favoriteList: [false, false] },
       });
-  
-      // Создадим новое сообщение
+      
       const message = await Message.create({
         sender: req.tokenData.userId,
         body: req.body.messageBody,
         conversationId: newConversation.id,
       });
         console.log('message =============================')
-      // Найдем собеседника
       const interlocutorId = participants.find(p => p !== req.tokenData.userId);
-  
-      // Эмитируем событие (использование этого метода зависит от вашего websocket)
+      
       controller.getChatController().emitNewMessage(interlocutorId, {
         message,
         preview: {
@@ -62,18 +57,16 @@ module.exports.addMessage = async (req, res, next) => {
   module.exports.getChat = async (req, res, next) => {
     const participants = [req.tokenData.userId, req.body.interlocutorId].sort();
     try {
-      // Получаем все сообщения в рамках беседы
       const messages = await Message.findAll({
         include: [{
           model: Conversation,
           where: { participants },
-          attributes: [], // Не нужно включать данные беседы
+          attributes: [], 
         }],
         order: [['createdAt', 'ASC']],
         attributes: ['id', 'sender', 'body', 'conversationId', 'createdAt', 'updatedAt'],
       });
-  
-      // Получаем данные собеседника
+      
       const interlocutor = await Users.findOne({
         where: { id: req.body.interlocutorId },
         attributes: ['id', 'firstName', 'lastName', 'displayName', 'avatar'],
@@ -179,15 +172,14 @@ module.exports.addMessage = async (req, res, next) => {
       if (!conversation) {
         return res.status(404).send({ message: 'Conversation not found' });
       }
-  
-      // Обновляем favoriteList вручную, чтобы избежать проблем с индексами
+      
       const updatedFavoriteList = [...conversation.favoriteList];
       // console.log('----', updatedFavoriteList)
       // console.log("Favorite Flag://///", req.body.favoriteFlag);
       updatedFavoriteList[index] = req.body.favoriteFlag;
   
       conversation.favoriteList = updatedFavoriteList;
-      await conversation.save(); // сохраняем изменения
+      await conversation.save(); 
   
       res.send(conversation);
     } catch (err) {

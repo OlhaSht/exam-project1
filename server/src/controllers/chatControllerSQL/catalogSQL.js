@@ -1,5 +1,4 @@
-
-const { Catalog, Message } = require("../../../models")
+const { Catalog, Message } = require("../../models")
 
 module.exports.createCatalog = async (req, res, next) => {
     try {
@@ -45,7 +44,6 @@ module.exports.createCatalog = async (req, res, next) => {
       if (!catalog) {
         return res.status(404).send({ message: 'Catalog not found' });
       }
-      // Добавляем chatId, если его нет
       const updatedChats = [...new Set([...catalog.chats, req.body.chatId])];
       await catalog.update({ chats: updatedChats });
       res.send(catalog);
@@ -62,7 +60,6 @@ module.exports.createCatalog = async (req, res, next) => {
       if (!catalog) {
         return res.status(404).send({ message: 'Catalog not found' });
       }
-      // Убираем chatId
       const updatedChats = catalog.chats.filter(chatId => chatId !== req.body.chatId);
       await catalog.update({ chats: updatedChats });
       res.send(catalog);

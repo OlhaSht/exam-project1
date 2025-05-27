@@ -6,12 +6,12 @@ const contestController = require('../controllers/contestController');
 const checkToken = require('../middlewares/checkToken');
 const validators = require('../middlewares/validators');
 // const chatController = require('../controllers/chatController');
-const chatSQL = require('../controllers/sockets/chatControllerSQL/chatSQL');
-const catalogSQL = require('../controllers/sockets/chatControllerSQL/catalogSQL');
+const chatSQL = require('../controllers/chatControllerSQL/chatSQL');
+const catalogSQL = require('../controllers/chatControllerSQL/catalogSQL');
 const upload = require('../utils/fileUpload');
 const moderatorController = require('../controllers/moderatorController');
 const customerOfferController = require('../controllers/customerOfferController');
-const financeController = require('../controllers/financeController');
+const financeController = require('../controllers/financeController')
 const router = express.Router();
 
 router.post(
