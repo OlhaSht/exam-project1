@@ -11,7 +11,8 @@ const catalogSQL = require('../controllers/chatControllerSQL/catalogSQL');
 const upload = require('../utils/fileUpload');
 const moderatorController = require('../controllers/moderatorController');
 const customerOfferController = require('../controllers/customerOfferController');
-const financeController = require('../controllers/financeController')
+const financeController = require('../controllers/financeController');
+const offerController = require('../controllers/offerController');
 const router = express.Router();
 
 router.post(
@@ -86,14 +87,14 @@ router.post(
   checkToken.checkToken,
   upload.uploadLogoFiles,
   basicMiddlewares.canSendOffer,
-  contestController.setNewOffer,
+  offerController.setNewOffer,
 );
 
 router.post(
   '/setOfferStatus',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomerWhoCreateContest,
-  contestController.setOfferStatus,
+  offerController.setOfferStatus,
 );
 
 router.post(
