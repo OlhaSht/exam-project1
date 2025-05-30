@@ -44,7 +44,7 @@ router.post(
   financeController.payment,
 );
 
-router.post(
+router.get(
   '/getCustomersContests',
   checkToken.checkToken,
   contestController.getCustomersContests,
@@ -57,16 +57,17 @@ router.get(
   contestController.getContestById,
 );
 
-router.post(
+router.get(
   '/getAllContests',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
   contestController.getContests,
 );
 
-router.post(
+router.get(
   '/getUser',
   checkToken.checkAuth,
+  userController.getUser,
 );
 
 router.get(
@@ -75,7 +76,7 @@ router.get(
   contestController.downloadFile,
 );
 
-router.post(
+router.put(
   '/updateContest',
   checkToken.checkToken,
   upload.updateContestFile,
@@ -90,21 +91,21 @@ router.post(
   offerController.setNewOffer,
 );
 
-router.post(
+router.patch(
   '/setOfferStatus',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomerWhoCreateContest,
   offerController.setOfferStatus,
 );
 
-router.post(
+router.put(
   '/changeMark',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomer,
   financeController.changeMark,
 );
 
-router.post(
+router.put(
   '/updateUser',
   checkToken.checkToken,
   upload.uploadAvatar,
@@ -126,28 +127,28 @@ router.post(
   // chatController.addMessage,
 );
 
-router.post(
+router.get(
   '/getChat',
   checkToken.checkToken,
   chatSQL.getChat,
   // chatController.getChat,
 );
 
-router.post(
+router.get(
   '/getPreview',
   checkToken.checkToken,
   chatSQL.getPreview,
   // chatController.getPreview,
 );
 
-router.post(
+router.put(
   '/blackList',
   checkToken.checkToken,
   chatSQL.blackList,
   // chatController.blackList,
 );
 
-router.post(
+router.put(
   '/favorite',
   checkToken.checkToken,
   chatSQL.favoriteChat,
@@ -161,7 +162,7 @@ router.post(
   // chatController.createCatalog,
 );
 
-router.post(
+router.put(
   '/updateNameCatalog',
   checkToken.checkToken,
   catalogSQL.updateNameCatalog,
@@ -175,21 +176,21 @@ router.post(
   // chatController.addNewChatToCatalog,
 );
 
-router.post(
+router.delete(
   '/removeChatFromCatalog',
   checkToken.checkToken,
   catalogSQL.removeChatFromCatalog,
   // chatController.removeChatFromCatalog,
 );
 
-router.post(
+router.delete(
   '/deleteCatalog',
   checkToken.checkToken,
   catalogSQL.deleteCatalog,
   // chatController.deleteCatalog,
 );
 
-router.post(
+router.get(
   '/getCatalogs',
   checkToken.checkToken,
   catalogSQL.getCatalogs,
