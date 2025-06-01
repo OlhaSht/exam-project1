@@ -67,7 +67,7 @@ router.get(
 router.get(
   '/getUser',
   checkToken.checkAuth,
-  userController.getUser,
+  // userController.getUser,
 );
 
 router.get(

@@ -53,12 +53,17 @@ const getPreviewChatExtraReducers = createExtraReducers({
 //---------- getDialogMessages
 export const getDialogMessages = decorateAsyncThunk({
   key: `${CHAT_SLICE_NAME}/getDialogMessages`,
-  thunk: async payload => {
-    const { data } = await restController.getDialog(payload);
-    console.log('=====>>>>', data);
-    console.log('////////////', payload);
+  thunk: async ({ interlocutorId }) => {
+    const { data } = await restController.getDialog(interlocutorId);
     return data;
-  },
+  }
+  
+  // thunk: async payload => {
+  //   const { data } = await restController.getDialog(payload);
+  //   console.log('=====>>>>', data);
+  //   console.log('////////////', payload);
+  //   return data;
+  // },
 });
 
 const getDialogMessagesExtraReducers = createExtraReducers({

@@ -50,15 +50,18 @@ module.exports.registration = async (req, res, next) => {
   }
 };
 
-module.exports.getUser = async (req, res, next) => {
-  try {
-    console.log('Token data:', req.tokenData);
-    const user = req.tokenData;
-    res.status(200).send(user);
-  } catch (err) {
-    next(err);
-  }
-};
+// module.exports.getUser = async (req, res, next) => {
+//   try {
+//     console.log('Token data:', req.tokenData);
+//     const user = req.tokenData;
+//     res.status(200).send(user);
+//   } catch (err) {
+//     if(err.res.status === 500){
+//       return null;
+//     }
+//     next(err);
+//   }
+// };
 
 module.exports.updateUser = async (req, res, next) => {
   try {

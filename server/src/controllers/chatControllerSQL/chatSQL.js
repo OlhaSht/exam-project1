@@ -55,7 +55,8 @@ module.exports.addMessage = async (req, res, next) => {
   //-----------------------------------------------------------------------------------
 
   module.exports.getChat = async (req, res, next) => {
-    const participants = [req.tokenData.userId, req.body.interlocutorId].sort();
+    const interlocutorId = Number(req.query.interlocutorId);
+    const participants = [req.tokenData.userId, interlocutorId].sort();
     try {
       const messages = await Message.findAll({
         include: [{
@@ -68,7 +69,7 @@ module.exports.addMessage = async (req, res, next) => {
       });
       
       const interlocutor = await Users.findOne({
-        where: { id: req.body.interlocutorId },
+        where: { id: interlocutorId },
         attributes: ['id', 'firstName', 'lastName', 'displayName', 'avatar'],
       });
   
