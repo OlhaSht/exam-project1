@@ -12,9 +12,13 @@ export const changeMark = data => http.put('changeMark', data);
 // CONTESTS
 export const updateContest = data => http.put('updateContest', data);
 export const dataForContest = data => http.post('dataForContest', data);
-export const getCustomersContests = data => http.get('getCustomersContests',
-  { limit: data.limit, offset: data.offset },
-  {headers: {status: data.contestStatus,},});
+export const getCustomersContests = data => http.get('getCustomersContests',{
+  params:{
+    limit: data.limit,
+    offset: data.offset,
+    status: data.contestStatus,
+    }
+  });
 export const getActiveContests = ({
     offset,
     limit,

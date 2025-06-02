@@ -122,9 +122,9 @@ module.exports.updateContest = async (req, res, next) => {
 
 module.exports.getCustomersContests = (req, res, next) => {
   db.Contests.findAll({
-    where: { status: req.headers.status, userId: req.tokenData.userId },
-    limit: req.body.limit,
-    offset: req.body.offset ? req.body.offset : 0,
+    where: { status: req.query.status, userId: req.tokenData.userId },
+    limit: Number(req.query.limit),
+    offset: req.query.offset ? Number(req.query.offset) : 0,
     order: [['id', 'DESC']],
     include: [
       {
