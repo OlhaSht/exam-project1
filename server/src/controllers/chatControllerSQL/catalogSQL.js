@@ -74,7 +74,7 @@ module.exports.createCatalog = async (req, res, next) => {
     try {
       const result = await Catalog.destroy({
         where: {
-          id: req.body.catalogId,
+          id: req.query.catalogId,
           userId: req.tokenData.userId,
         },
       });

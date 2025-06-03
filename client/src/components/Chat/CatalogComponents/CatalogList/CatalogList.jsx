@@ -13,8 +13,9 @@ const CatalogList = (props) => {
     event.stopPropagation();
   };
 
-  const deleteCatalog = (event, catalogId) => {
-    props.deleteCatalog({ catalogId });
+  const handleDeleteCatalog = (event, catalogId) => {
+    console.log('Удаляем каталог с id:', catalogId); 
+    props.deleteCatalog(catalogId);
     event.stopPropagation();
   };
 
@@ -25,8 +26,8 @@ const CatalogList = (props) => {
       elementList.push(
         <Catalog
           catalog={catalog}
-          key={catalog._id}
-          deleteCatalog={deleteCatalog}
+          key={catalog.id}
+          deleteCatalog={handleDeleteCatalog}
           goToCatalog={goToCatalog}
         />
       );
@@ -43,7 +44,7 @@ const CatalogList = (props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   changeShowModeCatalog: (data) => dispatch(changeShowModeCatalog(data)),
-  deleteCatalog: (data) => dispatch(deleteCatalog(data)),
+  deleteCatalog: (catalogId) => dispatch(deleteCatalog(catalogId)),
 });
 
 export default connect(null, mapDispatchToProps)(CatalogList);
