@@ -1,17 +1,3 @@
-// const express = require('express');
-
-// const authRouter = require("./authRouter.js");
-// const catalogRouter = require("./catalogRouter.js");
-// const chatRouter = require('./chatRouter.js');
-// const contestRouter = require('./contestRouter');
-// const financeRouter = require('./financeRouter.js');
-// const moderatorRouter = require('./moderatorRouter');
-// const offerRouter = require('./offerRouter.js');
-// const userRouter = require('./userRouter');
-// const router = express.Router();
-
-// module.exports = router;
-
 const express = require('express');
 
 const authRouter = require('./authRouter');
