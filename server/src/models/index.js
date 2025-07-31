@@ -81,7 +81,11 @@ db['CatalogConversations'].belongsTo(db['Catalog'],
   { foreignKey: 'catalogId' });
 db['CatalogConversations'].belongsTo(db['Conversation'],
    { foreignKey: 'conversationId' });
-  
+
+db['RefreshToken'].belongsTo(db['Users'], 
+  { foreignKey: 'userId', as: 'user',});
+db['Users'].hasMany(db['RefreshToken'], 
+  {foreignKey: 'userId',});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

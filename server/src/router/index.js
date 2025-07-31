@@ -7,7 +7,7 @@ const contestRouter = require('./contestRouter');
 const financeRouter = require('./financeRouter');
 const moderatorRouter = require('./moderatorRouter');
 const offerRouter = require('./offerRouter');
-const userRouter = require('./userRouter');
+// const userRouter = require('./userRouter');
 
 const router = express.Router();
 
@@ -18,6 +18,6 @@ router.use('/contest', contestRouter);
 router.use('/finance', financeRouter);
 router.use('/moderator', moderatorRouter);
 router.use('/offer', offerRouter);
-router.use('/user', userRouter);
+// router.use('/user', userRouter);
 
 module.exports = router;

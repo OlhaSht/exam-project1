@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const { SALT_ROUNDS } = require('../constants');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('Users', {
     id: {
@@ -44,22 +47,36 @@ module.exports = (sequelize, DataTypes) => {
         min: 0,
       },
     },
-    accessToken: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
     rating: {
       type: DataTypes.FLOAT,
       allowNull: false,
       defaultValue: 0,
     },
-  }, {
-    timestamps: false,
-  });
-  console.log('User model:', User);
-  
+    }, {
+        timestamps: false,
+    });
+    console.log('User model:', User);
+
   User.associate = function (models) {
     User.hasMany(models.Message, { foreignKey: 'sender', sourceKey: 'id' });
+  };
+ 
+  User.beforeCreate(async (user, options) => {
+    if (user.password) {
+      const hashedPass = await bcrypt.hash(user.password, SALT_ROUNDS);
+      user.password = hashedPass;
+    }
+  });
+
+  User.beforeUpdate(async (user, options) => {
+    if (user.changed('password')) {
+      const hashedPass = await bcrypt.hash(user.password, SALT_ROUNDS);
+      user.password = hashedPass;
+    }
+  });
+ 
+  User.prototype.comparePassword = async function (password) {
+    return bcrypt.compare(password, this.password);
   };
 
   return User;

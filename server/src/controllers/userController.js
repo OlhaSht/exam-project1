@@ -3,6 +3,7 @@ const CONSTANTS = require('../constants');
 const NotUniqueEmail = require('../errors/NotUniqueEmail');
 const userQueries = require('./queries/userQueries');
 
+
 module.exports.login = async (req, res, next) => {
   try {
     const foundUser = await userQueries.findUser({ email: req.body.email });
@@ -24,10 +25,11 @@ module.exports.login = async (req, res, next) => {
     next(err);
   }
 };
+
 module.exports.registration = async (req, res, next) => {
   try {
-    const newUser = await userQueries.userCreation(
-      Object.assign(req.body, { password: req.hashPass }));
+    const newUser = await userQueries.userCreation(req.body);
+    
     const accessToken = jwt.sign({
       firstName: newUser.firstName,
       userId: newUser.id,
@@ -39,16 +41,19 @@ module.exports.registration = async (req, res, next) => {
       email: newUser.email,
       rating: newUser.rating,
     }, CONSTANTS.JWT_SECRET, { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME });
+    
     await userQueries.updateUser({ accessToken }, newUser.id);
-    res.send({ token: accessToken });
+    return res.status(201).send({ token: accessToken });
+
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
-      next(new NotUniqueEmail());
-    } else {
-      next(err);
+      return next(new NotUniqueEmail());
     }
+    return next(err);
   }
 };
+
+
 
 // module.exports.getUser = async (req, res, next) => {
 //   try {

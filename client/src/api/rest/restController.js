@@ -5,7 +5,7 @@ export const registerRequest = data => http.post('/auth/registration', data);
 export const loginRequest = data => http.post('/auth/login', data);
 
 // USER
-export const getUser = data => http.get('/user/getUser', data);
+ export const getUser = data => http.get('/user/getUser', data);
 export const updateUser = data => http.put('/user/updateUser', data);
 
 // CONTESTS

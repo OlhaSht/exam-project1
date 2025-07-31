@@ -18,12 +18,33 @@ const initialState = {
 export const checkAuth = decorateAsyncThunk({
   key: `${AUTH_SLICE_NAME}/checkAuth`,
   thunk: async ({ data: authInfo, history, authMode }) => {
-    authMode === CONSTANTS.AUTH_MODE.LOGIN
-      ? await restController.loginRequest(authInfo)
-      : await restController.registerRequest(authInfo);
+    let response;
+
+    if (authMode === CONSTANTS.AUTH_MODE.LOGIN) {
+      response = await restController.loginRequest(authInfo);
+    } else {
+      response = await restController.registerRequest(authInfo);
+    }
+    
+    const token = response?.data?.token || response?.data?.tokenPair?.access;
+
+    if (token) {
+      window.localStorage.setItem(CONSTANTS.ACCESS_TOKEN, token);
+    }
+    
     history.replace('/');
   },
 });
+
+// export const checkAuth = decorateAsyncThunk({
+//   key: `${AUTH_SLICE_NAME}/checkAuth`,
+//   thunk: async ({ data: authInfo, history, authMode }) => {
+//     authMode === CONSTANTS.AUTH_MODE.LOGIN
+//       ? await restController.loginRequest(authInfo)
+//       : await restController.registerRequest(authInfo);
+//     history.replace('/');
+//   },
+// });
 
 const reducers = {
   clearAuthError: state => {

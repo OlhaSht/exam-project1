@@ -22,6 +22,7 @@ module.exports.findUser = async (predicate, transaction) => {
 };
 
 module.exports.userCreation = async (data) => {
+  console.log('Password before create:', data.password);
   const newUser = await db.Users.create(data);
   if (!newUser) {
     throw new ServerError('server error on user creation');
