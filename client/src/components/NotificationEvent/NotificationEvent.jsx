@@ -20,7 +20,6 @@ const NotificationEvent = ({role}) => {
       try {
         tasks = tasksRaw ? JSON.parse(tasksRaw) : [];
       } catch (err) {
-        console.warn("⚠️ Ошибка чтения tasks из localStorage", err);
         return;
       }
 

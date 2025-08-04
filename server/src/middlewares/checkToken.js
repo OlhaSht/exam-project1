@@ -11,7 +11,17 @@ module.exports.checkAuth = async (req, res, next) => {
   try {
     const tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
     const foundUser = await userQueries.findUser({ id: tokenData.userId });
-    res.send({
+    // res.send({
+    //   firstName: foundUser.firstName,
+    //   lastName: foundUser.lastName,
+    //   role: foundUser.role,
+    //   id: foundUser.id,
+    //   avatar: foundUser.avatar,
+    //   displayName: foundUser.displayName,
+    //   balance: foundUser.balance,
+    //   email: foundUser.email,
+    // });
+        req.tokenData = {
       firstName: foundUser.firstName,
       lastName: foundUser.lastName,
       role: foundUser.role,
@@ -20,7 +30,8 @@ module.exports.checkAuth = async (req, res, next) => {
       displayName: foundUser.displayName,
       balance: foundUser.balance,
       email: foundUser.email,
-    });
+    };
+      next();
   } catch (err) {
     next(new TokenError());
   }

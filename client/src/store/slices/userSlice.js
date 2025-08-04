@@ -16,12 +16,12 @@ export const getUser = createAsyncThunk(
   `${USER_SLICE_NAME}/getUser`,
   async (replace, { rejectWithValue }) => {
     try {
-      const { data } = await restController.getUser();
-      controller.subscribe(data.id);
+      const { user } = await restController.getUser();
+      controller.subscribe(user.id);
       if (replace) {
         replace('/');
       }
-      return data;
+      return user;
     } catch (err) {
       return rejectWithValue({
         data: err?.response?.data ?? 'Gateway Timeout',
