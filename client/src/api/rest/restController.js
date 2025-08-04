@@ -3,6 +3,7 @@ import http from '../interceptor';
 //  AUTH
 export const registerRequest = data => http.post('/auth/registration', data);
 export const loginRequest = data => http.post('/auth/login', data);
+export const refreshRequest = () => http.get('/auth/refresh', data);
 
 // USER
 export const getUser = data => http.get('/user/getUser', data);

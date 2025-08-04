@@ -50,19 +50,24 @@ module.exports.registration = async (req, res, next) => {
 };
 module.exports.refresh = async (req, res, next) => {
   try {
-    const {
-      body: { refreshToken } 
-    } = req 
-    const refreshTokenInstance = await RefreshToken.findOne({
-      where: {
-        value: refreshToken
-      }
-    })
-    if (!refreshTokenInstance) {
-      next(createHttpError(404, 'User token not found.'))
+    // const {body: { refreshToken } } = req 
+    const refreshToken = req.cookies?.refreshToken;
+    if (!refreshToken) {
+      return next(createHttpError(401, 'No refresh token found in cookies.'));
     }
-    const data = await AuthService.refreshSession(refreshTokenInstance)
-    res.status(200).send({ data })
+    const refreshTokenInstance = await RefreshToken.findOne({
+      where: {value: refreshToken}})
+    if (!refreshTokenInstance) {
+      next(createHttpError(404, 'Refresh token not found in DB.'))
+    }
+    const tokenPair = await AuthService.refreshSession(refreshTokenInstance)
+    res.cookie('refreshToken', tokenPair.refresh, {
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 дней
+    });
+    res.status(200).send(({ accessToken: tokenPair.accessToken }))
   } catch (error) {
     next(error)
   }

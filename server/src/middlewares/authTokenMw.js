@@ -19,7 +19,11 @@ module.exports.checkAccessToken = async (req, res, next) => {
 
 module.exports.checkRefreshToken = async (req, res, next) => {
   try {
-    const {body: {refreshToken}} = req;
+    // const {body: {refreshToken}} = req;
+    const refreshToken = req.cookies?.refreshToken;
+    if (!refreshToken) {
+      return res.status(401).send({ message: 'No refresh token provided' });
+    }
     req.tokenData = await JwtService.verifyRefreshToken(refreshToken);
     next();
   } catch (error) {

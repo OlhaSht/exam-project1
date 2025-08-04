@@ -1,4 +1,5 @@
 const http = require('http');
+const cookieParser = require('cookie-parser');
 // ============================
 require('dotenv').config();
 const express = require('express');
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/public', express.static('public'));
 app.use(router);
 app.use(handlerError);
+app.use(cookieParser());
 
 const server = http.createServer(app);
 server.listen(PORT, () =>  console.log(`Example app listening on port ${PORT}!`));
