@@ -2,6 +2,7 @@ const JwtService = require('./jwtService');
 const _ = require('lodash');
 
  const prepareUser = (user) => _.omit(user.get(), ['password']);
+ console.log('prepareUser?' === prepareUser)
 
 module.exports.createSession = async (user) => {
   const tokenPair = await JwtService.createTokenPair(user);

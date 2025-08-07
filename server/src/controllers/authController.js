@@ -15,6 +15,8 @@ module.exports.login = async (req, res, next) => {
       // return res.status(200).send({ data })
       res.cookie('refreshToken', data.refreshToken, {
         httpOnly: true,
+        secure: false,
+        path: '/', 
         // secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
         maxAge: 30 * 24 * 60 * 60 * 1000
@@ -36,6 +38,8 @@ module.exports.registration = async (req, res, next) => {
       // return res.status(200).send({ data })
       res.cookie('refreshToken', data.refreshToken, {
         httpOnly: true,
+        secure: false,
+        path: '/',
         // secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
         maxAge: 30 * 24 * 60 * 60 * 1000
@@ -58,16 +62,21 @@ module.exports.refresh = async (req, res, next) => {
     const refreshTokenInstance = await RefreshToken.findOne({
       where: {value: refreshToken}})
     if (!refreshTokenInstance) {
-      next(createHttpError(404, 'Refresh token not found in DB.'))
+      return next(createHttpError(404, 'Refresh token not found in DB.'))
     }
-    const tokenPair = await AuthService.refreshSession(refreshTokenInstance)
-    res.cookie('refreshToken', tokenPair.refresh, {
-      httpOnly: true,
+    const data = await AuthService.refreshSession(refreshTokenInstance)
+
+    res.cookie('refreshToken', data.tokenPair, {
+      httpOnly: false,
+      secure: false,
+      path: '/',
       // secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 дней
     });
-    res.status(200).send(({ accessToken: tokenPair.accessToken }))
+    
+    res.status(200).send({ accessToken: data.accessToken });
+    console.log('tokenPair:::::::::::::::::', data.tokenPair);
   } catch (error) {
     next(error)
   }

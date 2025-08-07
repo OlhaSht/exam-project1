@@ -43,6 +43,21 @@ export const checkAuth = decorateAsyncThunk({
 //   },
 // });
 
+export const refreshToken = decorateAsyncThunk({
+  key: `${AUTH_SLICE_NAME}/refreshToken`,
+  thunk: async () => {
+    const response = await restController.refreshRequest(); 
+    const accessToken = response?.data?.accessToken;
+
+    if (accessToken) {
+      window.localStorage.setItem(CONSTANTS.ACCESS_TOKEN, accessToken);
+    }
+
+    return accessToken;
+  },
+});
+
+
 const reducers = {
   clearAuthError: state => {
     state.error = null;
@@ -54,6 +69,10 @@ const extraReducers = builder => {
   builder.addCase(checkAuth.pending, pendingReducer);
   builder.addCase(checkAuth.fulfilled, fulfilledReducer);
   builder.addCase(checkAuth.rejected, rejectedReducer);
+
+  builder.addCase(refreshToken.pending, pendingReducer);
+  builder.addCase(refreshToken.fulfilled, fulfilledReducer);
+  builder.addCase(refreshToken.rejected, rejectedReducer);
 };
 
 const authSlice = createSlice({
