@@ -20,6 +20,7 @@ export default {
   NOTIFICATION_AUDIO: '/audio/',
   BASE_URL: `http://${serverIP}:${serverPort}/`,
   ACCESS_TOKEN: 'accessToken',
+  REFRESH_TOKEN: 'refreshToken',
   publicURL:
     env === 'production'
       ? `http://${serverIP}:80/images/`
