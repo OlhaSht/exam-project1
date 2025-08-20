@@ -9,6 +9,7 @@ module.exports.checkAccessToken = async (req, res, next) => {
       const [, accessToken] = authorization.split(' ');  
       console.log("accessToken =========>>>>>>>>>>>>", accessToken)
       req.tokenData = await JwtService.verifyAccessToken(accessToken);
+      console.log("req.tokenData =========>>>>>>>>>>>>", req.tokenData)
       return next();      
     }
     next(createHttpError(401, 'Need token'))

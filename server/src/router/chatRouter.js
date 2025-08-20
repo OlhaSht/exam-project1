@@ -1,5 +1,6 @@
 const express = require('express');
 const checkToken = require('../middlewares/checkToken');
+const checkAuth = require('../middlewares/authTokenMw');
 const chatSQL = require('../controllers/chatControllerSQL/chatSQL');
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router.get(
 
 router.get(
   '/getPreview',
-  checkToken.checkToken,
+  checkAuth.checkAccessToken,
   chatSQL.getPreview,
   // chatController.getPreview,
 );

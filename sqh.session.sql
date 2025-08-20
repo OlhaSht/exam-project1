@@ -1,3 +1,9 @@
+DELETE FROM "RefreshTokens" 
+WHERE "userId" = 63;
+
+-- DELETE FROM "Users" 
+-- WHERE "id" = 63;
+
 -- SELECT unnest(enum_range(NULL::"enum_Users_role"));
 -- -- ALTER TYPE "enum_Users_role" 
 -- -- ADD VALUE 'moderator';
@@ -40,7 +46,6 @@
 -- FROM "Users" 
 -- WHERE role = 'moderator';
 
-DELETE FROM "Ratings" 
-WHERE "userId" = 3;
-DELETE FROM "Users" 
-WHERE "id" = 3;
+-- DELETE FROM "Ratings" 
+-- WHERE "userId" = 3;
+

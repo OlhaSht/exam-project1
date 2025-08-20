@@ -1,18 +1,19 @@
 const express = require('express');
 const basicMiddlewares = require('../middlewares/basicMiddlewares');
 const checkToken = require('../middlewares/checkToken');
+const checkAuth = require('../middlewares/authTokenMw');
 const contestController = require('../controllers/contestController');
 const upload = require('../utils/fileUpload');
 const router = express.Router();
 
 router.post(
     '/dataForContest',
-    checkToken.checkToken,
+    checkAuth.checkAccessToken,
     contestController.dataForContest,
   );
 router.get(
     '/getCustomersContests',
-    checkToken.checkToken,
+    checkAuth.checkAccessToken,
     contestController.getCustomersContests,
   );
 router.get(
@@ -23,7 +24,7 @@ router.get(
 );
 router.get(
     '/getAllContests',
-    checkToken.checkToken,
+     checkAuth.checkAccessToken,
     basicMiddlewares.onlyForCreative,
     contestController.getContests,
   );
