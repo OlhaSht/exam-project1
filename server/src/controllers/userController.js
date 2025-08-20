@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../constants');
 const NotUniqueEmail = require('../errors/NotUniqueEmail');
 const userQueries = require('./queries/userQueries');
+const {Users} = require('../models');
 
 
 module.exports.login = async (req, res, next) => {
@@ -55,7 +56,7 @@ module.exports.registration = async (req, res, next) => {
 
 module.exports.getUser = async (req, res, next) => {
   try {
-    const data = await userQueries.userCreation(req.tokenData.access);
+    const data = await Users.findByPk(req.tokenData.userId);
     console.log('Token data::::::::::::::::', data);
     res.status(200).send(data);
   } catch (err) {
