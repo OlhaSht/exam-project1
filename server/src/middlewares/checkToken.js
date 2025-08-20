@@ -37,17 +37,22 @@ module.exports.checkAuth = async (req, res, next) => {
   }
 };
 
-module.exports.checkToken = async (req, res, next) => {
-  const accessToken = req.headers.authorization;
-  console.log('Access Token:', accessToken);
-  if (!accessToken) {
+module.exports.checkToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  console.log('Access Token in mw checkToken11111', authHeader);
+
+  if (!authHeader) {
     return next(new TokenError('need token'));
   }
+  const accessToken = authHeader.split(' ')[1];
+
   try {
-    req.tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
+    req.tokenData = jwt.verify(accessToken, CONSTANTS.ACCESS_TOKEN_SECRET);
+    console.log("req.tokenData in mw checkToken>>>>>>>>>", req.tokenData);
     next();
   } catch (err) {
-    console.error('JWT verification failed:', err);
+    console.error("JWT verification failed:", err);
     next(new TokenError());
   }
 };
+
