@@ -13,7 +13,7 @@ module.exports.login = async (req, res, next) => {
     if (user && (await user.comparePassword(password))) {
       const data = await AuthService.createSession(user)
       // return res.status(200).send({ data })
-      res.cookie('refreshToken', data.refreshToken, {
+      res.cookie('refreshToken', data.tokenPair.refresh, {
         httpOnly: true,
         secure: false,
         path: '/', 
@@ -22,7 +22,7 @@ module.exports.login = async (req, res, next) => {
         maxAge: 30 * 24 * 60 * 60 * 1000
       })
 
-      return res.status(200).send({ accessToken: data.accessToken })
+      return res.status(200).send({accessToken:data.tokenPair.access})
     }
     next(createHttpError(401, 'Invalid user authentication.'))
   } catch (error) {
@@ -36,7 +36,7 @@ module.exports.registration = async (req, res, next) => {
     if (user) {
       const data = await AuthService.createSession(user)
       // return res.status(200).send({ data })
-      res.cookie('refreshToken', data.refreshToken, {
+      res.cookie('refreshToken', data.tokenPair.refresh, {
         httpOnly: true,
         secure: false,
         path: '/',
@@ -44,8 +44,8 @@ module.exports.registration = async (req, res, next) => {
         sameSite: 'strict',
         maxAge: 30 * 24 * 60 * 60 * 1000
       })
-
-      return res.status(200).send({ accessToken: data.accessToken })
+      console.log(':::::::::::', data);
+      return res.status(200).send({accessToken:data.tokenPair.access})
     }
     next(createHttpError(400, 'Invalid user data.'))
   } catch (error) {
@@ -66,7 +66,7 @@ module.exports.refresh = async (req, res, next) => {
     }
     const data = await AuthService.refreshSession(refreshTokenInstance)
 
-    res.cookie('refreshToken', data.tokenPair, {
+    res.cookie('refreshToken', data.tokenPair.refresh, {
       httpOnly: false,
       secure: false,
       path: '/',
@@ -74,9 +74,9 @@ module.exports.refresh = async (req, res, next) => {
       sameSite: 'strict',
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 дней
     });
+    console.log('tokenPair:::::::::::::::::', data);
+    res.status(200).send({accessToken:data.tokenPair.access});
     
-    res.status(200).send({ accessToken: data.accessToken });
-    console.log('tokenPair:::::::::::::::::', data.tokenPair);
   } catch (error) {
     next(error)
   }
