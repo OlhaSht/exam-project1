@@ -17,7 +17,7 @@ module.exports = (err, req, res) => {
       console.error('Error writing to log file:', fsErr);
     }
   });
-  res.status(500).json({ message: 'Internal Server Error' });
+  //res.status(500).json({ message: 'Internal Server Error' });
 };
 
 function transformData(data) {
