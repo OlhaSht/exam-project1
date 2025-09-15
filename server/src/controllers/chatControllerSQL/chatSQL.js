@@ -18,7 +18,7 @@ module.exports.addMessage = async (req, res, next) => {
         body: req.body.messageBody,
         conversationId: newConversation.id,
       });
-        console.log('message =============================')
+        // console.log('message =============================')
       const interlocutorId = participants.find(p => p !== req.tokenData.userId);
       
       controller.getChatController().emitNewMessage(interlocutorId, {
@@ -47,7 +47,7 @@ module.exports.addMessage = async (req, res, next) => {
         preview: { ...message.dataValues, interlocutor: req.body.interlocutor },
       });
     } catch (err) {
-      console.log('Error===========================:', err);
+      // console.log('Error===========================:', err);
       next(err);
     }
   };
@@ -83,7 +83,7 @@ module.exports.addMessage = async (req, res, next) => {
 
   module.exports.getPreview = async (req, res, next) => {
     try {
-      console.log('Fetching conversations for user=================:', req.tokenData.userId);
+      // console.log('Fetching conversations for user=================:', req.tokenData.userId);
   
       const conversations = await Message.findAll({
         include: [{
@@ -99,34 +99,34 @@ module.exports.addMessage = async (req, res, next) => {
         ],
       });
   
-      console.log('Conversations fetched========================:', conversations);
+      // console.log('Conversations fetched========================:', conversations);
   
       const interlocutors = conversations.map(convo =>
         convo.Conversation.participants.find(p => p !== req.tokenData.userId)
       );
-      console.log('Interlocutors:', interlocutors);
+      // console.log('Interlocutors:', interlocutors);
   
       const senders = await Users.findAll({
         where: { id: interlocutors },
         attributes: ['id', 'firstName', 'lastName', 'displayName', 'avatar'],
       });
   
-      console.log('Senders======================:', senders);
+      // console.log('Senders======================:', senders);
   
       conversations.forEach(convo => {
-        console.log('Current conversation:', convo);
+        // console.log('Current conversation:', convo);
         const sender = senders.find(s => convo.Conversation.participants.includes(s.id));
         if (sender) {
-          console.log('Found sender:', sender);
+          // console.log('Found sender:', sender);
           convo.dataValues.interlocutor = sender;
         }
       });
   
-      console.log('Final conversations====================:', conversations);
+      // console.log('Final conversations====================:', conversations);
       
       await res.send(conversations);
     } catch (err) {
-      console.log('Error===========================:', err);
+      // console.log('Error===========================:', err);
       next(err);
     }
   };
@@ -147,8 +147,8 @@ module.exports.addMessage = async (req, res, next) => {
       }
       
       const updatedBlackList = [...conversation.blackList];
-      console.log('----', updatedBlackList)
-      console.log('Value of blackListFlag:', req.body.blackListFlag);
+      // console.log('----', updatedBlackList)
+      // console.log('Value of blackListFlag:', req.body.blackListFlag);
       updatedBlackList[index] = req.body.blackListFlag;
   
       conversation.blackList = updatedBlackList;
@@ -156,7 +156,7 @@ module.exports.addMessage = async (req, res, next) => {
   
       res.send(conversation);
     } catch (err) {
-      console.error('Error updating conversation:', err);
+      // console.error('Error updating conversation:', err);
       res.status(500).send({ message: 'Server error', error: err });
     }
   };
@@ -184,7 +184,7 @@ module.exports.addMessage = async (req, res, next) => {
   
       res.send(conversation);
     } catch (err) {
-      console.error('Error updating conversation:', err);
+      // console.error('Error updating conversation:', err);
       res.status(500).send({ message: 'Server error', error: err });
     }
   };
