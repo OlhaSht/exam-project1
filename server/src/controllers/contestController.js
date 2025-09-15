@@ -103,17 +103,24 @@ module.exports.downloadFile = async (req, res, next) => {
 };
 
 module.exports.updateContest = async (req, res, next) => {
+  console.log("=== updateContest CALLED ===");
+console.log("BODY:", req.body);
+console.log("FILE:", req.file);
+console.log("TOKEN DATA:", req.tokenData);
+
   if (req.file) {
     req.body.fileName = req.file.filename;
     req.body.originalFileName = req.file.originalname;
   }
   const contestId = req.body.contestId;
+  console.log('contestId======',contestId)
   delete req.body.contestId;
   try {
     const updatedContest = await contestQueries.updateContest(req.body, {
       id: contestId,
       userId: req.tokenData.userId,
     });
+    console.log('updatedContest>>>>>>>', updatedContest)
     res.send(updatedContest);
   } catch (e) {
     next(e);
