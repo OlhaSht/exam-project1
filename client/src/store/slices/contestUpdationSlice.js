@@ -16,8 +16,9 @@ const initialState = {
 };
 
 export const updateContest = decorateAsyncThunk({
-  key: CONTEST_UPDATION_SLICE_NAME,
+  key: `${CONTEST_UPDATION_SLICE_NAME}/updateContest`,
   thunk: async (payload, { dispatch }) => {
+    console.log('payload updateContest====', payload)
     const { data } = await restController.updateContest(payload);
     dispatch(updateStoreAfterUpdateContest(data));
   },
@@ -34,7 +35,7 @@ const extraReducers = builder => {
 };
 
 const contestUpdationSlice = createSlice({
-  name: CONTEST_UPDATION_SLICE_NAME,
+  name: `${CONTEST_UPDATION_SLICE_NAME}`,
   initialState,
   reducers,
   extraReducers,
