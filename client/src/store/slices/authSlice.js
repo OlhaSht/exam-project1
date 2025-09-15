@@ -33,26 +33,16 @@ export const checkAuth = decorateAsyncThunk({
   },
 });
 
-// export const checkAuth = decorateAsyncThunk({
-//   key: `${AUTH_SLICE_NAME}/checkAuth`,
-//   thunk: async ({ data: authInfo, history, authMode }) => {
-//     authMode === CONSTANTS.AUTH_MODE.LOGIN
-//       ? await restController.loginRequest(authInfo)
-//       : await restController.registerRequest(authInfo);
-//     history.replace('/');
-//   },
-// });
-
 export const refreshToken = decorateAsyncThunk({
   key: `${AUTH_SLICE_NAME}/refreshToken`,
   thunk: async () => {
     const response = await restController.refreshRequest(); 
-    const accessToken = response?.data?.accessToken;
+    // const accessToken = response?.data?.accessToken;
+    const accessToken = response?.data?.tokenPair?.access;
 
     if (accessToken) {
       window.localStorage.setItem(CONSTANTS.ACCESS_TOKEN, accessToken);
     }
-
     return accessToken;
   },
 });
