@@ -22,6 +22,12 @@ router.post(
   AuthController.refresh
 );
 
+router.post(
+  '/logout',
+  AuthController.logout
+ );
+
+
 module.exports = router;
 
 // module.exports = router;
