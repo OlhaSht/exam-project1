@@ -5,6 +5,8 @@ import styles from './Header.module.sass';
 import CONSTANTS from '../../constants';
 import { clearUserStore } from '../../store/slices/userSlice';
 import { getUser } from '../../store/slices/userSlice';
+import { logout } from '../../api/rest/restController'
+import { method } from 'lodash';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -13,7 +15,12 @@ class Header extends React.Component {
     }
   }
 
-  logOut = () => {
+  logOut = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.log('Logout error', error);
+    }
     localStorage.removeItem('accessToken');
     this.props.clearUserStore();
     this.props.history.replace('/login');
