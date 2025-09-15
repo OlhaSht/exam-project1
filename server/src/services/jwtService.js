@@ -1,10 +1,13 @@
 const { promisify } = require('util');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const TokenExpiredError = require('../errors/TokenExpiredError');
+const InvalidTokenError = require('../errors/InvalidTokenError');
+const TokenVerificationError = require('../errors/TokenVerificationError');
 const {
   ACCESS_TOKEN_TIME,
   REFRESH_TOKEN_TIME
-} = require('../constants')
+} = require('../constants');
 
 const tokenConfig = {
   access:{
@@ -19,12 +22,26 @@ const tokenConfig = {
 
 const verifyPromiseJWT = promisify(jwt.verify);
 const signPromiseJWT = promisify(jwt.sign);
+
 const buildPayload = (user) => ({
   userId: user.id,
   email: user.email,
   role: user.role
 });
-const verifyToken = (token, {secret})=> verifyPromiseJWT(token, secret);
+
+const verifyToken = async (token, {secret}) => {            //=> verifyPromiseJWT(token, secret);
+  try {
+    return await verifyPromiseJWT(token, secret);
+      } catch (err) {
+    if (err.name === 'TokenExpiredError') {
+      throw new TokenExpiredError();
+      }
+    if (err.name === 'JsonWebTokenError') {
+      throw new InvalidTokenError();
+    }
+    throw new TokenVerificationError();
+  }
+};
 const createToken = (payload, {secret, time}) => {
   return signPromiseJWT(
     buildPayload(payload),
