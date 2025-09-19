@@ -5,8 +5,7 @@ import styles from './Header.module.sass';
 import CONSTANTS from '../../constants';
 import { clearUserStore } from '../../store/slices/userSlice';
 import { getUser } from '../../store/slices/userSlice';
-import { logout } from '../../api/rest/restController'
-import { method } from 'lodash';
+import { logout } from '../../api/rest/restController';
 
 class Header extends React.Component {
   componentDidMount() {

@@ -37,7 +37,6 @@ export const refreshToken = decorateAsyncThunk({
   key: `${AUTH_SLICE_NAME}/refreshToken`,
   thunk: async () => {
     const response = await restController.refreshRequest(); 
-    // const accessToken = response?.data?.accessToken;
     const accessToken = response?.data?.tokenPair?.access;
 
     if (accessToken) {

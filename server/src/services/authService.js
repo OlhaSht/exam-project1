@@ -1,11 +1,11 @@
 const JwtService = require('./jwtService');
 const _ = require('lodash');
 
- const prepareUser = (user) => _.omit(user.get(), ['password']);
+const prepareUser = (user) => _.omit(user.get(), ['password']);
 
 module.exports.createSession = async (user) => {
   const tokenPair = await JwtService.createTokenPair(user);
-  console.log('TOKEN PAIR:', tokenPair);
+  //console.log('TOKEN PAIR authService:', tokenPair);
   const existingTokens = await user.getRefreshTokens();
 
   if (existingTokens.length > 0) {

@@ -29,7 +29,7 @@ const buildPayload = (user) => ({
   role: user.role
 });
 
-const verifyToken = async (token, {secret}) => {            //=> verifyPromiseJWT(token, secret);
+const verifyToken = async (token, {secret}) => {           
   try {
     return await verifyPromiseJWT(token, secret);
       } catch (err) {
