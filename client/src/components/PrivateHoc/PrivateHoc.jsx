@@ -5,11 +5,18 @@ import Spinner from '../Spinner/Spinner';
 
 const PrivateHoc = (Component, props) => {
   class Hoc extends React.Component {
+    // componentDidMount() {
+    //   if (!this.props.data) {
+    //     this.props.getUser();
+    //   }
+    // }
     componentDidMount() {
-      if (!this.props.data) {
+      const { data, isLoggedIn } = this.props;
+      if (!data && isLoggedIn) {
         this.props.getUser();
       }
     }
+
 
     render() {
       return (
@@ -28,7 +35,7 @@ const PrivateHoc = (Component, props) => {
     }
   }
 
-  const mapStateToProps = (state) => state.userStore;
+  const mapStateToProps = (state) => ({...state.userStore,isLoggedIn: state.userStore.isLoggedIn});
 
   const mapDispatchToProps = (dispatch) => ({
     getUser: () => dispatch(getUser()),

@@ -9,10 +9,12 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
+
     console.log('%c🚀 REQUEST INTERCEPTOR ON', 'color: green; font-weight: bold;');
     console.log('CONFIG URL:', config.url);
     console.log('TOKEN FROM LS:', window.localStorage.getItem('accessToken'));
     console.log('CONFIG DATA:', config.data);
+
     const token = window.localStorage.getItem('accessToken');
     console.log('((((((', token);
     if (token) {
@@ -36,6 +38,7 @@ instance.interceptors.response.use(
 
   async (error) => {
     const originalRequest = error.config;
+
     console.log("====== FULL ERROR RESPONSE ======");
     console.log(error.response);   
     console.log("====== FULL ERROR REQUEST ======");
@@ -50,8 +53,6 @@ instance.interceptors.response.use(
     !originalRequest._retry
   ) {
     originalRequest._retry = true;
-    //  if ((error.response?.status === 500) && !originalRequest._retry) {
-    //   originalRequest._retry = true;
       try {
         console.log('%c🔄 Пытаемся обновить accessToken через /auth/refresh...', 'color: orange; font-weight: bold;');
         const { data } = await instance.post(
@@ -89,29 +90,7 @@ export default instance;
 
 
 
-// instance.interceptors.response.use(
-//   response => {
-//     console.log('RESPONSE DATA:', response.data);
-//       const token = response.data?.accessToken;
-//       if (token) {
-//         window.localStorage.setItem(CONSTANTS.ACCESS_TOKEN, token);
-//       }
-//       console.log('}}}}}}', token);
-//     return response;
-//  },
-//    err => {
-//     if (
-//       err.response.status === 408 &&
-//       history.location.pathname !== '/login' &&
-//       history.location.pathname !== '/registration' &&
-//       history.location.pathname !== '/'
-//     ) {
-//       history.replace('/login');
-//     }
-//     return Promise.reject(err);
-//   }
-// )
- 
+
 
 
 
