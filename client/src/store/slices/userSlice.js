@@ -10,6 +10,7 @@ const initialState = {
   isFetching: true,
   error: null,
   data: null,
+  isLoggedIn: true,
 };
 
 export const getUser = createAsyncThunk(
@@ -51,9 +52,20 @@ const reducers = {
   clearUserStore: state => {
     state.error = null;
     state.data = null;
+    state.isLoggedIn = false; 
   },
   clearUserError: state => {
     state.error = null;
+  },
+
+  loginSuccess: (state, action) => {
+    state.data = action.payload;
+    state.isLoggedIn = true; 
+  },
+
+  logout: (state) => {
+    state.data = null;
+    state.isLoggedIn = false; 
   },
 };
 
@@ -66,6 +78,7 @@ const extraReducers = builder => {
   builder.addCase(getUser.fulfilled, (state, { payload }) => {
     state.isFetching = false;
     state.data = payload;
+    state.isLoggedIn = true;
   });
   builder.addCase(getUser.rejected, rejectedReducer);
 
@@ -87,6 +100,6 @@ const userSlice = createSlice({
 
 const { actions, reducer } = userSlice;
 
-export const { clearUserStore, clearUserError } = actions;
+export const { clearUserStore, clearUserError, loginSuccess, logout } = actions;
 
 export default reducer;
