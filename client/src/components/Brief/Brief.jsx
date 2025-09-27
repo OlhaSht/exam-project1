@@ -73,7 +73,7 @@ const Brief = (props) => {
     clearContestUpdationStore,
   } = props;
   const { error } = props.contestUpdationStore;
-  const { id } = props.userStore.data;
+  const { id } = props.userStore.data || {};
   if (!isEditContest) {
     return (
       <ContestInfo

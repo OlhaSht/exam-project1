@@ -88,7 +88,7 @@ class ContestPage extends React.Component {
 
   findConversationInfo = (interlocutorId) => {
     const { messagesPreview } = this.props.chatStore;
-    const { id } = this.props.userStore.data;
+    const { id } = this.props.userStore.data || {};
     const participants = [id, interlocutorId];
     participants.sort(
       (participant1, participant2) => participant1 - participant2
@@ -115,7 +115,12 @@ class ContestPage extends React.Component {
   };
 
   render() {
+     const { userStore } = this.props;
+      if (!userStore.data) {
+      return null; 
+      }
     const { role } = this.props.userStore.data;
+  
     const {
       contestByIdStore,
       changeShowImage,

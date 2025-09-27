@@ -31,7 +31,7 @@ class Chat extends React.Component {
   renderDialogList = () => {
     const { setChatPreviewMode } = this.props;
     const { chatMode, isShowChatsInCatalog } = this.props.chatStore;
-    const { id } = this.props.userStore.data;
+    const { id } = this.props.userStore.data || {};
     const {
       NORMAL_PREVIEW_CHAT_MODE,
       FAVORITE_PREVIEW_CHAT_MODE,
@@ -94,7 +94,7 @@ class Chat extends React.Component {
   render() {
     const { isExpanded, isShow, isShowCatalogCreation, error } =
       this.props.chatStore;
-    const { id } = this.props.userStore.data;
+    const { id } = this.props.userStore.data || {};
     const {  getPreviewChat } = this.props;
     return (
       <div

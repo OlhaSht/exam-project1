@@ -34,7 +34,7 @@ class CatalogListContainer extends React.Component {
 
   render() {
     const { catalogList, isShowChatsInCatalog } = this.props.chatStore;
-    const { id } = this.props.userStore.data;
+    const { id } = this.props.userStore.data || {};
     return (
       <>
         {isShowChatsInCatalog ? (

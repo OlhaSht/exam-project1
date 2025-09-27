@@ -16,10 +16,10 @@ import Header from '../../components/Header/Header';
 
   const StartContestPage = props => {
     useEffect(() => {
-      if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
+      if (props.userStore.data?.role !== CONSTANTS.CUSTOMER) {
         props.history.replace('/');
       }
-    }, [props.userStore.data.role, props.history]);
+    }, [props.userStore.data?.role, props.history]);
 
   const setBundle = bundleStr => {
     const array = bundleStr.toLowerCase().split('+');
