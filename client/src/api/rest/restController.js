@@ -4,7 +4,7 @@ import http from '../interceptor';
 export const registerRequest = data => http.post('/auth/registration', data);
 export const loginRequest = data => http.post('/auth/login', data);
 export const refreshRequest = () => http.post('/auth/refresh',{}, { withCredentials: true });
-export const logout = () => http.post('/auth/logout',{},{
+export const apilogout = () => http.post('/auth/logout',{},{
   withCredentials: true, 
   headers: {
     'Content-Type': 'application/json',

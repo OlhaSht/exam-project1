@@ -5,7 +5,8 @@ import styles from './Header.module.sass';
 import CONSTANTS from '../../constants';
 import { clearUserStore } from '../../store/slices/userSlice';
 import { getUser } from '../../store/slices/userSlice';
-import { logout } from '../../api/rest/restController';
+import { apilogout } from '../../api/rest/restController';
+import { logout as logoutAction } from '../../store/slices/userSlice';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -15,15 +16,43 @@ class Header extends React.Component {
   }
 
   logOut = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.log('Logout error', error);
-    }
+  try {
+    await apilogout(); 
+  } catch (error) {
+    console.log('Logout error', error);
+  } finally {
     localStorage.removeItem('accessToken');
-    this.props.clearUserStore();
+    this.props.logout();
     this.props.history.replace('/login');
-  };
+  }
+};
+
+//   logOut = async () => {
+//   try {
+//     await apilogout(); 
+//     localStorage.removeItem('accessToken');
+//     this.props.logout();
+//     //   setTimeout(() => {
+//     //   this.props.history.replace('/login');
+//     // }, 0);
+//     this.props.history.replace('/login');
+//   } catch (error) {
+//     console.log('Logout error', error);
+//   }
+// };
+
+
+  // logOut = async () => {
+  //   try {
+  //     await apilogout();
+  //   } catch (error) {
+  //     console.log('Logout error', error);
+  //   }
+  //   localStorage.removeItem('accessToken');
+  //   this.props.logout();
+  //   //this.props.clearUserStore();
+  //   this.props.history.replace('/login');
+  // };
 
   startContests = () => {
     this.props.history.push('/startContest');
@@ -293,7 +322,8 @@ class Header extends React.Component {
 const mapStateToProps = (state) => state.userStore;
 const mapDispatchToProps = (dispatch) => ({
   getUser: () => dispatch(getUser()),
-  clearUserStore: () => dispatch(clearUserStore()),
+  logout: () => dispatch(logoutAction()),
+  //clearUserStore: () => dispatch(clearUserStore()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
