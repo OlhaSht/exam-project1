@@ -49,11 +49,6 @@ export const updateUser = createAsyncThunk(
 );
 
 const reducers = {
-  clearUserStore: state => {
-    state.error = null;
-    state.data = null;
-    state.isLoggedIn = false; 
-  },
   clearUserError: state => {
     state.error = null;
   },
@@ -100,6 +95,6 @@ const userSlice = createSlice({
 
 const { actions, reducer } = userSlice;
 
-export const { clearUserStore, clearUserError, loginSuccess, logout } = actions;
+export const { clearUserError, loginSuccess, logout } = actions;
 
 export default reducer;
