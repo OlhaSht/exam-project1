@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import DialogListContainer from '../../DialogComponents/DialogListContainer/DialogListContainer';
 import styles from './Chat.module.sass';
-import Dialog from '../../DialogComponents/Dialog/Dialog';
+import Dialog from '../../DialogComponents/Dialog/DialogHook';
 import {
   changeChatShow,
   setPreviewChatMode,
@@ -95,7 +95,7 @@ class Chat extends React.Component {
     const { isExpanded, isShow, isShowCatalogCreation, error } =
       this.props.chatStore;
     const { id } = this.props.userStore.data || {};
-    const {  getPreviewChat } = this.props;
+    const { getPreviewChat } = this.props;
     return (
       <div
         className={classNames(styles.chatContainer, {
@@ -105,11 +105,13 @@ class Chat extends React.Component {
         {error && <ChatError getData={getPreviewChat} />}
         {isShowCatalogCreation && <CatalogCreation />}
         {isExpanded ? <Dialog userId={id} /> : this.renderDialogList()}
-        
-        <div className={styles.toggleChat} onClick={() => this.props.changeShow()}>
+
+        <div
+          className={styles.toggleChat}
+          onClick={() => this.props.changeShow()}
+        >
           {isShow ? 'Hide Chat' : 'Show Chat'}
         </div>
-
       </div>
     );
   }
@@ -121,7 +123,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeShow: () => dispatch(changeChatShow()), 
+  changeShow: () => dispatch(changeChatShow()),
 
   setChatPreviewMode: (mode) => dispatch(setPreviewChatMode(mode)),
   changeShowModeCatalog: () => dispatch(changeShowModeCatalog()),

@@ -1,4 +1,5 @@
-import React from 'react';
+//import React from 'react';
+import { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import className from 'classnames';
@@ -10,37 +11,59 @@ import ChatHeader from '../../ChatComponents/ChatHeader/ChatHeader';
 import styles from './Dialog.module.sass';
 import ChatInput from '../../ChatComponents/ChatInut/ChatInput';
 
-class Dialog extends React.Component {
-  componentDidMount() {
-    this.props.getDialog(this.props.interlocutor.id);
-    // this.props.getDialog({ interlocutorId: this.props.interlocutor.id });
-    this.scrollToBottom();
-  }
-
-  messagesEnd = React.createRef();
-  scrollToBottom = () => {
-    this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
+function Dialog(props) {
+  const messagesEnd = useRef(null);
+  const scrollToBottom = () => {
+    if (messagesEnd.current) {
+      messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    if (nextProps.interlocutor.id !== this.props.interlocutor.id)
-      // this.props.getDialog({ interlocutorId: nextProps.interlocutor.id });
-      this.props.getDialog(nextProps.interlocutor.id);
-  }
+  useEffect(() => {
+    if (props.interlocutor && props.interlocutor?.id) {
+      props.getDialog(props.interlocutor.id);
+      //scrollToBottom();
+    }
+    return () => {
+      clearMessageList();
+    };
+  }, [props.interlocutor?.id]);
 
-  componentWillUnmount() {
-    this.props.clearMessageList();
-  }
+  // componentWillReceiveProps(nextProps, nextContext) {
+  //   if (nextProps.interlocutor.id !== props.interlocutor.id)
+  //   props.getDialog(nextProps.interlocutor.id);
+  // }
+  // useEffect(() => {
+  //   props.getDialog(props.interlocutor.id);
+  // }, [props.interlocutor.id]);
 
-  componentDidUpdate() {
-    if (this.messagesEnd.current) this.scrollToBottom();
-  }
+  useEffect(() => {
+    if (props.interlocutor?.id) {
+      props.getDialog(props.interlocutor.id);
+    }
+  }, [props.interlocutor?.id]);
+
+  // componentWillUnmount() {
+  //   props.clearMessageList();
+  // }
+  useEffect(() => {
+    return () => {
+      clearMessageList();
+    };
+  }, []);
+
+  // componentDidUpdate() {
+  //   if (messagesEnd.current)scrollToBottom();
+  // }
+  useEffect(() => {
+    scrollToBottom();
+  }, [messagesEnd.current]);
 
   //-----
 
-  renderMainDialog = () => {
+  const renderMainDialog = () => {
     const messagesArray = [];
-    const { messages, userId } = this.props;
+    const { messages, userId } = props;
     let currentTime = moment();
     messages.forEach((message, i) => {
       if (!currentTime.isSame(message.createdAt, 'date')) {
@@ -62,7 +85,7 @@ class Dialog extends React.Component {
           <span className={styles.messageTime}>
             {moment(message.createdAt).format('HH:mm')}
           </span>
-          <div ref={this.messagesEnd} />
+          <div ref={messagesEnd} />
         </div>
       );
     });
@@ -71,8 +94,8 @@ class Dialog extends React.Component {
 
   //-----
 
-  blockMessage = () => {
-    const { userId, chatData } = this.props;
+  const blockMessage = () => {
+    const { userId, chatData } = props;
     const { blackList, participants } = chatData;
     const userIndex = participants.indexOf(userId);
     let message;
@@ -84,28 +107,28 @@ class Dialog extends React.Component {
     return <span className={styles.messageBlock}>{message}</span>;
   };
 
-  render() {
-    const { chatData, userId } = this.props;
-    console.log('cd>>>>>>>>>>>>>>>>>>>>>>>>>', chatData);
+  //render() {
+  const { chatData, userId } = props;
+  console.log('cd>>>>>>>>>>>>>>>>>>>>>>>>>', chatData);
 
-    const isBlackListDefined =
-      chatData?.blackList && chatData.blackList.length > 0;
-    const isParticipantsDefined =
-      chatData?.participants && chatData.participants.length > 0;
+  const isBlackListDefined =
+    chatData?.blackList && chatData.blackList.length > 0;
+  const isParticipantsDefined =
+    chatData?.participants && chatData.participants.length > 0;
 
-    return (
-      <>
-        <ChatHeader userId={userId} />
-        {this.renderMainDialog()}
-        <div ref={this.messagesEnd} />
-        {isBlackListDefined && chatData.blackList.includes(true) ? (
-          this.blockMessage()
-        ) : (
-          <ChatInput />
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      <ChatHeader userId={userId} />
+      {renderMainDialog()}
+      <div ref={messagesEnd} />
+      {isBlackListDefined && chatData.blackList.includes(true) ? (
+        blockMessage()
+      ) : (
+        <ChatInput />
+      )}
+    </>
+  );
+  //}
 }
 const mapStateToProps = (state) => {
   console.log('State in mapStateToProps:::::::', state.chatStore);
