@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CONSTANTS from '../../constants';
 import CustomerDashboard from '../../components/CustomerDashboard/CustomerDashboard';
-import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard';
+import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard2';
 import Header from '../../components/Header/Header';
 import ModeratorPage from '../ModeratorPage/ModeratorPage';
 
-const Dashboard = props => {
+const Dashboard = (props) => {
   const { role, history } = props;
 
   return (
@@ -23,6 +23,6 @@ const Dashboard = props => {
   );
 };
 
-const mapStateToProps = state => state.userStore.data;
+const mapStateToProps = (state) => state.userStore.data;
 
 export default connect(mapStateToProps)(Dashboard);
