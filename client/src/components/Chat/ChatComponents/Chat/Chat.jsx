@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import DialogListContainer from '../../DialogComponents/DialogListContainer/DialogListContainer';
+import DialogListContainer from '../../DialogComponents/DialogListContainer/DialogListContainerHook';
 import styles from './Chat.module.sass';
 import Dialog from '../../DialogComponents/Dialog/DialogHook';
 import {
