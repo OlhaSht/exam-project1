@@ -20,3 +20,12 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(DialogListContainer);
+
+//====2===
+// function DialogListContainer(props) {
+//   useEffect(() => {
+//     props.getChatPreview();
+//   }, []);
+
+//   return <DialogList preview={props.messagesPreview} userId={props.userId} />;
+// }
