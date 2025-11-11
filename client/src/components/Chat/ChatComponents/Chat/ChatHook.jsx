@@ -14,7 +14,7 @@ import {
 import { chatController } from '../../../../api/ws/socketController';
 import CONSTANTS from '../../../../constants';
 import CatalogListContainer from '../../CatalogComponents/CatalogListContainer/CatalogListContainer';
-import CatalogCreation from '../../CatalogComponents/CatalogCreation/CatalogCreation';
+import CatalogCreation from '../../CatalogComponents/CatalogCreation/CatalogCreationHook';
 import CatalogListHeader from '../../CatalogComponents/CatalogListHeader/CatalogListHeader';
 import ChatError from '../../../ChatError/ChatError';
 
