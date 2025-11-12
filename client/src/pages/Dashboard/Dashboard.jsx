@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CONSTANTS from '../../constants';
-import CustomerDashboard from '../../components/CustomerDashboard/CustomerDashboard';
+import CustomerDashboard from '../../components/CustomerDashboard/CustomerDashboardHook';
 import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard2';
 import Header from '../../components/Header/Header';
 import ModeratorPage from '../ModeratorPage/ModeratorPage';

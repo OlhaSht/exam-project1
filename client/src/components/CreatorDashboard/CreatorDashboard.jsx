@@ -10,7 +10,7 @@ import {
   setNewCreatorFilter,
 } from '../../store/slices/contestsSlice';
 import { getDataForContest } from '../../store/slices/dataForContestSlice';
-import ContestsContainer from '../ContestsContainer/ContestsContainer';
+import ContestsContainer from '../ContestsContainer/ContestsContainerHook';
 import ContestBox from '../ContestBox/ContestBox';
 import styles from './CreatorDashboard.module.sass';
 import TryAgain from '../TryAgain/TryAgain';
@@ -87,7 +87,7 @@ class CreatorDashboard extends React.Component {
       </select>
     );
   };
-  
+
   componentWillReceiveProps(nextProps, nextContext) {
     if (nextProps.location.search !== this.props.location.search) {
       this.parseUrlForParams(nextProps.location.search);

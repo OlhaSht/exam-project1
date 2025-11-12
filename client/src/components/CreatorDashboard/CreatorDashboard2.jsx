@@ -10,7 +10,7 @@ import {
   setNewCreatorFilter,
 } from '../../store/slices/contestsSlice';
 import { getDataForContest } from '../../store/slices/dataForContestSlice';
-import ContestsContainer from '../ContestsContainer/ContestsContainer';
+import ContestsContainer from '../ContestsContainer/ContestsContainerHook';
 import ContestBox from '../ContestBox/ContestBox';
 import TryAgain from '../TryAgain/TryAgain';
 import CONSTANTS from '../../constants';
