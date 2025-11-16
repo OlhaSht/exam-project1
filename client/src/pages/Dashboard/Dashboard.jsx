@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CONSTANTS from '../../constants';
 import CustomerDashboard from '../../components/CustomerDashboard/CustomerDashboardHook';
 import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard2';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header/HeaderHook';
 import ModeratorPage from '../ModeratorPage/ModeratorPage';
 
 const Dashboard = (props) => {

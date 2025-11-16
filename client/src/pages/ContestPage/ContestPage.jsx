@@ -12,7 +12,7 @@ import {
   changeContestViewMode,
   changeShowImage,
 } from '../../store/slices/contestByIdSlice';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header/HeaderHook';
 import ContestSideBar from '../../components/ContestSideBar/ContestSideBar';
 import styles from './ContestPage.module.sass';
 import OfferBox from '../../components/OfferBox/OfferBox';
@@ -115,12 +115,12 @@ class ContestPage extends React.Component {
   };
 
   render() {
-     const { userStore } = this.props;
-      if (!userStore.data) {
-      return null; 
-      }
+    const { userStore } = this.props;
+    if (!userStore.data) {
+      return null;
+    }
     const { role } = this.props.userStore.data;
-  
+
     const {
       contestByIdStore,
       changeShowImage,

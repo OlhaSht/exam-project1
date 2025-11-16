@@ -7,21 +7,21 @@ import CONSTANTS from '../../constants';
 import styles from './StartContestPage.module.sass';
 import Footer from '../../components/Footer/Footer';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header/HeaderHook';
 
 // const StartContestPage = props => {
 //   if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
 //     props.history.replace('/');
 //   }
 
-  const StartContestPage = props => {
-    useEffect(() => {
-      if (props.userStore.data?.role !== CONSTANTS.CUSTOMER) {
-        props.history.replace('/');
-      }
-    }, [props.userStore.data?.role, props.history]);
+const StartContestPage = (props) => {
+  useEffect(() => {
+    if (props.userStore.data?.role !== CONSTANTS.CUSTOMER) {
+      props.history.replace('/');
+    }
+  }, [props.userStore.data?.role, props.history]);
 
-  const setBundle = bundleStr => {
+  const setBundle = (bundleStr) => {
     const array = bundleStr.toLowerCase().split('+');
     const bundleList = {};
     bundleList.first = array[0];
@@ -63,48 +63,48 @@ import Header from '../../components/Header/Header';
         <div className={styles.baseBundles}>
           <BundleBox
             path={['Name.png']}
-            header='Name'
-            describe='Get up and running with the perfect name.'
+            header="Name"
+            describe="Get up and running with the perfect name."
             setBundle={setBundle}
           />
           <BundleBox
             path={['Logo.png']}
-            header='Logo'
-            describe='Kickstart your venture with a unique, memorable logo.'
+            header="Logo"
+            describe="Kickstart your venture with a unique, memorable logo."
             setBundle={setBundle}
           />
           <BundleBox
             path={['Tagline.png']}
-            header='Tagline'
-            describe='Connect deeply with your target audience with an on-target tagline.'
+            header="Tagline"
+            describe="Connect deeply with your target audience with an on-target tagline."
             setBundle={setBundle}
           />
         </div>
       </div>
 
-      <div className={styles.baseButtonContainer}>   
+      <div className={styles.baseButtonContainer}>
         <div className={styles.baseButtons}>
           <ButtonGruop
             path={['name-icon.svg']}
-            header='Name'
-            describe='Get up and running with the perfect name.'
+            header="Name"
+            describe="Get up and running with the perfect name."
             setBundle={setBundle}
           />
           <ButtonGruop
             path={['name-icon.svg']}
-            header='Logo'
-            describe='Kickstart your venture with a unique, memorable logo.'
+            header="Logo"
+            describe="Kickstart your venture with a unique, memorable logo."
             setBundle={setBundle}
           />
           <ButtonGruop
             path={['name-icon.svg']}
-            header='Tagline'
-            describe='Connect deeply with your target audience with an on-target tagline.'
+            header="Tagline"
+            describe="Connect deeply with your target audience with an on-target tagline."
             setBundle={setBundle}
           />
         </div>
-      </div>  
-      
+      </div>
+
       <div className={styles.combinedBundles}>
         <div className={styles.infoCombinedBundles}>
           <span className={styles.headerInfo}>
@@ -118,26 +118,26 @@ import Header from '../../components/Header/Header';
         <div className={styles.baseBundles}>
           <BundleBox
             path={['Name.png', 'Logo.png']}
-            header='Name+Logo'
-            describe='Get the essentials needed to establish your brand together and save.'
+            header="Name+Logo"
+            describe="Get the essentials needed to establish your brand together and save."
             setBundle={setBundle}
           />
           <BundleBox
             path={['Name.png', 'Tagline.png']}
-            header='Name+Tagline'
-            describe='Communicate your vision with the perfect Name/Tagline combo.'
+            header="Name+Tagline"
+            describe="Communicate your vision with the perfect Name/Tagline combo."
             setBundle={setBundle}
           />
           <BundleBox
             path={['Logo.png', 'Tagline.png']}
-            header='Tagline+Logo'
-            describe='Description for Logo + Tagline will come here.'
+            header="Tagline+Logo"
+            describe="Description for Logo + Tagline will come here."
             setBundle={setBundle}
           />
           <BundleBox
             path={['Name.png', 'Logo.png', 'Tagline.png']}
-            header='Name+Tagline+Logo'
-            describe='Establish your entire brand identity and save with this bundle.'
+            header="Name+Tagline+Logo"
+            describe="Establish your entire brand identity and save with this bundle."
             setBundle={setBundle}
           />
         </div>
@@ -147,13 +147,13 @@ import Header from '../../components/Header/Header';
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { bundleStore, userStore } = state;
   return { bundleStore, userStore };
 };
 
-const mapDispatchToProps = dispatch => ({
-  choseBundle: bundle => dispatch(updateBundle(bundle)),
+const mapDispatchToProps = (dispatch) => ({
+  choseBundle: (bundle) => dispatch(updateBundle(bundle)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage);

@@ -7,7 +7,7 @@ import ContestForm from '../../components/ContestForm/ContestFormHook';
 import BackButton from '../../components/BackButton/BackButton';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header/HeaderHook';
 
 const ContestCreationPage = (props) => {
   const formRef = useRef();
