@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getUser } from '../../store/slices/userSlice';
 import Spinner from '../Spinner/Spinner';
 
-const PrivateHoc = (Component, props) => {
+const PrivateHoc = (WrappedComponent, extraProps = {}) => {
   function Hoc(props) {
     useEffect(() => {
       const { data, isLoggedIn } = props;
@@ -17,7 +17,8 @@ const PrivateHoc = (Component, props) => {
         {props.isFetching ? (
           <Spinner />
         ) : (
-          <Component history={props.history} match={props.match} {...props} />
+          <WrappedComponent {...props} {...extraProps} />
+          //<Component history={props.history} match={props.match} {...props} />
         )}
       </>
     );
