@@ -1,6 +1,7 @@
 const express = require('express');
 const basicMiddlewares = require('../middlewares/basicMiddlewares');
 const checkToken = require('../middlewares/checkToken');
+const checkAuth = require('../middlewares/authTokenMw');
 const validators = require('../middlewares/validators');
 const upload = require('../utils/fileUpload');
 const financeController = require('../controllers/financeController');
@@ -8,19 +9,20 @@ const router = express.Router();
 
 router.post(
   '/pay',
-  checkToken.checkToken,
+  // checkToken.checkToken,
+  checkAuth.checkAccessToken,
   basicMiddlewares.onlyForCustomer,
   upload.uploadContestFiles,
   basicMiddlewares.parseBody,
   validators.validateContestCreation,
-  financeController.payment,
+  financeController.payment
 );
 
 router.post(
   '/cashout',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
-  financeController.cashout,
+  financeController.cashout
   // userController.cashout,
 );
 
@@ -28,7 +30,7 @@ router.put(
   '/changeMark',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomer,
-  financeController.changeMark,
+  financeController.changeMark
 );
 
 module.exports = router;
