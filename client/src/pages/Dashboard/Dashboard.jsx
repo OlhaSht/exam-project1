@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import CONSTANTS from '../../constants';
 import CustomerDashboard from '../../components/CustomerDashboard/CustomerDashboardHook';
-import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard2';
+import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard';
 import Header from '../../components/Header/HeaderHook';
 import ModeratorPage from '../ModeratorPage/ModeratorPage';
 
