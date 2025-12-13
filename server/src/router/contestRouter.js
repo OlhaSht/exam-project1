@@ -7,37 +7,40 @@ const upload = require('../utils/fileUpload');
 const router = express.Router();
 
 router.post(
-    '/dataForContest',
-    checkAuth.checkAccessToken,
-    contestController.dataForContest,
-  );
+  '/dataForContest',
+  checkAuth.checkAccessToken,
+  contestController.dataForContest
+);
 router.get(
-    '/getCustomersContests',
-    checkAuth.checkAccessToken,
-    contestController.getCustomersContests,
-  );
+  '/getCustomersContests',
+  checkAuth.checkAccessToken,
+  contestController.getCustomersContests
+);
 router.get(
   '/getContestById',
-  checkToken.checkToken,
+  // checkToken.checkToken,
+  checkAuth.checkAccessToken,
   basicMiddlewares.canGetContest,
-  contestController.getContestById,
+  contestController.getContestById
 );
 router.get(
-    '/getAllContests',
-     checkAuth.checkAccessToken,
-    basicMiddlewares.onlyForCreative,
-    contestController.getContests,
-  );
+  '/getAllContests',
+  checkAuth.checkAccessToken,
+  basicMiddlewares.onlyForCreative,
+  contestController.getContests
+);
 router.put(
   '/updateContest',
-  checkToken.checkToken,
+  //checkToken.checkToken,
+  checkAuth.checkAccessToken,
   upload.updateContestFile,
-  contestController.updateContest,
+  contestController.updateContest
 );
 router.get(
-    '/downloadFile/:fileName',
-    checkToken.checkToken,
-    contestController.downloadFile,
-  );
+  '/downloadFile/:fileName',
+  //checkToken.checkToken,
+  checkAuth.checkAccessToken,
+  contestController.downloadFile
+);
 
-  module.exports = router;
+module.exports = router;
