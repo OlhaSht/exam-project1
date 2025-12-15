@@ -40,7 +40,7 @@ function CatalogListContainer(props) {
         <DialogList
           userId={id}
           preview={getDialogsPreview()}
-          removeChat={removeChatFromCatalog()}
+          removeChat={removeChatFromCatalog}
         />
       ) : (
         <CatalogList catalogList={catalogList} />

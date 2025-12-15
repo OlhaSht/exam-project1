@@ -83,14 +83,19 @@ export const changeChatBlock = (data) => http.put('/chat/blackList', data);
 
 // CATALOG
 export const getCatalogList = (data) => http.get('/catalog/getCatalogs', data);
+
 export const addChatToCatalog = (data) =>
   http.post('/catalog/addNewChatToCatalog', data);
+
 export const createCatalog = (data) =>
   http.post('/catalog/createCatalog', data);
+
 export const deleteCatalog = (catalogId) =>
   http.delete(`/catalog/deleteCatalog?catalogId=${catalogId}`);
+
 export const removeChatFromCatalog = (data) =>
   http.delete('/catalog/removeChatFromCatalog', data);
+
 export const changeCatalogName = (data) =>
   http.put('/catalog/updateNameCatalog', data);
 
