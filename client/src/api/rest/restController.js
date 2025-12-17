@@ -96,8 +96,10 @@ export const deleteCatalog = (catalogId) =>
 export const removeChatFromCatalog = (data) =>
   http.delete('/catalog/removeChatFromCatalog', data);
 
-export const changeCatalogName = (data) =>
-  http.put('/catalog/updateNameCatalog', data);
+// export const changeCatalogName = (data) =>
+//   http.put('/catalog/updateNameCatalog', data);
+export const changeCatalogName = ({ catalogId, catalogName }) =>
+  http.put(`/catalog/updateNameCatalog/${catalogId}`, { catalogName });
 
 // MODERATOR
 export const getAllOffersForModerator = ({ page = 1, limit = 5 }) =>
