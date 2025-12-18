@@ -84,8 +84,8 @@ export const changeChatBlock = (data) => http.put('/chat/blackList', data);
 // CATALOG
 export const getCatalogList = (data) => http.get('/catalog/getCatalogs', data);
 
-export const addChatToCatalog = (data) =>
-  http.post('/catalog/addNewChatToCatalog', data);
+export const addChatToCatalog = ({ catalogId, chatId }) =>
+  http.post(`/catalog/addNewChatToCatalog/${catalogId}`, { chatId });
 
 export const createCatalog = (data) =>
   http.post('/catalog/createCatalog', data);

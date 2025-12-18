@@ -27,7 +27,7 @@ router.put(
 );
 
 router.post(
-  '/addNewChatToCatalog',
+  '/addNewChatToCatalog/:catalogId',
   checkAuth.checkAccessToken,
   //checkToken.checkToken,
   catalogSQL.addNewChatToCatalog

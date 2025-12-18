@@ -1,4 +1,4 @@
-const { Catalog, Message } = require('../../models');
+const { Catalog, Message, CatalogConversations } = require('../../models');
 
 module.exports.createCatalog = async (req, res, next) => {
   try {
@@ -43,9 +43,6 @@ module.exports.updateNameCatalog = async (req, res, next) => {
   try {
     const { catalogId } = req.params;
     const { catalogName } = req.body;
-    console.log('params:', req.params);
-    console.log('body:', req.body);
-
     const [updatedRowCount, [updatedCatalog]] = await Catalog.update(
       { catalogName },
       {
@@ -62,22 +59,56 @@ module.exports.updateNameCatalog = async (req, res, next) => {
     }
     res.send(updatedCatalog);
   } catch (err) {
-    console.error('UPDATE CATALOG ERROR:::::::::::::::', err);
     next(err);
   }
 };
 
 //----------------------------------------------------------------
 
+// module.exports.addNewChatToCatalog = async (req, res, next) => {
+//   try {
+//     const { catalogId } = req.params;
+//     const catalog = await Catalog.findByPk(catalogId);
+//
+//     if (!catalog) {
+//       return res.status(404).send({ message: 'Catalog not found' });
+//     }
+//     const updatedChats = [
+//       ...new Set([...catalog.chats, req.body.chatId]),
+//     ];
+//
+//     await catalog.update({ chats: updatedChats });
+//     res.send(catalog);
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
 module.exports.addNewChatToCatalog = async (req, res, next) => {
   try {
-    const catalog = await Catalog.findByPk(req.body.catalogId);
+    const { catalogId } = req.params;
+    const { chatId } = req.body;
+    console.log('params:', req.params);
+    console.log('body:', req.body);
+
+    if (!chatId) {
+      return res.status(400).send({ message: 'chatId is required' });
+    }
+
+    const catalog = await Catalog.findByPk(catalogId);
+
     if (!catalog) {
       return res.status(404).send({ message: 'Catalog not found' });
     }
-    const updatedChats = [...new Set([...catalog.chats, req.body.chatId])];
-    await catalog.update({ chats: updatedChats });
-    res.send(catalog);
+
+    await CatalogConversations.findOrCreate({
+      where: {
+        catalogId,
+        conversationId: chatId,
+      },
+    });
+
+    res.send({ success: true });
   } catch (err) {
     next(err);
   }
