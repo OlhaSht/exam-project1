@@ -12,17 +12,26 @@ const handlerError = require('./handlerError/handler');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true 
-}));
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
-app.use('/public', express.static('public'));
+// app.use('/public', express.static('public'));
+const path = require('path');
+app.use('/public', express.static(path.resolve(__dirname, '..', 'public')));
+console.log(
+  'STATIC DIR:::::::::::::::::::::::>>>>>>>>>>>>>',
+  path.resolve(__dirname, '..', 'public')
+);
 app.use(router);
 app.use(handlerError);
 
-
 const server = http.createServer(app);
-server.listen(PORT, () =>  console.log(`Example app listening on port ${PORT}!`));
+server.listen(PORT, () =>
+  console.log(`Example app listening on port ${PORT}!`)
+);
 controller.createConnection(server);

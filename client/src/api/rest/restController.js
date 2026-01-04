@@ -23,8 +23,10 @@ export const updateUser = (data) => http.put('/user/updateUser', data);
 
 // CONTESTS
 export const updateContest = (data) => http.put('/contest/updateContest', data);
+
 export const dataForContest = (data) =>
   http.post('/contest/dataForContest', data);
+
 export const getCustomersContests = (data) =>
   http.get('/contest/getCustomersContests', {
     params: {
@@ -33,6 +35,7 @@ export const getCustomersContests = (data) =>
       status: data.contestStatus,
     },
   });
+
 export const getActiveContests = ({
   offset,
   limit,
@@ -63,8 +66,10 @@ export const downloadContestFile = (data) =>
 
 // OFFER
 export const setNewOffer = (data) => http.post('/offer/setNewOffer', data);
+
 export const setOfferStatus = (data) =>
   http.patch('/offer/setOfferStatus', data);
+
 export const getApprovedOffersForCustomer = () =>
   http.get('/offer/getApprovedOffersForCustomer');
 
