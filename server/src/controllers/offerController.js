@@ -9,15 +9,12 @@ module.exports.setNewOffer = async (req, res, next) => {
   const obj = {};
   if (req.body.contestType === CONSTANTS.LOGO_CONTEST) {
     obj.fileName = req.file.filename;
-    //(obj.fileName = `images/${req.file.filename}`),
     obj.originalFileName = req.file.originalname;
   } else {
     obj.text = req.body.offerData;
   }
   obj.userId = req.tokenData.userId;
   obj.contestId = req.body.contestId;
-  console.log('BODY:', req.body);
-  console.log('FILE:', req.file);
 
   try {
     const result = await contestQueries.createOffer(obj);
@@ -26,8 +23,6 @@ module.exports.setNewOffer = async (req, res, next) => {
     controller
       .getNotificationController()
       .emitEntryCreated(req.body.customerId);
-    // const User = Object.assign({}, req.tokenData, { id: req.tokenData.userId });
-    // res.send(Object.assign({}, result, { User }));
     const userFromDb = await db.Users.findByPk(req.tokenData.userId, {
       attributes: ['id', 'firstName', 'lastName', 'email', 'avatar', 'rating'],
     });

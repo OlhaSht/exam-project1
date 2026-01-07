@@ -11,6 +11,7 @@ const handlerError = require('./handlerError/handler');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+const path = require('path');
 
 app.use(
   cors({
@@ -20,13 +21,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
-// app.use('/public', express.static('public'));
-const path = require('path');
 app.use('/public', express.static(path.resolve(__dirname, '..', 'public')));
-console.log(
-  'STATIC DIR:::::::::::::::::::::::>>>>>>>>>>>>>',
-  path.resolve(__dirname, '..', 'public')
-);
 app.use(router);
 app.use(handlerError);
 
