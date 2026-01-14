@@ -1,6 +1,6 @@
 const express = require('express');
 const basicMiddlewares = require('../middlewares/basicMiddlewares');
-const checkToken = require('../middlewares/checkToken');
+//const checkToken = require('../middlewares/checkToken');
 const checkAuth = require('../middlewares/authTokenMw');
 const validators = require('../middlewares/validators');
 const upload = require('../utils/fileUpload');
@@ -20,7 +20,8 @@ router.post(
 
 router.post(
   '/cashout',
-  checkToken.checkToken,
+  //checkToken.checkToken,
+  checkAuth.checkAccessToken,
   basicMiddlewares.onlyForCreative,
   financeController.cashout
   // userController.cashout,
@@ -28,7 +29,8 @@ router.post(
 
 router.put(
   '/changeMark',
-  checkToken.checkToken,
+  //checkToken.checkToken,
+  checkAuth.checkAccessToken,
   basicMiddlewares.onlyForCustomer,
   financeController.changeMark
 );
