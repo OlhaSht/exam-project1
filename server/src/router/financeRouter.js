@@ -1,6 +1,5 @@
 const express = require('express');
 const basicMiddlewares = require('../middlewares/basicMiddlewares');
-//const checkToken = require('../middlewares/checkToken');
 const checkAuth = require('../middlewares/authTokenMw');
 const validators = require('../middlewares/validators');
 const upload = require('../utils/fileUpload');
@@ -9,7 +8,6 @@ const router = express.Router();
 
 router.post(
   '/pay',
-  // checkToken.checkToken,
   checkAuth.checkAccessToken,
   basicMiddlewares.onlyForCustomer,
   upload.uploadContestFiles,
@@ -20,16 +18,13 @@ router.post(
 
 router.post(
   '/cashout',
-  //checkToken.checkToken,
   checkAuth.checkAccessToken,
   basicMiddlewares.onlyForCreative,
   financeController.cashout
-  // userController.cashout,
 );
 
 router.put(
   '/changeMark',
-  //checkToken.checkToken,
   checkAuth.checkAccessToken,
   basicMiddlewares.onlyForCustomer,
   financeController.changeMark
