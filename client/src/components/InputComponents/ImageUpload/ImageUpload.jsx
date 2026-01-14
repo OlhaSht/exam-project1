@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useField } from 'formik';
 
 const ImageUpload = (props) => {
-  const [field, helpers] = useField(props.name);
+  const [field, meta, helpers] = useField(props.name);
   const { uploadContainer, inputContainer, imgStyle } = props.classes;
 
   const onChange = (e) => {
