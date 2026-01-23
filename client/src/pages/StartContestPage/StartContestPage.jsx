@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { updateBundle } from '../../store/slices/bundleSlice';
 import BundleBox from '../../components/BundleBox/BundleBox';

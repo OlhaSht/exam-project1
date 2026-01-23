@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -13,6 +13,7 @@ import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
 import TryAgain from '../TryAgain/TryAgain';
 import Schems from '../../utils/validators/validationSchems';
 import OptionalSelects from '../OptionalSelects/OptionalSelects';
+import ButtonGroup from '../ButtonGroup/ButtonGroup';
 
 const variableOptions = {
   [CONSTANTS.NAME_CONTEST]: {
@@ -156,6 +157,7 @@ function ContestForm(props) {
             ) : null}
           </Form>
         </Formik>
+        <ButtonGroup />
       </div>
     </>
   );
