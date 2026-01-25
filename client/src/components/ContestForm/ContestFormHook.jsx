@@ -14,6 +14,7 @@ import TryAgain from '../TryAgain/TryAgain';
 import Schems from '../../utils/validators/validationSchems';
 import OptionalSelects from '../OptionalSelects/OptionalSelects';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
+import ButtonGroupInput from '../ButtonGroup/ButtonGroupInput';
 
 const variableOptions = {
   [CONSTANTS.NAME_CONTEST]: {
@@ -157,7 +158,7 @@ function ContestForm(props) {
             ) : null}
           </Form>
         </Formik>
-        <ButtonGroup />
+        {props.contestType === CONSTANTS.NAME_CONTEST && <ButtonGroupInput />}
       </div>
     </>
   );
