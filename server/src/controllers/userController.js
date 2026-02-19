@@ -2,24 +2,27 @@ const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../constants');
 const NotUniqueEmail = require('../errors/NotUniqueEmail');
 const userQueries = require('./queries/userQueries');
-const {Users} = require('../models');
-
+const { Users } = require('../models');
 
 module.exports.login = async (req, res, next) => {
   try {
     const foundUser = await userQueries.findUser({ email: req.body.email });
     await userQueries.passwordCompare(req.body.password, foundUser.password);
-    const accessToken = jwt.sign({
-      firstName: foundUser.firstName,
-      userId: foundUser.id,
-      role: foundUser.role,
-      lastName: foundUser.lastName,
-      avatar: foundUser.avatar,
-      displayName: foundUser.displayName,
-      balance: foundUser.balance,
-      email: foundUser.email,
-      rating: foundUser.rating,
-    }, CONSTANTS.JWT_SECRET, { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME });
+    const accessToken = jwt.sign(
+      {
+        firstName: foundUser.firstName,
+        userId: foundUser.id,
+        role: foundUser.role,
+        lastName: foundUser.lastName,
+        avatar: foundUser.avatar,
+        displayName: foundUser.displayName,
+        balance: foundUser.balance,
+        email: foundUser.email,
+        rating: foundUser.rating,
+      },
+      CONSTANTS.JWT_SECRET,
+      { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
+    );
     await userQueries.updateUser({ accessToken }, foundUser.id);
     res.send({ token: accessToken });
   } catch (err) {
@@ -30,22 +33,25 @@ module.exports.login = async (req, res, next) => {
 module.exports.registration = async (req, res, next) => {
   try {
     const newUser = await userQueries.userCreation(req.body);
-    
-    const accessToken = jwt.sign({
-      firstName: newUser.firstName,
-      userId: newUser.id,
-      role: newUser.role,
-      lastName: newUser.lastName,
-      avatar: newUser.avatar,
-      displayName: newUser.displayName,
-      balance: newUser.balance,
-      email: newUser.email,
-      rating: newUser.rating,
-    }, CONSTANTS.JWT_SECRET, { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME });
-    
+
+    const accessToken = jwt.sign(
+      {
+        firstName: newUser.firstName,
+        userId: newUser.id,
+        role: newUser.role,
+        lastName: newUser.lastName,
+        avatar: newUser.avatar,
+        displayName: newUser.displayName,
+        balance: newUser.balance,
+        email: newUser.email,
+        rating: newUser.rating,
+      },
+      CONSTANTS.JWT_SECRET,
+      { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
+    );
+
     await userQueries.updateUser({ accessToken }, newUser.id);
     return res.status(201).send({ token: accessToken });
-
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       return next(new NotUniqueEmail());
@@ -56,11 +62,13 @@ module.exports.registration = async (req, res, next) => {
 
 module.exports.getUser = async (req, res, next) => {
   try {
-    const data = await Users.findByPk(req.tokenData.userId);
-    // console.log('Token data::::::::::::::::', data);
+    const data = await Users.findByPk(req.tokenData.userId, {
+      attributes: { exclude: ['password'] },
+    });
+    //console.log('Token data::::::::::::::::', data);
     res.status(200).send(data);
   } catch (err) {
-    if(err.res.status === 500){
+    if (err.res.status === 500) {
       return null;
     }
     next(err);
@@ -72,8 +80,10 @@ module.exports.updateUser = async (req, res, next) => {
     if (req.file) {
       req.body.avatar = req.file.filename;
     }
-    const updatedUser = await userQueries.updateUser(req.body,
-      req.tokenData.userId);
+    const updatedUser = await userQueries.updateUser(
+      req.body,
+      req.tokenData.userId
+    );
     res.send({
       firstName: updatedUser.firstName,
       lastName: updatedUser.lastName,
@@ -88,4 +98,3 @@ module.exports.updateUser = async (req, res, next) => {
     next(err);
   }
 };
-
