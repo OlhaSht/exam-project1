@@ -1,30 +1,30 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('CatalogConversations', {
-      // id: {
-      //   type: Sequelize.INTEGER,
-      //   autoIncrement: true,
-      //   primaryKey: true,
-      // },
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       catalogId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'Catalogs',
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        allowNull: false,
       },
       conversationId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'Conversations',
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -37,13 +37,14 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
     });
+    await queryInterface.addConstraint('CatalogConversations', {
+      fields: ['catalogId', 'conversationId'],
+      type: 'unique',
+      name: 'unique_catalog_conversation_pair',
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('CatalogConversations');
   },
 };
-
-
-
-  

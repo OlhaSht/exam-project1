@@ -1,57 +1,38 @@
 module.exports = (sequelize, DataTypes) => {
-  const CatalogConversations = sequelize.define('CatalogConversations', {
-    catalogId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Catalogs',
-        key: 'id',
+  const CatalogConversations = sequelize.define(
+    'CatalogConversations',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-      allowNull: false,
-    },
-    conversationId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Conversations',
-        key: 'id',
+      catalogId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Catalogs',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false,
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-      allowNull: false,
+      conversationId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Conversations',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false,
+      },
     },
-  }, {
-    timestamps: false, 
-    tableName: 'CatalogConversations', 
-  });
+    {
+      timestamps: true,
+      tableName: 'CatalogConversations',
+    }
+  );
 
   return CatalogConversations;
 };
-
-
-
-// module.exports = (sequelize, DataTypes) => {
-//     const CatalogConversations = sequelize.define('CatalogConversations', {
-//       catalogId: {
-//         type: DataTypes.INTEGER,
-//         references: {
-//           model: 'Catalogs',
-//           key: 'id',
-//         },
-//         allowNull: false,
-//       },
-//       conversationId: {
-//         type: DataTypes.INTEGER,
-//         references: {
-//           model: 'Conversations',
-//           key: 'id',
-//         },
-//         allowNull: false,
-//       },
-//     }, {
-//       timestamps: false,
-//     });
-  
-//     return CatalogConversations;
-//   };
-  
