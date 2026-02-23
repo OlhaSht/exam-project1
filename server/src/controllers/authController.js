@@ -1,77 +1,92 @@
 const { Users, RefreshToken } = require('../models');
 const AuthService = require('../services/authService');
-const {RefreshTokenMissingError, RefreshTokenNotFoundError} = require('../errors/RefreshTokenErrors');
-const {InvalidUserAuthentication, InvalidUserData, RefreshTokenNotProvidedError} = require('../errors/AuthTokenError');
+const {
+  RefreshTokenMissingError,
+  RefreshTokenNotFoundError,
+} = require('../errors/RefreshTokenErrors');
+const {
+  InvalidUserAuthentication,
+  InvalidUserData,
+  RefreshTokenNotProvidedError,
+} = require('../errors/AuthTokenError');
 
 module.exports.login = async (req, res, next) => {
   try {
     const {
-      body: { email, password }
-    } = req
+      body: { email, password },
+    } = req;
     const user = await Users.findOne({
-      where: { email }
+      where: { email },
     });
     if (user && (await user.comparePassword(password))) {
-      const data = await AuthService.createSession(user)
-      res.cookie('refreshToken', data.tokenPair.refresh, {
-        httpOnly: true,
-        secure: false,
-        path: '/', 
-        // secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: 30 * 24 * 60 * 60 * 1000
-      })
-
-      return res.status(200).send({accessToken:data.tokenPair.access})
-    }
-    next(new InvalidUserAuthentication())
-  } catch (error) {
-    next(error)
-  }
-};
-
-module.exports.registration = async (req, res, next) => {
-  try {
-    const { body } = req
-    const user = await Users.create(body)
-    if (user) {
-      const data = await AuthService.createSession(user)
+      const data = await AuthService.createSession(user);
       res.cookie('refreshToken', data.tokenPair.refresh, {
         httpOnly: true,
         secure: false,
         path: '/',
         // secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
-        maxAge: 30 * 24 * 60 * 60 * 1000
-      })
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
+
+      return res.status(200).send({ accessToken: data.tokenPair.access });
+    }
+    next(new InvalidUserAuthentication());
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.registration = async (req, res, next) => {
+  try {
+    const { body } = req;
+    const user = await Users.create(body);
+    if (user) {
+      const data = await AuthService.createSession(user);
+      res.cookie('refreshToken', data.tokenPair.refresh, {
+        httpOnly: true,
+        secure: false,
+        path: '/',
+        // secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
       console.log(':::::::::::', data);
-      return res.status(200).send({accessToken:data.tokenPair.access})
+      return res.status(200).send({ accessToken: data.tokenPair.access });
     }
     next(new InvalidUserData());
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
 module.exports.refresh = async (req, res, next) => {
-  try { 
+  try {
     const refreshToken = req.cookies?.refreshToken;
-    console.log('refreshToken-----', refreshToken)
+    console.log('refreshToken-----', refreshToken);
     if (!refreshToken) {
       return next(new RefreshTokenMissingError());
     }
     const refreshTokenInstance = await RefreshToken.findOne({
-      where: {value: refreshToken}})
+      where: { value: refreshToken },
+    });
 
-      console.log('🍪 RefreshToken, from cookies:', req.cookies?.refreshToken);
-      console.log('🍪 RefreshToken, from database:', refreshTokenInstance);
-      console.log('req.cookies.refreshToken:', req.cookies.refreshToken, req.cookies.refreshToken?.length);
-      console.log('DB token length:', (await RefreshToken.findOne())?.value.length);
+    console.log('🍪 RefreshToken, from cookies:', req.cookies?.refreshToken);
+    console.log('🍪 RefreshToken, from database:', refreshTokenInstance);
+    console.log(
+      'req.cookies.refreshToken:',
+      req.cookies.refreshToken,
+      req.cookies.refreshToken?.length
+    );
+    console.log(
+      'DB token length:',
+      (await RefreshToken.findOne())?.value.length
+    );
 
     if (!refreshTokenInstance) {
       return next(new RefreshTokenNotFoundError());
     }
-    const data = await AuthService.refreshSession(refreshTokenInstance)
+    const data = await AuthService.refreshSession(refreshTokenInstance);
     res.cookie('refreshToken', data.tokenPair.refresh, {
       httpOnly: true,
       path: '/',
@@ -82,11 +97,10 @@ module.exports.refresh = async (req, res, next) => {
     });
     console.log('tokenPair:::::::::::::::::', data);
     res.status(200).send({
-      accessToken: data.tokenPair.access
-      });
-    
+      accessToken: data.tokenPair.access,
+    });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -98,13 +112,13 @@ module.exports.logout = async (req, res, next) => {
       return next(new RefreshTokenNotProvidedError());
     }
     await RefreshToken.destroy({
-      where: {value: refreshToken}
+      where: { value: refreshToken },
     });
-    
+
     res.clearCookie('refreshToken', {
       httpOnly: true,
       sameSite: 'strict',
-      secure: false, 
+      secure: false,
       path: '/',
     });
 

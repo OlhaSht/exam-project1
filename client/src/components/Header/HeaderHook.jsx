@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import styles from './Header.module.sass';
@@ -15,16 +15,25 @@ function Header(props) {
     }
   }, []);
 
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
   const logOut = async () => {
+    if (isLoggingOut) return;
+
+    setIsLoggingOut(true);
     try {
       await apilogout();
-    } catch (error) {
-      console.log('Logout error', error);
-    } finally {
       localStorage.removeItem('accessToken');
       props.logout();
       props.history.replace('/login');
+    } catch (error) {
+      console.log('Logout error', error);
     }
+    // } finally {
+    //   localStorage.removeItem('accessToken');
+    //   props.logout();
+    //   props.history.replace('/login');
+    // }
   };
 
   const startContests = () => {
