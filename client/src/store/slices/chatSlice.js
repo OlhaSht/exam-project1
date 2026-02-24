@@ -58,19 +58,11 @@ export const getDialogMessages = decorateAsyncThunk({
     const { data } = await restController.getDialog(interlocutorId);
     return data;
   },
-
-  // thunk: async payload => {
-  //   const { data } = await restController.getDialog(payload);
-  //   console.log('=====>>>>', data);
-  //   console.log('////////////', payload);
-  //   return data;
-  // },
 });
 
 const getDialogMessagesExtraReducers = createExtraReducers({
   thunk: getDialogMessages,
   fulfilledReducer: (state, { payload }) => {
-    console.log('|||||||||||||||||', payload);
     state.messages = payload.messages;
     state.interlocutor = payload.interlocutor;
   },
@@ -103,7 +95,6 @@ const sendMessageExtraReducers = createExtraReducers({
         isNew = false;
       }
     });
-    console.log('=====', payload);
     if (isNew) {
       messagesPreview.push(payload.preview);
     }
@@ -121,8 +112,6 @@ export const changeChatFavorite = decorateAsyncThunk({
   key: `${CHAT_SLICE_NAME}/changeChatFavorite`,
   thunk: async (payload) => {
     const { data } = await restController.changeChatFavorite(payload);
-    console.log('in changeChatFavorite:-----', payload);
-    console.log('Data returned from API in changeChatFavorite:-----', data);
     return data;
   },
 });
@@ -130,7 +119,6 @@ export const changeChatFavorite = decorateAsyncThunk({
 const changeChatFavoriteExtraReducers = createExtraReducers({
   thunk: changeChatFavorite,
   fulfilledReducer: (state, { payload }) => {
-    console.log('Payload received:ЖЖЖЖЖЖЖЖЖ', payload);
     const { messagesPreview } = state;
     messagesPreview.forEach((preview) => {
       if (isEqual(preview.participants, payload.participants))
@@ -243,11 +231,6 @@ export const deleteCatalog = decorateAsyncThunk({
     await restController.deleteCatalog(catalogId);
     return catalogId;
   },
-
-  // thunk: async payload => {
-  //   await restController.deleteCatalog(payload);
-  //   return payload;
-  // },
 });
 
 const deleteCatalogExtraReducers = createExtraReducers({

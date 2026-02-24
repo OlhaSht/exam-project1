@@ -223,7 +223,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  // getData: (data) => dispatch(getApprovedOffersForCustomer(data)),
   getData: (data) => dispatch(getContestById(data)),
   setOfferStatus: (data) => dispatch(setOfferStatus(data)),
   clearSetOfferStatusError: () => dispatch(clearSetOfferStatusError()),

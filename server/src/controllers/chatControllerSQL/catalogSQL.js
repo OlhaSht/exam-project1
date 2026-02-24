@@ -15,30 +15,6 @@ module.exports.createCatalog = async (req, res, next) => {
 
 //------------------------------------------------------
 
-// module.exports.updateNameCatalog = async (req, res, next) => {
-//   try {
-//
-//     const [updatedRowCount, [updatedCatalog]] = await Catalog.update(
-//       { catalogName: req.body.catalogName },
-//       {
-//         where: {
-//           id: req.body.catalogId,
-//           userId: req.tokenData.userId,
-//         },
-//         returning: true,
-//       }
-//     );
-//     if (updatedRowCount === 0) {
-//       return res.status(404).send({ message: 'Catalog not found' });
-//     }
-
-//     res.send(updatedCatalog);
-//   } catch (err) {
-//     console.error('UPDATE CATALOG ERROR:ЮЮЮЮЮЮЮЮЮЮЮЮ', err);
-//     next(err);
-//   }
-// };
-
 module.exports.updateNameCatalog = async (req, res, next) => {
   try {
     const { catalogId } = req.params;
@@ -65,31 +41,10 @@ module.exports.updateNameCatalog = async (req, res, next) => {
 
 //----------------------------------------------------------------
 
-// module.exports.addNewChatToCatalog = async (req, res, next) => {
-//   try {
-//     const { catalogId } = req.params;
-//     const catalog = await Catalog.findByPk(catalogId);
-//
-//     if (!catalog) {
-//       return res.status(404).send({ message: 'Catalog not found' });
-//     }
-//     const updatedChats = [
-//       ...new Set([...catalog.chats, req.body.chatId]),
-//     ];
-//
-//     await catalog.update({ chats: updatedChats });
-//     res.send(catalog);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
 module.exports.addNewChatToCatalog = async (req, res, next) => {
   try {
     const { catalogId } = req.params;
     const { chatId } = req.body;
-    console.log('params:', req.params);
-    console.log('body:', req.body);
 
     if (!chatId) {
       return res.status(400).send({ message: 'chatId is required' });

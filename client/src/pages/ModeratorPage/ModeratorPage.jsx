@@ -48,8 +48,6 @@ const ModeratorPage = () => {
       });
   };
 
-  console.log('Offers from state:', offers);
-
   if (isFetching) return <p>Loading offers...</p>;
   if (error) return <p>{error}</p>;
 

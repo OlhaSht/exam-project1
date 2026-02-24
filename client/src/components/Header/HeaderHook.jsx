@@ -27,13 +27,8 @@ function Header(props) {
       props.logout();
       props.history.replace('/login');
     } catch (error) {
-      console.log('Logout error', error);
+      console.error('Logout error', error);
     }
-    // } finally {
-    //   localStorage.removeItem('accessToken');
-    //   props.logout();
-    //   props.history.replace('/login');
-    // }
   };
 
   const startContests = () => {

@@ -32,7 +32,7 @@ export const getContests = decorateAsyncThunk({
 });
 
 const reducers = {
-  clearContestsList: state => {
+  clearContestsList: (state) => {
     state.error = null;
     state.contests = [];
   },
@@ -48,7 +48,7 @@ const reducers = {
   }),
 };
 
-const extraReducers = builder => {
+const extraReducers = (builder) => {
   builder.addCase(getContests.pending, pendingReducer);
 
   builder.addCase(getContests.fulfilled, (state, { payload }) => {
@@ -56,18 +56,11 @@ const extraReducers = builder => {
     const merged = [...state.contests, ...payload.contests];
     const uniqueContestsMap = new Map();
     for (const contest of merged) {
-      uniqueContestsMap.set(contest.id, contest); 
+      uniqueContestsMap.set(contest.id, contest);
     }
     state.contests = Array.from(uniqueContestsMap.values());
     state.haveMore = payload.haveMore;
   });
-  
-
-  // builder.addCase(getContests.fulfilled, (state, { payload }) => {
-  //   state.isFetching = false;
-  //   state.contests = [...state.contests, ...payload.contests];
-  //   state.haveMore = payload.haveMore;
-  // });
 
   builder.addCase(getContests.rejected, (state, { payload }) => {
     state.isFetching = false;
@@ -85,10 +78,7 @@ const contestsSlice = createSlice({
 
 const { actions, reducer } = contestsSlice;
 
-export const {
-  clearContestsList,
-  setNewCustomerFilter,
-  setNewCreatorFilter,
-} = actions;
+export const { clearContestsList, setNewCustomerFilter, setNewCreatorFilter } =
+  actions;
 
 export default reducer;

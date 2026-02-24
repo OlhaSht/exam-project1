@@ -53,11 +53,11 @@ const Brief = (props) => {
     const defaultData = {};
     Object.keys(data).forEach((key) => {
       if (data[key]) {
-        //   if (key === 'originalFileName') {
-        //     defaultData.file = { name: data[key] };
-        //   } else {
-        //     defaultData[key] = data[key];
-        //   }
+        if (key === 'originalFileName') {
+          defaultData.file = { name: data[key] };
+        } else {
+          defaultData[key] = data[key];
+        }
       }
     });
     return defaultData;

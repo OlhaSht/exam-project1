@@ -1,6 +1,5 @@
 const express = require('express');
 const basicMiddlewares = require('../middlewares/basicMiddlewares');
-const checkToken = require('../middlewares/checkToken');
 const checkAuth = require('../middlewares/authTokenMw');
 const upload = require('../utils/fileUpload');
 const offerController = require('../controllers/offerController');
@@ -9,7 +8,6 @@ const router = express.Router();
 
 router.post(
   '/setNewOffer',
-  //checkToken.checkToken,
   checkAuth.checkAccessToken,
   upload.uploadLogoFiles,
   basicMiddlewares.canSendOffer,
@@ -18,14 +16,14 @@ router.post(
 
 router.patch(
   '/setOfferStatus',
-  checkToken.checkToken,
+  checkAuth.checkAccessToken,
   basicMiddlewares.onlyForCustomerWhoCreateContest,
   offerController.setOfferStatus
 );
 
 router.get(
   '/getApprovedOffersForCustomer',
-  checkToken.checkToken,
+  checkAuth.checkAccessToken,
   basicMiddlewares.onlyForCustomer,
   customerOfferController.getApprovedOffersForCustomer
 );

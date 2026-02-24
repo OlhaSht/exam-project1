@@ -1,6 +1,5 @@
 const express = require('express');
 const basicMiddlewares = require('../middlewares/basicMiddlewares');
-const checkToken = require('../middlewares/checkToken');
 const checkAuth = require('../middlewares/authTokenMw');
 const contestController = require('../controllers/contestController');
 const upload = require('../utils/fileUpload');
@@ -18,7 +17,6 @@ router.get(
 );
 router.get(
   '/getContestById',
-  // checkToken.checkToken,
   checkAuth.checkAccessToken,
   basicMiddlewares.canGetContest,
   contestController.getContestById
@@ -31,14 +29,12 @@ router.get(
 );
 router.put(
   '/updateContest',
-  //checkToken.checkToken,
   checkAuth.checkAccessToken,
   upload.updateContestFile,
   contestController.updateContest
 );
 router.get(
   '/downloadFile/:fileName',
-  //checkToken.checkToken,
   checkAuth.checkAccessToken,
   contestController.downloadFile
 );

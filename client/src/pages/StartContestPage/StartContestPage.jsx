@@ -9,11 +9,6 @@ import Footer from '../../components/Footer/Footer';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Header from '../../components/Header/HeaderHook';
 
-// const StartContestPage = props => {
-//   if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
-//     props.history.replace('/');
-//   }
-
 const StartContestPage = (props) => {
   useEffect(() => {
     if (props.userStore.data?.role !== CONSTANTS.CUSTOMER) {

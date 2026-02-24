@@ -142,7 +142,7 @@ const CreatorDashboard = () => {
     if (parsed && !contests.length) {
       getContestsList(creatorFilter);
     }
-  }, [location.search]); // аналог componentWillReceiveProps
+  }, [location.search]);
 
   // === render parts ===
   const renderSelectType = () => (

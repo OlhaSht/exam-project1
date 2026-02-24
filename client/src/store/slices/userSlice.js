@@ -68,7 +68,6 @@ const extraReducers = (builder) => {
   builder.addCase(getUser.pending, (state) => {
     state.isFetching = true;
     state.error = null;
-    //state.data = null;
   });
   builder.addCase(getUser.fulfilled, (state, { payload }) => {
     state.isFetching = false;

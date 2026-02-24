@@ -15,16 +15,15 @@ class Header extends React.Component {
   }
 
   logOut = async () => {
-  try {
-    await apilogout(); 
-  } catch (error) {
-    console.log('Logout error', error);
-  } finally {
-    localStorage.removeItem('accessToken');
-    this.props.logout();
-    this.props.history.replace('/login');
-  }
-};
+    try {
+      await apilogout();
+    } catch (error) {
+    } finally {
+      localStorage.removeItem('accessToken');
+      this.props.logout();
+      this.props.history.replace('/login');
+    }
+  };
 
   startContests = () => {
     this.props.history.push('/startContest');
@@ -56,10 +55,11 @@ class Header extends React.Component {
               </li>
               {this.props.data.role === CONSTANTS.CUSTOMER && (
                 <li>
-                <Link to="/event" style={{ textDecoration: 'none' }}>
-                  <span>Events</span>
-                </Link>
-              </li>)}
+                  <Link to="/event" style={{ textDecoration: 'none' }}>
+                    <span>Events</span>
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link to="/account" style={{ textDecoration: 'none' }}>
                   <span>My Account</span>
@@ -129,12 +129,12 @@ class Header extends React.Component {
           </div>
         </div>
         <div className={styles.navContainer}>
-          <Link to='/'>
-          <img
-            src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
-            className={styles.logo}
-            alt="blue_logo"
-          />
+          <Link to="/">
+            <img
+              src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
+              className={styles.logo}
+              alt="blue_logo"
+            />
           </Link>
           <div className={styles.leftNav}>
             <div className={styles.nav}>
@@ -180,7 +180,7 @@ class Header extends React.Component {
                   />
                   <ul>
                     <li>
-                      <Link to ="/atom">HOW IT WORKS</Link>
+                      <Link to="/atom">HOW IT WORKS</Link>
                       {/* <a href="https://olhasht.github.io/Layout/">HOW IT WORKS</a> */}
                     </li>
                     <li>

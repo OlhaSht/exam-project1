@@ -1,42 +1,16 @@
 const express = require('express');
-const checkToken = require('../middlewares/checkToken');
 const checkAuth = require('../middlewares/authTokenMw');
 const chatSQL = require('../controllers/chatControllerSQL/chatSQL');
 const router = express.Router();
 
-router.post(
-  '/newMessage',
-  checkToken.checkToken,
-  chatSQL.addMessage,
-  // chatController.addMessage,
-);
+router.post('/newMessage', checkAuth.checkAccessToken, chatSQL.addMessage);
 
-router.get(
-  '/getChat',
-  checkToken.checkToken,
-  chatSQL.getChat,
-  // chatController.getChat,
-);
+router.get('/getChat', checkAuth.checkAccessToken, chatSQL.getChat);
 
-router.get(
-  '/getPreview',
-  checkAuth.checkAccessToken,
-  chatSQL.getPreview,
-  // chatController.getPreview,
-);
+router.get('/getPreview', checkAuth.checkAccessToken, chatSQL.getPreview);
 
-router.put(
-  '/blackList',
-  checkToken.checkToken,
-  chatSQL.blackList,
-  // chatController.blackList,
-);
+router.put('/blackList', checkAuth.checkAccessToken, chatSQL.blackList);
 
-router.put(
-  '/favorite',
-  checkToken.checkToken,
-  chatSQL.favoriteChat,
-  // chatController.favoriteChat,
-);
+router.put('/favorite', checkAuth.checkAccessToken, chatSQL.favoriteChat);
 
 module.exports = router;

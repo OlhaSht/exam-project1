@@ -18,7 +18,6 @@ const initialState = {
 export const updateContest = decorateAsyncThunk({
   key: `${CONTEST_UPDATION_SLICE_NAME}/updateContest`,
   thunk: async (payload, { dispatch }) => {
-    console.log('payload updateContest====', payload)
     const { data } = await restController.updateContest(payload);
     dispatch(updateStoreAfterUpdateContest(data));
   },
@@ -28,7 +27,7 @@ const reducers = {
   clearContestUpdationStore: () => initialState,
 };
 
-const extraReducers = builder => {
+const extraReducers = (builder) => {
   builder.addCase(updateContest.pending, pendingReducer);
   builder.addCase(updateContest.fulfilled, fulfilledReducer);
   builder.addCase(updateContest.rejected, rejectedReducer);

@@ -21,7 +21,6 @@ const ChatHeader = (props) => {
   };
 
   const isFavorite = (chatData, userId) => {
-    console.log('....', chatData);
     const { favoriteList, participants } = chatData;
     return favoriteList[participants.indexOf(userId)];
   };
@@ -99,7 +98,6 @@ const mapStateToProps = (state) => {
   const { interlocutor, chatData } = state.chatStore;
   return { interlocutor, chatData };
 };
-
 
 const mapDispatchToProps = (dispatch) => ({
   backToDialogList: () => dispatch(backToDialogList()),

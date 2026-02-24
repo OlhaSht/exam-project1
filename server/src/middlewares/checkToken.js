@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../constants');
 const TokenError = require('../errors/TokenError');
-const userQueries =require('../controllers/queries/userQueries');
+const userQueries = require('../controllers/queries/userQueries');
 
 module.exports.checkAuth = async (req, res, next) => {
   const accessToken = req.headers.authorization;
@@ -21,7 +21,7 @@ module.exports.checkAuth = async (req, res, next) => {
     //   balance: foundUser.balance,
     //   email: foundUser.email,
     // });
-        req.tokenData = {
+    req.tokenData = {
       firstName: foundUser.firstName,
       lastName: foundUser.lastName,
       role: foundUser.role,
@@ -31,7 +31,7 @@ module.exports.checkAuth = async (req, res, next) => {
       balance: foundUser.balance,
       email: foundUser.email,
     };
-      next();
+    next();
   } catch (err) {
     next(new TokenError());
   }
@@ -39,8 +39,6 @@ module.exports.checkAuth = async (req, res, next) => {
 
 module.exports.checkToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  console.log('Access Token in mw checkToken11111', authHeader);
-
   if (!authHeader) {
     return next(new TokenError('need token'));
   }
@@ -48,11 +46,9 @@ module.exports.checkToken = (req, res, next) => {
 
   try {
     req.tokenData = jwt.verify(accessToken, CONSTANTS.ACCESS_TOKEN_SECRET);
-    console.log("req.tokenData in mw checkToken>>>>>>>>>", req.tokenData);
     next();
   } catch (err) {
-    console.error("JWT verification failed:", err);
+    console.error('JWT verification failed:', err);
     next(new TokenError());
   }
 };
-

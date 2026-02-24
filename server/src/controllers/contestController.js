@@ -10,7 +10,6 @@ module.exports.dataForContest = async (req, res, next) => {
     const {
       body: { characteristic1, characteristic2 },
     } = req;
-    console.log(req.body, characteristic1, characteristic2);
     const types = [characteristic1, characteristic2, 'industry'].filter(
       Boolean
     );
@@ -151,49 +150,6 @@ module.exports.getCustomersContests = (req, res, next) => {
     })
     .catch((err) => next(new ServerError(err)));
 };
-
-// module.exports.getContests = (req, res, next) => {
-//   const predicates = UtilFunctions.createWhereForAllContests(
-//     req.query.typeIndex,
-//     req.query.contestId,
-//     req.query.industry,
-//     req.query.awardSort
-//   );
-//   console.log('predicates from getContests====', predicates);
-//   db.Contests.findAll({
-//     where: predicates.where,
-//     order: predicates.order,
-//     limit: req.query.limit,
-//     offset: req.query.offset ? req.query.offset : 0,
-//     include: [
-//       {
-//         model: db.Offers,
-//         required: req.query.ownEntries,
-//         where: req.query.ownEntries ? { userId: req.tokenData.userId } : {},
-//         attributes: ['id'],
-//       },
-//     ],
-//   })
-//     .then((contests) => {
-//       console.log('contests from then getContests////', contests);
-//       contests.forEach(
-//         (contest) =>
-//           (contest.dataValues.count = contest.dataValues.Offers.length)
-//       );
-//       let haveMore = true;
-//       if (contests.length === 0) {
-//         haveMore = false;
-//       }
-//       res.send({ contests, haveMore });
-//       console.log('{ contests, haveMore }from then getContests////', {
-//         contests,
-//         haveMore,
-//       });
-//     })
-//     .catch((err) => {
-//       next(new ServerError());
-//     });
-// };
 
 module.exports.getContests = (req, res, next) => {
   const predicates = UtilFunctions.createWhereForAllContests(

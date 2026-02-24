@@ -14,7 +14,6 @@ const CatalogList = (props) => {
   };
 
   const handleDeleteCatalog = (event, catalogId) => {
-    console.log('Удаляем каталог с id:', catalogId); 
     props.deleteCatalog(catalogId);
     event.stopPropagation();
   };

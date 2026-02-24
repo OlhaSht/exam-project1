@@ -1,22 +1,16 @@
 const express = require('express');
 const userController = require('../controllers/userController');
-const checkAuth = require('../middlewares/authTokenMw')
-const checkToken = require('../middlewares/checkToken');
+const checkAuth = require('../middlewares/authTokenMw');
 const upload = require('../utils/fileUpload');
 const router = express.Router();
 
-router.get(
-  '/getUser',
-  checkAuth.checkAccessToken,
-  // checkToken.checkAuth,
-  userController.getUser,
-);
+router.get('/getUser', checkAuth.checkAccessToken, userController.getUser);
 
 router.put(
   '/updateUser',
-  checkToken.checkToken,
+  checkAuth.checkAccessToken,
   upload.uploadAvatar,
-  userController.updateUser,
+  userController.updateUser
 );
 
 module.exports = router;

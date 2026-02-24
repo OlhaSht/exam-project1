@@ -16,8 +16,10 @@ const initialState = {
 export const getModeratorOffers = decorateAsyncThunk({
   key: `${MODERATOR_SLICE_NAME}/getModeratorOffers`,
   thunk: async ({ page = 1, limit = 5 }) => {
-    console.log(`Fetching page ${page} with limit ${limit}`);
-    const { data } = await restController.getAllOffersForModerator({ page, limit });
+    const { data } = await restController.getAllOffersForModerator({
+      page,
+      limit,
+    });
     return data;
   },
 });
@@ -42,7 +44,7 @@ const reducers = {};
 
 const extraReducers = (builder) => {
   builder
-    // Получение офферов
+    // отримання офферів
     .addCase(getModeratorOffers.pending, (state) => {
       state.isFetching = true;
     })
@@ -58,7 +60,7 @@ const extraReducers = (builder) => {
       state.error = payload;
     })
 
-    // Одобрение оффера
+    // зхвалення оффера
     .addCase(approveModeratorOffer.fulfilled, (state, { payload }) => {
       const offer = state.offers.find((offer) => offer.id === payload.offerId);
       if (offer) {
@@ -69,7 +71,7 @@ const extraReducers = (builder) => {
       state.error = payload;
     })
 
-    // Отклонение оффера
+    // відхилення оффера
     .addCase(rejectModeratorOffer.fulfilled, (state, { payload }) => {
       const offer = state.offers.find((offer) => offer.id === payload.offerId);
       if (offer) {

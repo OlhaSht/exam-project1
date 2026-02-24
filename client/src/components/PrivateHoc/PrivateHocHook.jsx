@@ -18,7 +18,6 @@ const PrivateHoc = (WrappedComponent, extraProps = {}) => {
           <Spinner />
         ) : (
           <WrappedComponent {...props} {...extraProps} />
-          //<Component history={props.history} match={props.match} {...props} />
         )}
       </>
     );

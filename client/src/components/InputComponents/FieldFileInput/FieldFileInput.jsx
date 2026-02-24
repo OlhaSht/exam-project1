@@ -24,7 +24,6 @@ const FieldFileInput = ({ classes, ...rest }) => {
               {getFileName()}
             </span>
             <input
-              //{...field}
               onChange={(e) => {
                 props.form.setFieldValue(field.name, e.target.files[0]);
               }}

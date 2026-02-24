@@ -108,7 +108,6 @@ const OfferBox = (props) => {
 
   const { data, role, id, contestType } = props;
   const { avatar, firstName, lastName, email, rating } = props.data.User;
-  console.log('USER IN OFFER:жжжжжжж', props.data.User);
   return (
     <div className={styles.offerContainer}>
       {offerStatus()}

@@ -1,4 +1,3 @@
-//import React from 'react';
 import { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -22,20 +21,11 @@ function Dialog(props) {
   useEffect(() => {
     if (props.interlocutor && props.interlocutor?.id) {
       props.getDialog(props.interlocutor.id);
-      //scrollToBottom();
     }
     return () => {
       clearMessageList();
     };
   }, [props.interlocutor?.id]);
-
-  // componentWillReceiveProps(nextProps, nextContext) {
-  //   if (nextProps.interlocutor.id !== props.interlocutor.id)
-  //   props.getDialog(nextProps.interlocutor.id);
-  // }
-  // useEffect(() => {
-  //   props.getDialog(props.interlocutor.id);
-  // }, [props.interlocutor.id]);
 
   useEffect(() => {
     if (props.interlocutor?.id) {
@@ -43,18 +33,12 @@ function Dialog(props) {
     }
   }, [props.interlocutor?.id]);
 
-  // componentWillUnmount() {
-  //   props.clearMessageList();
-  // }
   useEffect(() => {
     return () => {
       clearMessageList();
     };
   }, []);
 
-  // componentDidUpdate() {
-  //   if (messagesEnd.current)scrollToBottom();
-  // }
   useEffect(() => {
     scrollToBottom();
   }, [messagesEnd.current]);
@@ -107,9 +91,7 @@ function Dialog(props) {
     return <span className={styles.messageBlock}>{message}</span>;
   };
 
-  //render() {
   const { chatData, userId } = props;
-  console.log('cd>>>>>>>>>>>>>>>>>>>>>>>>>', chatData);
 
   const isBlackListDefined =
     chatData?.blackList && chatData.blackList.length > 0;
@@ -128,10 +110,8 @@ function Dialog(props) {
       )}
     </>
   );
-  //}
 }
 const mapStateToProps = (state) => {
-  console.log('State in mapStateToProps:::::::', state.chatStore);
   return state.chatStore;
 };
 

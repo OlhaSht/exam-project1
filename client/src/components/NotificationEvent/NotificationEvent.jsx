@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import CONSTANTS from '../../constants';
 
-const NotificationEvent = ({role}) => {
+const NotificationEvent = ({ role }) => {
   useEffect(() => {
-    console.log(role); 
+    console.log(role);
     if (!role) return;
 
     if (role !== CONSTANTS.CUSTOMER) return;
@@ -29,26 +29,27 @@ const NotificationEvent = ({role}) => {
         const notifyTime = new Date(task.notifyDate);
 
         if (isNaN(notifyTime.getTime())) {
-          console.warn("⚠️ Invalid notifyDate:", task.notifyDate);
+          console.warn('⚠️ Invalid notifyDate:', task.notifyDate);
           return;
         }
 
         const notifyString = notifyTime.toISOString().slice(0, 16);
 
         if (notifyString === nowString) {
-            const audio = new Audio(`${CONSTANTS.NOTIFICATION_AUDIO}Marimba-notification-tone.mp3`);
-            console.log(audio);
-            audio.play();
+          const audio = new Audio(
+            `${CONSTANTS.NOTIFICATION_AUDIO}Marimba-notification-tone.mp3`
+          );
+          audio.play();
 
           toast.info(`⏰ You have an event: ${task.eventName}`, {
-            position: "top-right",
-            autoClose: false, 
+            position: 'top-right',
+            autoClose: false,
             closeOnClick: true,
             draggable: true,
           });
         }
       });
-    }, 60000); 
+    }, 60000);
 
     return () => clearInterval(interval);
   }, [role]);
@@ -61,7 +62,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(NotificationEvent);
-
-
-
-

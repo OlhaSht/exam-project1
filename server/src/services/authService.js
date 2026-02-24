@@ -5,7 +5,6 @@ const prepareUser = (user) => _.omit(user.get(), ['password']);
 
 module.exports.createSession = async (user) => {
   const tokenPair = await JwtService.createTokenPair(user);
-  //console.log('TOKEN PAIR authService:', tokenPair);
   const existingTokens = await user.getRefreshTokens();
 
   if (existingTokens.length > 0) {
@@ -16,7 +15,7 @@ module.exports.createSession = async (user) => {
   }
   return {
     user: prepareUser(user),
-    tokenPair
+    tokenPair,
   };
 };
 
@@ -27,6 +26,6 @@ module.exports.refreshSession = async (refreshTokenInstance) => {
 
   return {
     user: prepareUser(user),
-    tokenPair
+    tokenPair,
   };
 };
