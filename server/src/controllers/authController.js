@@ -51,7 +51,6 @@ module.exports.registration = async (req, res, next) => {
         sameSite: 'strict',
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
-      console.log(':::::::::::', data);
       return res.status(200).send({ accessToken: data.tokenPair.access });
     }
     next(new InvalidUserData());
@@ -63,7 +62,6 @@ module.exports.registration = async (req, res, next) => {
 module.exports.refresh = async (req, res, next) => {
   try {
     const refreshToken = req.cookies?.refreshToken;
-    console.log('refreshToken-----', refreshToken);
     if (!refreshToken) {
       return next(new RefreshTokenMissingError());
     }
@@ -71,22 +69,11 @@ module.exports.refresh = async (req, res, next) => {
       where: { value: refreshToken },
     });
 
-    console.log('🍪 RefreshToken, from cookies:', req.cookies?.refreshToken);
-    console.log('🍪 RefreshToken, from database:', refreshTokenInstance);
-    console.log(
-      'req.cookies.refreshToken:',
-      req.cookies.refreshToken,
-      req.cookies.refreshToken?.length
-    );
-    console.log(
-      'DB token length:',
-      (await RefreshToken.findOne())?.value.length
-    );
-
     if (!refreshTokenInstance) {
       return next(new RefreshTokenNotFoundError());
     }
     const data = await AuthService.refreshSession(refreshTokenInstance);
+
     res.cookie('refreshToken', data.tokenPair.refresh, {
       httpOnly: true,
       path: '/',
@@ -95,7 +82,7 @@ module.exports.refresh = async (req, res, next) => {
       secure: false,
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 дней
     });
-    console.log('tokenPair:::::::::::::::::', data);
+
     res.status(200).send({
       accessToken: data.tokenPair.access,
     });
@@ -117,7 +104,7 @@ module.exports.logout = async (req, res, next) => {
 
     res.clearCookie('refreshToken', {
       httpOnly: true,
-      sameSite: 'strict',
+      sameSite: 'lax',
       secure: false,
       path: '/',
     });
