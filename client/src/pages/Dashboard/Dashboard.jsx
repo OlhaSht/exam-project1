@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import CONSTANTS from '../../constants';
 import CustomerDashboard from '../../components/CustomerDashboard/CustomerDashboardHook';
 import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard2';
@@ -6,6 +7,9 @@ import Header from '../../components/Header/HeaderHook';
 import ModeratorPage from '../ModeratorPage/ModeratorPage';
 
 const Dashboard = (props) => {
+  if (!props || !props.role) {
+    return <Redirect to="/login" />;
+  }
   const { role, history } = props;
 
   return (
