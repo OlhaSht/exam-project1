@@ -7,29 +7,27 @@ const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
 const userQueries = require('./queries/userQueries');
 
+const getValidCard = async ({ number, cvc, expiry }) => {
+  return db.Banks.findOne({
+    where: {
+      cardNumber: number.replace(/ /g, ''),
+      cvc,
+      expiry,
+    },
+  });
+};
+
+const sendError = (res, message) => res.status(400).send({ message });
+
 //---------------------------------------------------------------------------------------------------------//
 
 module.exports.cashout = async (req, res, next) => {
   let transaction;
   try {
-    const criatorCard = await db.Banks.findOne({
-      where: {
-        cardNumber: req.body.number.replace(/ /g, ''),
-        cvc: req.body.cvc,
-        expiry: req.body.expiry,
-      },
-    });
+    const creatorCard = await getValidCard(req.body);
 
-    if (!criatorCard) {
-      return res.status(400).send({
-        message: 'Invalid card credentials',
-      });
-    }
-
-    if (criatorCard.balance < req.body.sum) {
-      return res.status(400).send({
-        message: 'Insufficient funds',
-      });
+    if (!creatorCard) {
+      return sendError(res, 'Invalid card credentials');
     }
 
     const currentUser = await db.Users.findOne({
@@ -38,10 +36,8 @@ module.exports.cashout = async (req, res, next) => {
       },
     });
 
-    if (currentUser.balance < req.body.sum) {
-      return res.status(400).send({
-        message: 'Insufficient balance',
-      });
+    if (Number(currentUser.balance) < Number(req.body.sum)) {
+      return sendError(res, 'Insufficient balance');
     }
 
     transaction = await db.sequelize.transaction();
@@ -73,7 +69,7 @@ module.exports.cashout = async (req, res, next) => {
       },
       transaction
     );
-    transaction.commit();
+    await transaction.commit();
     res.send({ balance: updatedUser.balance });
   } catch (err) {
     transaction.rollback();
@@ -86,24 +82,14 @@ module.exports.cashout = async (req, res, next) => {
 module.exports.payment = async (req, res, next) => {
   let transaction;
   try {
-    const customerCard = await db.Banks.findOne({
-      where: {
-        cardNumber: req.body.number.replace(/ /g, ''),
-        cvc: req.body.cvc,
-        expiry: req.body.expiry,
-      },
-    });
+    const customerCard = await getValidCard(req.body);
 
     if (!customerCard) {
-      return res.status(400).send({
-        message: 'Invalid card credentials',
-      });
+      return sendError(res, 'Invalid card credentials');
     }
 
-    if (customerCard.balance < req.body.price) {
-      return res.status(400).snd({
-        message: 'Insufficient balance',
-      });
+    if (Number(customerCard.balance) < Number(req.body.price)) {
+      return sendError(res, 'Insufficient balance');
     }
     transaction = await db.sequelize.transaction();
     await bankQueries.updateBankBalance(
@@ -148,7 +134,7 @@ module.exports.payment = async (req, res, next) => {
     transaction.commit();
     res.send();
   } catch (err) {
-    transaction.rollback();
+    await transaction.rollback();
     next(err);
   }
 };
