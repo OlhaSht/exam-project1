@@ -16,6 +16,9 @@ const UserInfo = (props) => {
   };
 
   const { isEdit, changeEditMode, data } = props;
+  if (!data) {
+    return null;
+  }
   const { avatar, firstName, lastName, displayName, email, role, balance } =
     data;
   return (
