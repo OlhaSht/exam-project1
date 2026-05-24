@@ -10,6 +10,12 @@ import { logout as logoutAction } from '../../store/slices/userSlice';
 function Header(props) {
   const { data } = props;
   useEffect(() => {
+    console.log('HEADER EFFECT', {
+      data,
+      isLoggedIn: props.isLoggedIn,
+      token: localStorage.getItem('accessToken'),
+    });
+
     if (!data) {
       props.getUser();
     }

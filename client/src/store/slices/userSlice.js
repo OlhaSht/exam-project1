@@ -10,7 +10,7 @@ const initialState = {
   isFetching: true,
   error: null,
   data: null,
-  isLoggedIn: true,
+  isLoggedIn: false,
 };
 
 export const getUser = createAsyncThunk(
@@ -74,7 +74,13 @@ const extraReducers = (builder) => {
     state.data = payload;
     state.isLoggedIn = true;
   });
-  builder.addCase(getUser.rejected, rejectedReducer);
+  //builder.addCase(getUser.rejected, rejectedReducer);
+  builder.addCase(getUser.rejected, (state, { payload }) => {
+    state.isFetching = false;
+    state.error = payload;
+    state.data = null;
+    state.isLoggedIn = false;
+  });
 
   builder.addCase(updateUser.fulfilled, (state, { payload }) => {
     state.data = { ...state.data, ...payload };
