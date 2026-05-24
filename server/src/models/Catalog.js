@@ -1,5 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    const Catalog = sequelize.define('Catalog', {
+  const Catalog = sequelize.define(
+    'Catalog',
+    {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -9,23 +11,27 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       chats: {
-        type: DataTypes.VIRTUAL, 
+        type: DataTypes.VIRTUAL,
         get() {
           return this.getConversations();
         },
       },
-    }, {
-      timestamps: false, 
+    },
+    {
+      timestamps: false,
+    }
+  );
+
+  Catalog.associate = function (models) {
+    Catalog.belongsToMany(models.Conversation, {
+      foreignKey: 'catalogId',
+      through: 'CatalogConversations',
+      otherKey: 'conversationId',
     });
-    
-    Catalog.associate = (models) => {
-      Catalog.belongsToMany(models.Conversation, {
-        through: 'CatalogConversations', 
-        foreignKey: 'catalogId',
-        otherKey: 'conversationId',
-      });
-    };
-  
-    return Catalog;
+    Catalog.belongsTo(models.Users, {
+      foreignKey: 'userId',
+    });
   };
-  
+
+  return Catalog;
+};

@@ -3,7 +3,8 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class RefreshToken extends Model {
     static associate(models) {
-      RefreshToken.belongsTo(models.User, {
+      console.log('RefreshToken associate called');
+      RefreshToken.belongsTo(models.Users, {
         foreignKey: 'userId',
         as: 'user',
         onDelete: 'CASCADE',

@@ -1,25 +1,35 @@
 module.exports = (sequelize, DataTypes) => {
-    const Conversation = sequelize.define('Conversation', {
+  const Conversation = sequelize.define(
+    'Conversation',
+    {
       participants: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER), 
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
         allowNull: false,
       },
       blackList: {
-        type: DataTypes.ARRAY(DataTypes.BOOLEAN), 
+        type: DataTypes.ARRAY(DataTypes.BOOLEAN),
         allowNull: false,
       },
       favoriteList: {
-        type: DataTypes.ARRAY(DataTypes.BOOLEAN), 
+        type: DataTypes.ARRAY(DataTypes.BOOLEAN),
         allowNull: false,
       },
-    }, {
-      timestamps: true, 
+    },
+    {
+      timestamps: true,
+    }
+  );
+
+  Conversation.associate = (models) => {
+    Conversation.hasMany(models.Message, {
+      foreignKey: 'conversationId',
     });
-    
-    Conversation.associate = (models) => {
-      Conversation.hasMany(models.Message, { foreignKey: 'conversationId' });
-    };
-  
-    return Conversation;
+    Conversation.belongsToMany(models.Catalog, {
+      foreignKey: 'conversationId',
+      through: 'CatalogConversations',
+      otherKey: 'catalogId',
+    });
   };
-  
+
+  return Conversation;
+};

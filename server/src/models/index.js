@@ -1,13 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
+
 const sequelizerc = require(
   path.resolve(__dirname, '..', '..', '.sequelizerc')
 );
+
 const configPath = sequelizerc.config;
 const config = require(configPath)[env];
+
 const db = {};
 
 const sequelize = new Sequelize(
@@ -28,66 +32,79 @@ fs.readdirSync(__dirname)
       sequelize,
       Sequelize.DataTypes
     );
+
     db[model.name] = model;
+    console.log('MODEL:', model.name);
   });
 
-db['Contests'].belongsTo(db['Users'], {
-  foreignKey: 'userId',
-  sourceKey: 'id',
-});
-db['Contests'].hasMany(db['Offers'], {
-  foreignKey: 'contestId',
-  targetKey: 'id',
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+    console.log(`${modelName} associated`);
+  }
 });
 
-db['Users'].hasMany(db['Offers'], { foreignKey: 'userId', targetKey: 'id' });
-db['Users'].hasMany(db['Contests'], { foreignKey: 'userId', targetKey: 'id' });
-db['Users'].hasMany(db['Ratings'], { foreignKey: 'userId', targetKey: 'id' });
-db['Users'].hasMany(db['Message'], { foreignKey: 'sender', targetKey: 'id' });
+// db['Contests'].belongsTo(db['Users'], {
+//   foreignKey: 'userId',
+//   sourceKey: 'id',
+// });
+// db['Contests'].hasMany(db['Offers'], {
+//   foreignKey: 'contestId',
+//   targetKey: 'id',
+// });
 
-db['Offers'].belongsTo(db['Users'], { foreignKey: 'userId', sourceKey: 'id' });
-db['Offers'].belongsTo(db['Contests'], {
-  foreignKey: 'contestId',
-  sourceKey: 'id',
-});
-db['Offers'].hasOne(db['Ratings'], { foreignKey: 'offerId', targetKey: 'id' });
+// db['Users'].hasMany(db['Offers'], { foreignKey: 'userId', targetKey: 'id' });
+// db['Users'].hasMany(db['Contests'], { foreignKey: 'userId', targetKey: 'id' });
+// db['Users'].hasMany(db['Ratings'], { foreignKey: 'userId', targetKey: 'id' });
+// db['Users'].hasMany(db['Message'], { foreignKey: 'sender', targetKey: 'id' });
 
-db['Ratings'].belongsTo(db['Users'], { foreignKey: 'userId', targetKey: 'id' });
-db['Ratings'].belongsTo(db['Offers'], {
-  foreignKey: 'offerId',
-  targetKey: 'id',
-});
+//db['Offers'].belongsTo(db['Users'], { foreignKey: 'userId', sourceKey: 'id' });
+//db['Offers'].belongsTo(db['Contests'], {
+// foreignKey: 'contestId',
+// sourceKey: 'id',
+//});
+//db['Offers'].hasOne(db['Ratings'], { foreignKey: 'offerId', targetKey: 'id' });
+
+// db['Ratings'].belongsTo(db['Users'], { foreignKey: 'userId', targetKey: 'id' });
+// db['Ratings'].belongsTo(db['Offers'], {
+//   foreignKey: 'offerId',
+//   targetKey: 'id',
+// });
 
 // зв'язки для модели Conversation
-db['Conversation'].hasMany(db['Message'], { foreignKey: 'conversationId' });
-db['Conversation'].belongsToMany(db['Catalog'], {
-  through: 'CatalogConversations',
-  foreignKey: 'conversationId',
-  otherKey: 'catalogId',
-});
+
+// db['Conversation'].hasMany(db['Message'], { foreignKey: 'conversationId' });
+// db['Conversation'].belongsToMany(db['Catalog'], {
+//   through: 'CatalogConversations',
+//   foreignKey: 'conversationId',
+//   otherKey: 'catalogId',
+// });
 
 // зв'язки для модели Message
-db['Message'].belongsTo(db['Users'], { foreignKey: 'sender' });
-db['Message'].belongsTo(db['Conversation'], { foreignKey: 'conversationId' });
+
+// db['Message'].belongsTo(db['Users'], { foreignKey: 'sender' });
+// db['Message'].belongsTo(db['Conversation'], { foreignKey: 'conversationId' });
 
 // зв'язки для модели Catalog
-db['Catalog'].belongsToMany(db['Conversation'], {
-  through: 'CatalogConversations',
-  foreignKey: 'catalogId',
-  otherKey: 'conversationId',
-});
-db['Catalog'].belongsTo(db['Users'], { foreignKey: 'userId' });
+
+// db['Catalog'].belongsToMany(db['Conversation'], {
+//   through: 'CatalogConversations',
+//   foreignKey: 'catalogId',
+//   otherKey: 'conversationId',
+// });
+// db['Catalog'].belongsTo(db['Users'], { foreignKey: 'userId' });
 
 // зв'язки для модели CatalogConversations
-db['CatalogConversations'].belongsTo(db['Catalog'], {
-  foreignKey: 'catalogId',
-});
-db['CatalogConversations'].belongsTo(db['Conversation'], {
-  foreignKey: 'conversationId',
-});
 
-db['RefreshToken'].belongsTo(db['Users'], { foreignKey: 'userId', as: 'user' });
-db['Users'].hasMany(db['RefreshToken'], { foreignKey: 'userId' });
+// db['CatalogConversations'].belongsTo(db['Catalog'], {
+//   foreignKey: 'catalogId',
+// });
+// db['CatalogConversations'].belongsTo(db['Conversation'], {
+//   foreignKey: 'conversationId',
+// });
+
+//db['RefreshToken'].belongsTo(db['Users'], { foreignKey: 'userId', as: 'user' });
+//db['Users'].hasMany(db['RefreshToken'], { foreignKey: 'userId' });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

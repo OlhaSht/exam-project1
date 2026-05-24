@@ -33,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'CatalogConversations',
     }
   );
+  CatalogConversations.associate = function (models) {
+    CatalogConversations.belongsTo(models.Catalog, {
+      foreignKey: 'catalogId',
+    });
+    CatalogConversations.belongsTo(models.Conversation, {
+      foreignKey: 'conversationId',
+    });
+  };
 
   return CatalogConversations;
 };
