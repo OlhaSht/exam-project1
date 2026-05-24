@@ -57,7 +57,7 @@ module.exports.getChat = async (req, res, next) => {
     const messages = await Message.findAll({
       include: [
         {
-          model: Conversation,
+          model: db.Conversation,
           where: { participants },
           attributes: [],
         },
@@ -91,7 +91,7 @@ module.exports.getPreview = async (req, res, next) => {
     const conversations = await Message.findAll({
       include: [
         {
-          model: Conversation,
+          model: db.Conversation,
           where: {
             participants: { [Op.contains]: [req.tokenData.userId] },
           },
