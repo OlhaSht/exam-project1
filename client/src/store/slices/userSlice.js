@@ -6,7 +6,7 @@ import { changeEditModeOnUserProfile } from './userProfileSlice';
 const USER_SLICE_NAME = 'user';
 
 const initialState = {
-  isFetching: true,
+  isFetching: false,
   error: null,
   data: null,
   isLoggedIn: false,

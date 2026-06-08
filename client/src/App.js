@@ -22,11 +22,13 @@ import EventPage from './pages/EventPage/EventPage';
 import NotificationEvent from './components/NotificationEvent/NotificationEvent';
 import ModeratorPage from './pages/ModeratorPage/ModeratorPage';
 import AtomPage from './pages/AtomPage/AtomPage';
+//import AuthBootstrap from './components/AuthBootstrap/AuthBootstrap';
 
 class App extends Component {
   render() {
     return (
       <Router history={browserHistory}>
+        {/* <AuthBootstrap /> */}
         <ToastContainer
           position="top-center"
           autoClose={5000}

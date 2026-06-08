@@ -28,7 +28,6 @@ export const checkAuth = decorateAsyncThunk({
     if (token) {
       window.localStorage.setItem(CONSTANTS.ACCESS_TOKEN, token);
     }
-    
     history.replace('/');
   },
 });
@@ -36,7 +35,7 @@ export const checkAuth = decorateAsyncThunk({
 export const refreshToken = decorateAsyncThunk({
   key: `${AUTH_SLICE_NAME}/refreshToken`,
   thunk: async () => {
-    const response = await restController.refreshRequest(); 
+    const response = await restController.refreshRequest();
     const accessToken = response?.data?.tokenPair?.access;
 
     if (accessToken) {
@@ -46,15 +45,14 @@ export const refreshToken = decorateAsyncThunk({
   },
 });
 
-
 const reducers = {
-  clearAuthError: state => {
+  clearAuthError: (state) => {
     state.error = null;
   },
   clearAuth: () => initialState,
 };
 
-const extraReducers = builder => {
+const extraReducers = (builder) => {
   builder.addCase(checkAuth.pending, pendingReducer);
   builder.addCase(checkAuth.fulfilled, fulfilledReducer);
   builder.addCase(checkAuth.rejected, rejectedReducer);
