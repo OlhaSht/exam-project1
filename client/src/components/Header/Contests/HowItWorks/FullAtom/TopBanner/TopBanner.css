@@ -1,0 +1,39 @@
+.header-container {
+  width: 100%;
+  background-color: #343434;
+}
+.header-block {
+  width: 99%;
+  /* height: 45px; */
+  margin: auto;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #19184a;
+}
+.header-link {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 767px) {
+  .header-link {
+    font-size: 14px;
+  }
+  .mobile-part {
+    display: none;
+  }
+}
+
+.header-button {
+  width: 90px;
+  margin: 0 0 0 20px;
+  padding: 8px 8px;
+  border-radius: 8px;
+  border: 1px solid #637cf7;
+  background-color: #19184a;
+  color: #637cf7;
+  font-weight: 700;
+}
