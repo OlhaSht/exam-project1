@@ -1,0 +1,147 @@
+.ways-container {
+  width: 100%;
+  padding-bottom: 150px;
+  background:
+    linear-gradient(
+      271.19deg,
+      rgba(48, 125, 246, 0.05) 0%,
+      rgba(20, 187, 191, 0.05) 100%
+    ),
+    #ffffff;
+}
+.ways-container-info {
+  width: 500px;
+  margin: auto;
+  padding: 10px 15px 10px 15px;
+  text-align: center;
+}
+@media screen and (max-width: 565px) {
+  .ways-container-info {
+    width: 300px;
+  }
+}
+
+.ways-container-marker {
+  width: 80px;
+  margin-top: 55px;
+  margin-left: 40%;
+  padding: 10px 5px 10px 5px;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 20px;
+  color: #377dff;
+  background-color: #377dff1a;
+}
+.ways-container-title {
+  margin-top: 20px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #19184a;
+}
+.ways-container-subtitle {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #19184a;
+}
+
+@media screen and (max-width: 320px) {
+  .ways-container-info {
+    width: 200px;
+  }
+  .ways-container-marker {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ways-container-title {
+    font-size: 24px;
+  }
+}
+
+.ways-content {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin: auto;
+}
+@media screen and (max-width: 992px) {
+  .ways-content {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 576px) {
+  .ways-content {
+    width: 100%;
+  }
+}
+.ways-content-block {
+  width: 33%;
+  margin: 35px 11px 5px 11px;
+  padding: 30px 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  background-color: #fff;
+  box-shadow: 0 16px 32px rgba(0 0 0 / 0.04);
+}
+@media screen and (max-width: 576px) {
+  .ways-content-block {
+    width: 100%;
+    align-items: center;
+  }
+}
+.content-block {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 15px 20px 0 20px;
+}
+.ways-contant-icon {
+  width: 48px;
+  height: 48px;
+}
+.ways-contant-title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.ways-content-info {
+  margin: 10px 0 70px 0;
+  font-size: 16px;
+  color: #828282;
+  line-height: 25px;
+}
+@media screen and (max-width: 576px) {
+  .ways-content-info {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+.ways-button {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 50px;
+  margin-top: auto;
+  background: linear-gradient(45deg, #5a73ed 0%, #3d57d5 100%);
+  transition: 0.5s;
+  border-radius: 8px;
+}
+.ways-button:hover {
+  background: linear-gradient(-45deg, #5a73ed 0%, #3d57d5 100%);
+  transition: 0.5s;
+}
+.ways-botton-text {
+  margin-left: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+.ways-arrow {
+  margin-left: 10px;
+  padding-right: 10px;
+}
+.ways-button:hover .ways-arrow {
+  margin: 15px;
+  transition: 0.5s;
+}
