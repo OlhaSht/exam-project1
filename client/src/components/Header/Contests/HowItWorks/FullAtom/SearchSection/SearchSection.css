@@ -1,0 +1,109 @@
+.search-container {
+  width: 100%;
+  background-color: rgb(99 124 247 / 0.08);
+}
+.search-container-section {
+  margin: auto;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.search-container-block {
+  width: 800px;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 16px 40px rgba(0 0 0 / 0.02);
+  display: flex;
+  align-items: center;
+}
+@media screen and (max-width: 992px) {
+  .search-container-block {
+    width: 600px;
+    height: 60px;
+  }
+}
+
+.search-block-img {
+  margin-left: 3vw;
+}
+.search-block-input {
+  width: 80%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  color: #a9a3b7;
+  border: none;
+  outline: none;
+}
+.search-block-button {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ff6955;
+}
+@media screen and (max-width: 575px) {
+  .search-container-block {
+    max-width: 100%;
+    height: 40px;
+  }
+  .search-block-input {
+    font-size: 12px;
+  }
+  .search-block-button {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.search-nav {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 40px;
+  padding-bottom: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 992px) {
+  .search-nav {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 575px) {
+  .search-nav {
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    order: 1 2 3;
+  }
+}
+.search-nav-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #343434;
+}
+.search-nav-livk {
+  padding: 10px 15px;
+  background-color: rgb(99 124 247 / 0.08);
+  border-radius: 20px;
+}
+
+.search-nav-livk:hover {
+  background-color: rgb(243, 245, 254);
+}
+.search-link-text {
+  font-size: 16px;
+  color: #637cf7;
+}
