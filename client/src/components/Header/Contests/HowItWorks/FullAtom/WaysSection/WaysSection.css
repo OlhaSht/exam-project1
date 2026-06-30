@@ -10,12 +10,14 @@
     #ffffff;
 }
 .ways-container-info {
-  width: 500px;
+  /* width: 500px; */
+  max-width: 500px;
+  width: 100%;
   margin: auto;
   padding: 10px 15px 10px 15px;
   text-align: center;
 }
-@media screen and (max-width: 565px) {
+@media screen and (max-width: 603px) {
   .ways-container-info {
     width: 300px;
   }
@@ -69,11 +71,6 @@
     flex-wrap: wrap;
   }
 }
-@media screen and (max-width: 576px) {
-  .ways-content {
-    width: 100%;
-  }
-}
 .ways-content-block {
   width: 33%;
   margin: 35px 11px 5px 11px;
@@ -84,7 +81,7 @@
   background-color: #fff;
   box-shadow: 0 16px 32px rgba(0 0 0 / 0.04);
 }
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 603px) {
   .ways-content-block {
     width: 100%;
     align-items: center;
@@ -142,6 +139,7 @@
   padding-right: 10px;
 }
 .ways-button:hover .ways-arrow {
-  margin: 15px;
+  /* margin: 15px; */
+  transform: translateX(6px);
   transition: 0.5s;
 }

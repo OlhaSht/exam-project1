@@ -1,4 +1,4 @@
-import styles from './WaysSection.css';
+import './WaysSection.css';
 import CONSTANTS from '../../../../../../constants';
 
 const WaysSection = () => {
@@ -25,7 +25,7 @@ const WaysSection = () => {
             suggestions for your business or brand. All names are auto-checked
             for URL availability.
           </p>
-          <a className="ways-button" href="">
+          <a className="ways-button" href="#">
             <p className="ways-botton-text">Launch a Contest</p>
             <img
               className="ways-arrow"
