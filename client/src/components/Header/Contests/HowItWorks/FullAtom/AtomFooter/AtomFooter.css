@@ -2,7 +2,7 @@
   width: 80%;
   margin: auto;
   padding: 60px 0;
-  border-top: 1px solid #eeee;
+  border-top: 1px solid #eee;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -129,8 +129,8 @@
   font-weight: 400;
   color: #637cf7;
 }
-.footer-container-consent:hover {
-  background-color: #ffff;
+.footer-container-button:hover {
+  background-color: #fff;
 }
 
 @media screen and (max-width: 767px) {

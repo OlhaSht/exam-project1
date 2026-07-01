@@ -51,7 +51,7 @@ html {
   background: linear-gradient(271.19deg, #307df6 0%, #14bbbf 100%), #307ff5;
 }
 .questions-main-link:hover .questions-main-link-text {
-  color: #ffff;
+  color: #fff;
 }
 .questions-main-link.active {
   background: linear-gradient(271.19deg, #f46906 0%, #f8d004 100%);
@@ -82,7 +82,6 @@ html {
 .questions-paragraph-point:hover {
   border: 1px solid #307df6;
   background-color: #eaf2fe;
-  scroll-behavior: smooth;
 }
 .questions-paragraph-point:last-child {
   margin-bottom: 70px;
@@ -100,14 +99,14 @@ html {
   opacity: 0;
   font-size: 16px;
   line-height: 1.5;
-  color: #ffffff;
+  color: #fff;
   background-color: #307df6;
   padding: 0px 20px;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   transition:
-    max-height 0.4s ease,
-    opacity 0.2s ease;
+    0.6s ease,
+    opacity 0.1s ease;
 }
 .active .questions-paragraph-text {
   /* display: block; */
@@ -126,8 +125,11 @@ html {
   border-top-right-radius: 16px;
 }
 .questions-paragraph-li {
-  display: none;
+  /* display: none; */
+  max-height: 0;
   opacity: 0;
+  overflow: hidden;
+  transition: 0.3s ease;
   padding: 0 20px 0 20px;
   font-size: 16px;
   line-height: 1.5;
@@ -135,7 +137,8 @@ html {
   list-style-type: none;
 }
 .active .questions-paragraph-li {
-  display: block;
+  /* display: block; */
+  max-height: 400px;
   opacity: 1;
   background-color: #307df6;
   list-style-type: none;

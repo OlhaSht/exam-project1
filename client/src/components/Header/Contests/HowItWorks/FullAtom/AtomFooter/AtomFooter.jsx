@@ -1,4 +1,4 @@
-import styles from './AtomFooter.css';
+import './AtomFooter.css';
 import CONSTANTS from '../../../../../../constants';
 
 const AtomFooter = () => {
@@ -58,7 +58,7 @@ const AtomFooter = () => {
 
       <div className="footer-container-block">
         <div className="footer-container-button">
-          <a className="footer-consent-text" href="">
+          <a className="footer-consent-text" href="#">
             Consent Preferences
           </a>
         </div>
@@ -69,7 +69,7 @@ const AtomFooter = () => {
           >
             <img
               src={`${CONSTANTS.STATIC_IMAGES_PATH_ATOM}facebook.svg`}
-              alt="fasebook icon"
+              alt="facebook icon"
             />
           </a>
           <a

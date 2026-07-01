@@ -14,23 +14,29 @@
   .mein-icon {
     margin-right: 10px;
   }
-}
-@media screen and (max-width: 480px) {
   .mein-icon-nav {
     margin: 0 0 0 20px;
   }
 }
+/* @media screen and (max-width: 480px) {
+  .mein-icon-nav {
+    margin: 0 0 0 20px;
+  }
+} */
 
 @media screen and (max-width: 320px) {
   .mein-icon {
     margin-right: 5px;
   }
-}
-@media screen and (max-width: 320px) {
   .mein-icon-nav {
     margin: 0 0 0 10px;
   }
 }
+/* @media screen and (max-width: 320px) {
+  .mein-icon-nav {
+    margin: 0 0 0 10px;
+  }
+} */
 
 .icon-drop-down {
   display: none;
@@ -43,7 +49,7 @@
   background-color: #ffff;
   color: #343434;
   border-radius: 10px;
-  box-shadow: 0 0 20 0 rgba(0 0 0 / 0.2);
+  box-shadow: 0 0 20px 0 rgba(0 0 0 / 0.2);
 }
 .mein-icon-nav:hover .icon-drop-down {
   display: block;

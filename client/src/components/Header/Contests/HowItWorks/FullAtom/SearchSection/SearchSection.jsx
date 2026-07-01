@@ -1,4 +1,4 @@
-import styles from './SearchSection.css';
+import './SearchSection.css';
 import CONSTANTS from '../../../../../../constants';
 
 const SearchSection = () => {
@@ -16,7 +16,7 @@ const SearchSection = () => {
             type="text"
             placeholder="Search Over 200,000+ Premium Names"
           />
-          <button className="search-block-button">
+          <button className="search-block-button" type="button">
             <img
               className="search-img-arrow"
               src={`${CONSTANTS.STATIC_IMAGES_PATH_ATOM}icon-arrow-long-right.svg`}

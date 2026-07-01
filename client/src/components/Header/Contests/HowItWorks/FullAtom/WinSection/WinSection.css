@@ -66,9 +66,10 @@
   align-items: center;
 }
 .win-step-text {
+  letter-spacing: 1px;
   font-size: 14px;
   font-weight: 700;
-  color: #ffff;
+  color: #fff;
 }
 .win-content-text {
   margin-top: 20px;
@@ -79,5 +80,7 @@
 .win-arrow {
   position: absolute;
   top: 50%;
-  left: 97%;
+  /* left: 97%; */
+  right: -15px;
+  transform: translateY(-50%);
 }

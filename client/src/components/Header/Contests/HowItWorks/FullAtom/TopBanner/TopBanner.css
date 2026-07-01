@@ -4,13 +4,16 @@
 }
 .header-block {
   width: 99%;
-  /* height: 45px; */
+  min-height: 25px;
   margin: auto;
   padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #19184a;
+}
+.header-content {
+  margin: 5px 0;
 }
 .header-link {
   color: #ffffff;
@@ -36,4 +39,5 @@
   background-color: #19184a;
   color: #637cf7;
   font-weight: 700;
+  cursor: pointer;
 }

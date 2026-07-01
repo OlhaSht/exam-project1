@@ -18,18 +18,35 @@ const FullAtom = () => {
   };
 
   return (
+    // <div className="body" style={customFontStyle}>
+    //   <header className="header">
+    //     <TopBanner />
+    //     <Navigation />
+    //     <HeroSection />
+    //     <WaysSection />
+    //     <WinSection />
+    //     <QuestionsSection />
+    //     <SearchSection />
+    //     <FooterListSection />
+    //     <AtomFooter />
+    //   </header>
+    // </div>
     <div className="body" style={customFontStyle}>
-      <header className="header">
+      <header>
         <TopBanner />
         <Navigation />
         <HeroSection />
+      </header>
+
+      <main>
         <WaysSection />
         <WinSection />
         <QuestionsSection />
         <SearchSection />
         <FooterListSection />
-        <AtomFooter />
-      </header>
+      </main>
+
+      <AtomFooter />
     </div>
   );
 };

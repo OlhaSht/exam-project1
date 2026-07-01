@@ -1,4 +1,4 @@
-import styles from './TopBanner.css';
+import './TopBanner.css';
 
 const TopBanner = () => {
   return (
@@ -9,6 +9,7 @@ const TopBanner = () => {
             className="header-link"
             href="https://www.atom.com/blog/discover-atom/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Squadhelp is now Atom{' '}
             <span className="mobile-part">- where everything starts!</span>
@@ -19,7 +20,6 @@ const TopBanner = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {' '}
             Learn More
           </a>
         </div>

@@ -1,11 +1,11 @@
-import styles from './FooterListSection.css';
+import './FooterListSection.css';
 
 const FooterListSection = () => {
   return (
     <footer className="footer-menu-container">
       <div
         className="footer-menu-block accordeon"
-        onClick={(e) => e.currentTarget.classNameList.toggle('active')}
+        onClick={(e) => e.currentTarget.classList.toggle('active')}
       >
         <h5 className="footer-menu-title">Services</h5>
         <ul className="footer-menu-ul">
@@ -155,7 +155,7 @@ const FooterListSection = () => {
 
       <div
         className="footer-menu-block accordeon"
-        onClick={(e) => e.currentTarget.classNameList.toggle('active')}
+        onClick={(e) => e.currentTarget.classList.toggle('active')}
       >
         <h5 className="footer-menu-title">Tools</h5>
         <ul className="footer-menu-ul">
@@ -266,7 +266,7 @@ const FooterListSection = () => {
       <div className="footer-menu-block">
         <div
           className="subblock accordeon"
-          onClick={(e) => e.currentTarget.classNameList.toggle('active')}
+          onClick={(e) => e.currentTarget.classList.toggle('active')}
         >
           <h5 className="footer-menu-title">Sellers</h5>
           <ul className="footer-menu-ul">
@@ -307,7 +307,7 @@ const FooterListSection = () => {
 
         <div
           className="subblock accordeon"
-          onClick={(e) => e.currentTarget.classNameList.toggle('active')}
+          onClick={(e) => e.currentTarget.classList.toggle('active')}
         >
           <h5 className="footer-menu-title">Creatives</h5>
           <ul className="footer-menu-ul">
@@ -358,7 +358,7 @@ const FooterListSection = () => {
       <div className="footer-menu-block">
         <div
           className="subblock accordeon"
-          onClick={(e) => e.currentTarget.classNameList.toggle('active')}
+          onClick={(e) => e.currentTarget.classList.toggle('active')}
         >
           <h5 className="footer-menu-title">Atom</h5>
           <ul className="footer-menu-ul">
@@ -420,7 +420,7 @@ const FooterListSection = () => {
 
         <div
           className="subblock accordeon"
-          onClick={(e) => e.currentTarget.classNameList.toggle('active')}
+          onClick={(e) => e.currentTarget.classList.toggle('active')}
         >
           <h5 className="footer-menu-title">Legal</h5>
           <ul className="footer-menu-ul">

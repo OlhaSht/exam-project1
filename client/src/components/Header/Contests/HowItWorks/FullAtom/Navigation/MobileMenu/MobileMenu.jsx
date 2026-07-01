@@ -1,4 +1,4 @@
-import styles from './MobileMenu.css';
+import './MobileMenu.css';
 import CONSTANTS from '../../../../../../../constants';
 
 const MobileMenu = () => {

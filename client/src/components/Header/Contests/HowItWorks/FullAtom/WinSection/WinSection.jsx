@@ -1,4 +1,4 @@
-import styles from './WinSection.css';
+import './WinSection.css';
 import CONSTANTS from '../../../../../../constants';
 
 const WinSection = () => {

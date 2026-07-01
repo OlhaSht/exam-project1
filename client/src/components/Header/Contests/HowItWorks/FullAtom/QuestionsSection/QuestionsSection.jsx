@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import styles from './QuestionsSection.css';
+import './QuestionsSection.css';
 
 const QuestionsSection = () => {
   const [activeSection, setActiveSection] = useState('article1');
