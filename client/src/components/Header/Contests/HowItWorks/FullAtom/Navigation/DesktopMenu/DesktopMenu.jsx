@@ -1,17 +1,4 @@
 import './DesktopMenu.css';
-// import CONSTANTS from '../../../../../../../constants';
-
-// function openMenu() {
-//   const body = document.querySelector('.body');
-//   body?.classList.toggle('menu-open');
-// }
-// const menuItems = document.querySelectorAll('.mobile-main-nav-link');
-
-// menuItems.forEach((item) => {
-//   item.addEventListener('click', function () {
-//     this.closest('.mobile-main-nav-li')?.classList.toggle('active');
-//   });
-// });
 
 const DesktopMenu = () => {
   return (

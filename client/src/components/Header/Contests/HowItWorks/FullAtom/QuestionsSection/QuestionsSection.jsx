@@ -16,7 +16,6 @@ const QuestionsSection = () => {
         });
       },
       {
-        //threshold: 0.5,
         rootMargin: '-30% 0px -60% 0px',
       }
     );
@@ -31,13 +30,7 @@ const QuestionsSection = () => {
       <section className="questions-main-container">
         <h3 className="questions-main-title">Frequently Asked Questions</h3>
         <nav className="questions-main-nav">
-          {/* <div
-            className="questions-main-link"
-            onClick={(e) => e.currentTarget.classList.toggle('active')}
-          > */}
-
           <div
-            //onClick={(e) => e.currentTarget.classList.toggle('active')}
             className={`questions-main-link ${
               activeSection === 'article1' ? 'active' : ''
             }`}
@@ -46,14 +39,7 @@ const QuestionsSection = () => {
               <p className="questions-main-link-text">Launching A Contest</p>
             </a>
           </div>
-
-          {/* <div
-            className="questions-main-link"
-            onClick={(e) => e.currentTarget.classList.toggle('active')}
-          > */}
-
           <div
-            //onClick={(e) => e.currentTarget.classList.toggle('active')}
             className={`questions-main-link ${
               activeSection === 'article2' ? 'active' : ''
             }`}
@@ -65,13 +51,7 @@ const QuestionsSection = () => {
             </a>
           </div>
 
-          {/* <div
-            className="questions-main-link"
-            onClick={(e) => e.currentTarget.classList.toggle('active')}
-          > */}
-
           <div
-            //onClick={(e) => e.currentTarget.classList.toggle('active')}
             className={`questions-main-link ${
               activeSection === 'article3' ? 'active' : ''
             }`}
@@ -81,12 +61,7 @@ const QuestionsSection = () => {
             </a>
           </div>
 
-          {/* <div
-            className="questions-main-link"
-            onClick={(e) => e.currentTarget.classList.toggle('active')}
-          > */}
           <div
-            // onClick={(e) => e.currentTarget.classList.toggle('active')}
             className={`questions-main-link ${
               activeSection === 'article4' ? 'active' : ''
             }`}

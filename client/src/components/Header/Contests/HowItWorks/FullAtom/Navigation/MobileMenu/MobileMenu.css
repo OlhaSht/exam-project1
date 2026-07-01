@@ -81,14 +81,12 @@
     color: #6780f7;
   }
   .mobile-main-nav-drop-list {
-    /* display: none; */
     max-height: 0;
     opacity: 0;
     overflow: hidden;
     transition: max-height 0.7s ease;
   }
   .mobile-main-nav-li.active .mobile-main-nav-drop-list {
-    /* display: block; */
     max-height: 400px;
     margin-top: 30px;
     opacity: 1;
