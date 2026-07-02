@@ -5,11 +5,6 @@
   justify-content: space-between;
   align-items: center;
 }
-@media screen and (max-width: 1200px) {
-  .main-container-list {
-    display: none;
-  }
-}
 .main-nav-li {
   padding: 20px 25px;
   position: relative;
@@ -50,4 +45,12 @@
 }
 .main-nav-sub-link.child {
   padding-left: 25px;
+}
+
+/* ---------------------1200px------------------- */
+
+@media screen and (max-width: 1200px) {
+  .main-container-list {
+    display: none;
+  }
 }

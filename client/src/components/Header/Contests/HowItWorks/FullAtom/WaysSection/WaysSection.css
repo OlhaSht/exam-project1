@@ -16,11 +16,6 @@
   padding: 10px 15px 10px 15px;
   text-align: center;
 }
-@media screen and (max-width: 603px) {
-  .ways-container-info {
-    width: 300px;
-  }
-}
 
 .ways-container-marker {
   width: 80px;
@@ -46,30 +41,13 @@
   color: #19184a;
 }
 
-@media screen and (max-width: 320px) {
-  .ways-container-info {
-    width: 200px;
-  }
-  .ways-container-marker {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .ways-container-title {
-    font-size: 24px;
-  }
-}
-
 .ways-content {
   display: flex;
   flex-direction: row;
   width: 80%;
   margin: auto;
 }
-@media screen and (max-width: 992px) {
-  .ways-content {
-    flex-wrap: wrap;
-  }
-}
+
 .ways-content-block {
   width: 33%;
   margin: 35px 11px 5px 11px;
@@ -80,12 +58,7 @@
   background-color: #fff;
   box-shadow: 0 16px 32px rgba(0 0 0 / 0.04);
 }
-@media screen and (max-width: 603px) {
-  .ways-content-block {
-    width: 100%;
-    align-items: center;
-  }
-}
+
 .content-block {
   display: flex;
   flex-direction: column;
@@ -107,12 +80,7 @@
   color: #828282;
   line-height: 25px;
 }
-@media screen and (max-width: 576px) {
-  .ways-content-info {
-    font-size: 14px;
-    text-align: center;
-  }
-}
+
 .ways-button {
   display: inline-flex;
   align-items: center;
@@ -140,4 +108,47 @@
 .ways-button:hover .ways-arrow {
   transform: translateX(6px);
   transition: 0.5s;
+}
+
+/* ------------------992px------------------ */
+
+@media screen and (max-width: 992px) {
+  .ways-content {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+}
+
+/* ------------------603px------------------ */
+
+@media screen and (max-width: 603px) {
+  .ways-container-info {
+    width: 300px;
+  }
+  .ways-content-block {
+    width: 100%;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 603px) {
+  .ways-content-info {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+/* ------------------320px------------------ */
+
+@media screen and (max-width: 320px) {
+  .ways-container-info {
+    width: 200px;
+  }
+  .ways-container-marker {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ways-container-title {
+    font-size: 24px;
+  }
 }

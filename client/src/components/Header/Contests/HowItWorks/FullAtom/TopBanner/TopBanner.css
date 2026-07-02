@@ -21,15 +21,6 @@
   font-weight: 700;
 }
 
-@media screen and (max-width: 767px) {
-  .header-link {
-    font-size: 14px;
-  }
-  .mobile-part {
-    display: none;
-  }
-}
-
 .header-button {
   width: 90px;
   margin: 0 0 0 20px;
@@ -40,4 +31,15 @@
   color: #637cf7;
   font-weight: 700;
   cursor: pointer;
+}
+
+/* -----------------767px-------------------- */
+
+@media screen and (max-width: 767px) {
+  .header-link {
+    font-size: 14px;
+  }
+  .mobile-part {
+    display: none;
+  }
 }

@@ -10,24 +10,6 @@
   margin: 0 0 0 30px;
 }
 
-@media screen and (max-width: 480px) {
-  .mein-icon {
-    margin-right: 10px;
-  }
-  .mein-icon-nav {
-    margin: 0 0 0 20px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .mein-icon {
-    margin-right: 5px;
-  }
-  .mein-icon-nav {
-    margin: 0 0 0 10px;
-  }
-}
-
 .icon-drop-down {
   display: none;
   width: 160px;
@@ -65,11 +47,6 @@
 .icon-link:hover .icon-nav {
   color: #111;
 }
-@media screen and (max-width: 991px) {
-  .fa-magnifying-glass {
-    display: none;
-  }
-}
 
 /*----------------------------------*/
 
@@ -87,11 +64,7 @@
   background-color: #343434;
   transition: all 0.3s ease;
 }
-@media screen and (max-width: 991px) {
-  .menu-icon-mobile {
-    display: block;
-  }
-}
+
 .menu-open .icon-mobile-burger:nth-child(1) {
   margin-top: 15px;
   transform: rotate(45deg);
@@ -106,4 +79,37 @@
 
 .mobile-main {
   display: none;
+}
+
+/* -------------------991px------------------ */
+
+@media screen and (max-width: 991px) {
+  .menu-icon-mobile {
+    display: block;
+  }
+  .fa-magnifying-glass {
+    display: none;
+  }
+}
+
+/* -------------------480px------------------ */
+
+@media screen and (max-width: 480px) {
+  .mein-icon {
+    margin-right: 10px;
+  }
+  .mein-icon-nav {
+    margin: 0 0 0 20px;
+  }
+}
+
+/* -------------------320px------------------ */
+
+@media screen and (max-width: 320px) {
+  .mein-icon {
+    margin-right: 5px;
+  }
+  .mein-icon-nav {
+    margin: 0 0 0 10px;
+  }
 }
