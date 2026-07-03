@@ -26,10 +26,12 @@ const EventPage = ({ role }) => {
     setTasks((prevTasks) => [...prevTasks, newEvent]);
   };
 
-  const deleteTask = (eventDate) => {
-    setTasks((prevTasks) =>
-      prevTasks.filter((task) => task.eventDate !== eventDate)
-    );
+  // const deleteTask = (eventDate) => {
+  //   setTasks((prevTasks) =>
+  //     prevTasks.filter((task) => task.eventDate !== eventDate)
+  //   );
+  const deleteTask = (id) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
   const handleEventComplete = () => {
@@ -72,6 +74,7 @@ const EventPage = ({ role }) => {
                 .map((task) => (
                   <li key={task.id}>
                     <EventTimerBar
+                      id={task.id}
                       eventName={task.eventName}
                       eventDate={task.eventDate}
                       onDelete={deleteTask}
