@@ -26,10 +26,6 @@ const EventPage = ({ role }) => {
     setTasks((prevTasks) => [...prevTasks, newEvent]);
   };
 
-  // const deleteTask = (eventDate) => {
-  //   setTasks((prevTasks) =>
-  //     prevTasks.filter((task) => task.eventDate !== eventDate)
-  //   );
   const deleteTask = (id) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };

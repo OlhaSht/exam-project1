@@ -92,7 +92,6 @@ const EventTimerBar = ({
         className={styles.removeButton}
         onClick={() => {
           if (isCompleted) {
-            // onDelete(eventDate);
             onDelete(id);
             onTaskRemove();
           } else {
@@ -107,7 +106,6 @@ const EventTimerBar = ({
               cancelButtonText: 'Cancel',
             }).then((result) => {
               if (result.isConfirmed) {
-                // onDelete(eventDate);
                 onDelete(id);
               }
             });
