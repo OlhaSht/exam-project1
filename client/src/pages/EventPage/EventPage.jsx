@@ -10,8 +10,6 @@ import styles from '../../components/Events/EventTimerBar/EventTimerBar.module.s
 
 const EventPage = ({ role }) => {
   const [tasks, setTasks] = useState(() => {
-    // const savedTasks = localStorage.getItem('tasks');
-    // return savedTasks ? JSON.parse(savedTasks) : [];
     try {
       const savedTasks = localStorage.getItem('tasks');
 
