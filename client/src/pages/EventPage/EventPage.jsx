@@ -10,8 +10,17 @@ import styles from '../../components/Events/EventTimerBar/EventTimerBar.module.s
 
 const EventPage = ({ role }) => {
   const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem('tasks');
-    return savedTasks ? JSON.parse(savedTasks) : [];
+    // const savedTasks = localStorage.getItem('tasks');
+    // return savedTasks ? JSON.parse(savedTasks) : [];
+    try {
+      const savedTasks = localStorage.getItem('tasks');
+
+      return savedTasks ? JSON.parse(savedTasks) : [];
+    } catch (error) {
+      console.error('Failed to parse tasks from localStorage:', error);
+
+      return [];
+    }
   });
 
   const [completedEventsCount, setCompletedEventsCount] = useState(0);
