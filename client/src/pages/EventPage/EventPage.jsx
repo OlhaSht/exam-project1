@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
 import CONSTANTS from '../../constants';
 import Header from '../../components/Header/HeaderHook';
 import EventForm from '../../components/Events/EventForm/EventForm';
@@ -36,9 +37,13 @@ const EventPage = ({ role }) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
-  const handleEventComplete = () => {
+  // const handleEventComplete = () => {
+  //   setCompletedEventsCount((prev) => prev + 1);
+  // };
+  const handleEventComplete = useCallback(() => {
     setCompletedEventsCount((prev) => prev + 1);
-  };
+  }, []);
+
   const handleTaskRemove = () => {
     setCompletedEventsCount((prev) => Math.max(0, prev - 1));
   };
@@ -47,6 +52,8 @@ const EventPage = ({ role }) => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
+  console.log('role:', role);
+  console.log('CUSTOMER:', CONSTANTS.CUSTOMER);
   if (role !== CONSTANTS.CUSTOMER) {
     return <p>Only customers can create events</p>;
   }
@@ -93,5 +100,5 @@ const EventPage = ({ role }) => {
     </div>
   );
 };
-
-export default EventPage;
+const mapStateToProps = (state) => state.userStore.data;
+export default connect(mapStateToProps)(EventPage);
