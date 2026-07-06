@@ -72,7 +72,7 @@ const EventPage = ({ role }) => {
             </div>
 
             <ul>
-              {tasks
+              {[...tasks]
                 .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
                 .map((task) => (
                   <li key={task.id}>
