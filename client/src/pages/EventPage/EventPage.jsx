@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import CONSTANTS from '../../constants';
 import Header from '../../components/Header/HeaderHook';
@@ -95,6 +94,4 @@ const EventPage = ({ role }) => {
   );
 };
 
-const mapStateToProps = (state) => state.userStore.data;
-
-export default connect(mapStateToProps)(EventPage);
+export default EventPage;
