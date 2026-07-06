@@ -37,9 +37,6 @@ const EventPage = ({ role }) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
-  // const handleEventComplete = () => {
-  //   setCompletedEventsCount((prev) => prev + 1);
-  // };
   const handleEventComplete = useCallback(() => {
     setCompletedEventsCount((prev) => prev + 1);
   }, []);

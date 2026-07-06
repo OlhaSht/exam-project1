@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import { connect } from 'react-redux';
 import styles from './EventForm.module.sass';
 import * as Yup from 'yup';
 
@@ -202,9 +201,5 @@ const EventForm = ({ setTasks }) => {
     </div>
   );
 };
-
-// const mapDispatchToProps = {};
-
-// export default connect(null, mapDispatchToProps)(EventForm);
 
 export default EventForm;
