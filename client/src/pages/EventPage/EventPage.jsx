@@ -29,6 +29,7 @@ const EventPage = ({ role }) => {
       eventDate,
       eventName,
       notifyDate: notifyFullDateTime,
+      createdAt: Date.now(),
     };
     setTasks((prevTasks) => [...prevTasks, newEvent]);
   };
@@ -83,6 +84,7 @@ const EventPage = ({ role }) => {
                       id={task.id}
                       eventName={task.eventName}
                       eventDate={task.eventDate}
+                      createdAt={task.createdAt}
                       onDelete={deleteTask}
                       onComplete={handleEventComplete}
                       onTaskRemove={handleTaskRemove}

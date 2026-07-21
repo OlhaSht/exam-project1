@@ -7,6 +7,7 @@ const EventTimerBar = ({
   id,
   eventName,
   eventDate,
+  createdAt,
   onDelete,
   onComplete,
   onTaskRemove,
@@ -18,11 +19,11 @@ const EventTimerBar = ({
   const calculateProgressAndTimeLeft = (eventDate) => {
     const now = new Date();
     const eventTime = new Date(eventDate).getTime();
-    const startOfDay = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    ).getTime();
+    // const startOfDay = new Date(
+    //   now.getFullYear(),
+    //   now.getMonth(),
+    //   now.getDate()
+    // ).getTime();
 
     let percentage;
     let totalSeconds = Math.floor((eventTime - now.getTime()) / 1000);
@@ -31,8 +32,10 @@ const EventTimerBar = ({
       percentage = 100;
       totalSeconds = 0;
     } else {
-      const totalEventTime = eventTime - startOfDay;
-      const elapsedEventTime = now.getTime() - startOfDay;
+      // const totalEventTime = eventTime - startOfDay;
+      // const elapsedEventTime = now.getTime() - startOfDay;
+      const totalEventTime = eventTime - createdAt;
+      const elapsedEventTime = now.getTime() - createdAt;
       percentage = (elapsedEventTime / totalEventTime) * 100;
     }
 
@@ -85,6 +88,7 @@ const EventTimerBar = ({
           }
         />
       </div>
+      <p>{Math.round(percentage)}%</p>
       <p className={styles.eventName}>
         Left: {formatTimeLeft(timeLeft.hours, timeLeft.minutes)}
       </p>
