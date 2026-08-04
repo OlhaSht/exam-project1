@@ -9,12 +9,14 @@ import { logout as logoutAction } from '../../store/slices/userSlice';
 
 function Header(props) {
   const { data } = props;
+  const [completedEventsCount, setCompletedEventsCount] = useState(0);
   useEffect(() => {
     if (!data) {
       props.getUser();
     }
   }, []);
 
+  //---------------------logout------------------------
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const logOut = async () => {
@@ -31,6 +33,53 @@ function Header(props) {
     }
   };
 
+  //-------------------badge-------------------------------
+  // const getTasksFromLocalStorage = () => {
+  //   try {
+  //     const savedTasks = localStorage.getItem('tasks');
+  //     return savedTasks ? JSON.parse(savedTasks) : [];
+  //   } catch (error) {
+  //     console.error('Failed to parse tasks from localStorage:', error);
+  //     return [];
+  //   }
+  // };
+  // const savedTasks = getTasksFromLocalStorage();
+  // console.log('savedTasks', savedTasks);
+
+  // const completedEventsCount = savedTasks.filter(
+  //   (task) => new Date(task.eventDate) <= new Date()
+  // ).length;
+  // console.log('completedEventsCount', completedEventsCount);
+  const updateCompletedEventsCount = () => {
+    try {
+      const savedTasks = localStorage.getItem('tasks');
+      const tasks = savedTasks ? JSON.parse(savedTasks) : [];
+
+      const count = tasks.filter(
+        (task) => new Date(task.eventDate) <= new Date()
+      ).length;
+
+      setCompletedEventsCount(count);
+    } catch (error) {
+      console.error('Failed to parse tasks from localStorage:', error);
+      setCompletedEventsCount(0);
+    }
+  };
+
+  useEffect(() => {
+    updateCompletedEventsCount();
+
+    const handleEventCompleted = () => {
+      updateCompletedEventsCount();
+    };
+
+    window.addEventListener('eventCompleted', handleEventCompleted);
+
+    return () => {
+      window.removeEventListener('eventCompleted', handleEventCompleted);
+    };
+  }, []);
+  //----------------------------------------------------------
   const startContests = () => {
     props.history.push('/startContest');
   };
@@ -62,7 +111,14 @@ function Header(props) {
               {data.role === CONSTANTS.CUSTOMER && (
                 <li>
                   <Link to="/event" style={{ textDecoration: 'none' }}>
-                    <span>Events</span>
+                    <span>
+                      Events
+                      {completedEventsCount > 0 && (
+                        <span className={styles.badge}>
+                          {completedEventsCount}
+                        </span>
+                      )}
+                    </span>
                   </Link>
                 </li>
               )}

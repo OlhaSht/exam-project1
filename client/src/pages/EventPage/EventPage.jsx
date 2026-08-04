@@ -66,12 +66,12 @@ const EventPage = ({ role }) => {
             <div className={styles.nameContainer}>
               <h2 className={styles.timeListName}>
                 Time Left:
-                {completedEventsCount > 0 && (
+                {/* {completedEventsCount > 0 && (
                   <span className={styles.closedEvents}>
                     Closed Events
                     <span className={styles.badge}>{completedEventsCount}</span>
                   </span>
-                )}
+                )} */}
               </h2>
             </div>
 

@@ -51,6 +51,7 @@ const EventTimerBar = ({
       if (hours === 0 && minutes === 0 && !isCompleted) {
         setIsCompleted(true);
         onComplete();
+        window.dispatchEvent(new Event('eventComplited'));
         clearInterval(intervalId);
       }
     }, 1000);
