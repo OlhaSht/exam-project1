@@ -34,22 +34,7 @@ function Header(props) {
   };
 
   //-------------------badge-------------------------------
-  // const getTasksFromLocalStorage = () => {
-  //   try {
-  //     const savedTasks = localStorage.getItem('tasks');
-  //     return savedTasks ? JSON.parse(savedTasks) : [];
-  //   } catch (error) {
-  //     console.error('Failed to parse tasks from localStorage:', error);
-  //     return [];
-  //   }
-  // };
-  // const savedTasks = getTasksFromLocalStorage();
-  // console.log('savedTasks', savedTasks);
 
-  // const completedEventsCount = savedTasks.filter(
-  //   (task) => new Date(task.eventDate) <= new Date()
-  // ).length;
-  // console.log('completedEventsCount', completedEventsCount);
   const updateCompletedEventsCount = () => {
     try {
       const savedTasks = localStorage.getItem('tasks');

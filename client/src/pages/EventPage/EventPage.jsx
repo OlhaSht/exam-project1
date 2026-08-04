@@ -64,15 +64,7 @@ const EventPage = ({ role }) => {
           <EventForm setTasks={addTask} />
           <div className={styles.progressBarContainer}>
             <div className={styles.nameContainer}>
-              <h2 className={styles.timeListName}>
-                Time Left:
-                {/* {completedEventsCount > 0 && (
-                  <span className={styles.closedEvents}>
-                    Closed Events
-                    <span className={styles.badge}>{completedEventsCount}</span>
-                  </span>
-                )} */}
-              </h2>
+              <h2 className={styles.timeListName}>Time Left:</h2>
             </div>
 
             <ul>
