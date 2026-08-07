@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 import styles from './ButtonGroupInput.module.sass';
 
 const OPTIONS = [
@@ -32,9 +33,12 @@ const ButtonGroup = () => {
         {OPTIONS.map((option, index) => (
           <label
             key={option.value}
-            className={`${styles.button} ${
-              selectedOption === option.value ? styles.active : ''
-            }`}
+            className={classNames(styles.button, {
+              [styles.active]: selectedOption === option.value,
+            })}
+            // className={`${styles.button} ${
+            //   selectedOption === option.value ? styles.active : ''
+            // }`}
           >
             <input
               type="radio"
