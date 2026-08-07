@@ -20,7 +20,7 @@ const OPTIONS = [
 ];
 
 const ButtonGroup = () => {
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState('yes-variation');
 
   return (
     <section className={styles.container}>
