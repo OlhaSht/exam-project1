@@ -22,7 +22,6 @@ const ButtonOption = (props) => {
         <div className={styles.buttonMainText}>
           {option.title}
           {isRecomended && <span className={styles.badge}>Recommended</span>}
-          {/* <span className={styles.checkmark}></span> */}
         </div>
         <div className={styles.buttonSubText}>{option.description}</div>
       </div>
