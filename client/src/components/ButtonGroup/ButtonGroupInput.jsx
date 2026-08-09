@@ -38,36 +38,6 @@ const ButtonGroup = () => {
             isSelected={selectedOption === option.value}
             onChange={setSelectedOption}
             isRecomended={index === 0}
-            // <label
-            //   key={option.value}
-            //   className={classNames(styles.button, {
-            //     [styles.active]: selectedOption === option.value,
-            //   })}
-            //   // className={`${styles.button} ${
-            //   //   selectedOption === option.value ? styles.active : ''
-            //   // }`}
-            // >
-            //   <input
-            //     type="radio"
-            //     name="domain"
-            //     value={option.value}
-            //     checked={selectedOption === option.value}
-            //     onChange={() => setSelectedOption(option.value)}
-            //     className={styles.radio}
-            //   />
-
-            //   <div className={styles.content}>
-            //     <div className={styles.buttonMainText}>
-            //       {option.title}
-            //       {index === 0 && (
-            //         <span className={styles.badge}>Recommended</span>
-            //       )}
-            //       <span className={styles.checkmark}></span>
-            //     </div>
-
-            //     <div className={styles.buttonSubText}>{option.description}</div>
-            //   </div>
-            // </label>
           />
         ))}
       </div>
