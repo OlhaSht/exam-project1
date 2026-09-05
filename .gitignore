@@ -31,3 +31,7 @@ server/upload/
 server/public/images/
 server/public/
 
+# Error
+server/src/handlerError/error-*.log
+server/src/handlerError/error.log
+server/src/handlerError/backup-*.json
