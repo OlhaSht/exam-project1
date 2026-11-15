@@ -1,11 +1,11 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('CatalogConversations', {
-      id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
+      // id: {
+      //   type: Sequelize.INTEGER,
+      //   autoIncrement: true,
+      //   primaryKey: true,
+      // },
       catalogId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -39,8 +39,8 @@ module.exports = {
     });
     await queryInterface.addConstraint('CatalogConversations', {
       fields: ['catalogId', 'conversationId'],
-      type: 'unique',
-      name: 'unique_catalog_conversation_pair',
+      type: 'primary key',
+      name: 'catalog_conversation_pkey',
     });
   },
 
