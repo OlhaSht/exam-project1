@@ -81,6 +81,12 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.RefreshToken, {
       foreignKey: 'userId',
     });
+
+    User.belongsToMany(models.Conversation, {
+      foreignKey: 'userId',
+      through: models.UserConversation,
+      otherKey: 'conversationId',
+    });
   };
 
   User.beforeCreate(async (user, options) => {
