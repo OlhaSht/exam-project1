@@ -10,11 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Users', 
+          model: 'Users',
           key: 'id',
         },
-        onUpdate: 'CASCADE', 
-        onDelete: 'CASCADE', 
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       body: {
         type: Sequelize.STRING,
@@ -22,11 +22,13 @@ module.exports = {
       },
       conversationId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'Conversations',
           key: 'id',
         },
-        allowNull: false,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         type: Sequelize.DATE,
