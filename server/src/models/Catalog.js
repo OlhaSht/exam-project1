@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      chats: {
-        type: DataTypes.VIRTUAL,
-        get() {
-          return this.getConversations();
-        },
-      },
+      // chats: {
+      //   type: DataTypes.VIRTUAL,
+      //   get() {
+      //     return this.getConversations();
+      //   },
+      // },
     },
     {
       timestamps: false,
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   Catalog.associate = function (models) {
     Catalog.belongsToMany(models.Conversation, {
       foreignKey: 'catalogId',
-      through: 'CatalogConversations',
+      through: models.CatalogConversations,
       otherKey: 'conversationId',
     });
     Catalog.belongsTo(models.Users, {
