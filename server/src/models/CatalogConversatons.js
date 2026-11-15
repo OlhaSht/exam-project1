@@ -2,13 +2,9 @@ module.exports = (sequelize, DataTypes) => {
   const CatalogConversations = sequelize.define(
     'CatalogConversations',
     {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
       catalogId: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         references: {
           model: 'Catalogs',
           key: 'id',
@@ -19,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       conversationId: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         references: {
           model: 'Conversations',
           key: 'id',
