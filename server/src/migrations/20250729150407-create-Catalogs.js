@@ -1,23 +1,28 @@
 module.exports = {
-    up: async (queryInterface, Sequelize) => {
-      await queryInterface.createTable('Catalogs', {
-        id: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          primaryKey: true,
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Catalogs', {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
         },
-        userId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
-        catalogName: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-      });
-    },
-    down: async (queryInterface, Sequelize) => {
-      await queryInterface.dropTable('Catalogs');
-    },
-  };
-  
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      catalogName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+    });
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Catalogs');
+  },
+};
