@@ -2,18 +2,23 @@ module.exports = (sequelize, DataTypes) => {
   const Conversation = sequelize.define(
     'Conversation',
     {
-      participants: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER),
-        allowNull: false,
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
       },
-      blackList: {
-        type: DataTypes.ARRAY(DataTypes.BOOLEAN),
-        allowNull: false,
-      },
-      favoriteList: {
-        type: DataTypes.ARRAY(DataTypes.BOOLEAN),
-        allowNull: false,
-      },
+      // participants: {
+      //   type: DataTypes.ARRAY(DataTypes.INTEGER),
+      //   allowNull: false,
+      // },
+      // blackList: {
+      //   type: DataTypes.ARRAY(DataTypes.BOOLEAN),
+      //   allowNull: false,
+      // },
+      // favoriteList: {
+      //   type: DataTypes.ARRAY(DataTypes.BOOLEAN),
+      //   allowNull: false,
+      // },
     },
     {
       timestamps: true,
@@ -26,8 +31,13 @@ module.exports = (sequelize, DataTypes) => {
     });
     Conversation.belongsToMany(models.Catalog, {
       foreignKey: 'conversationId',
-      through: 'CatalogConversations',
+      through: models.CatalogConversations,
       otherKey: 'catalogId',
+    });
+    Conversation.belongsToMany(models.Users, {
+      foreignKey: 'conversationId',
+      through: models.UserConversation,
+      otherKey: 'userId',
     });
   };
 
