@@ -1,11 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('CatalogConversations', {
-      // id: {
-      //   type: Sequelize.INTEGER,
-      //   autoIncrement: true,
-      //   primaryKey: true,
-      // },
       catalogId: {
         type: Sequelize.INTEGER,
         allowNull: false,

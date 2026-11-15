@@ -10,12 +10,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      // chats: {
-      //   type: DataTypes.VIRTUAL,
-      //   get() {
-      //     return this.getConversations();
-      //   },
-      // },
     },
     {
       timestamps: false,

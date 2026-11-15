@@ -6,18 +6,6 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      // participants: {
-      //   type: Sequelize.ARRAY(Sequelize.INTEGER),
-      //   allowNull: false,
-      // },
-      // blackList: {
-      //   type: Sequelize.ARRAY(Sequelize.BOOLEAN),
-      //   allowNull: false,
-      // },
-      // favoriteList: {
-      //   type: Sequelize.ARRAY(Sequelize.BOOLEAN),
-      //   allowNull: false,
-      // },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
