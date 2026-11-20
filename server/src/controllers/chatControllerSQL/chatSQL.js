@@ -121,7 +121,7 @@ module.exports.getPreview = async (req, res, next) => {
 
     await res.send(conversations);
   } catch (err) {
-    console.err(err);
+    console.error(err);
     next(err);
   }
 };
